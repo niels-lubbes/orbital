@@ -43,7 +43,7 @@ def usecase__two_sphere_cyclide():
 
     R = sage_PolynomialRing( sage_QQ, 'a' )
     a = R.gens()[0]
-    B = sage_NumberField( [a ** 2 - 2], 'a0' )
+    B = sage_NumberField( [a ** 2 - 1 / sage_QQ( 2 )], 'a0' )
     B = sage_FractionField( sage_PolynomialRing( B, 'k' ) )
     OrbTools.p( ring_dict( B ) )
 
@@ -52,8 +52,8 @@ def usecase__two_sphere_cyclide():
     OrbTools.p( euclidean_type_form( X[1:-1] ) )
 
     p = '[y0-y4,y1,y2,y3]'
-    m = '[y4,y0-a0*y1]'
-    P = '[x0+k*x1]'
+    m = '[y4,y1+a0*y0]'
+    P = '[x0-k*x1]'
 
     f = invert_birational_map( p, S )
     OrbTools.p( 'f =', f )
@@ -68,9 +68,11 @@ def usecase__two_sphere_cyclide():
     C = image_map( p, F, B )
     OrbTools.p( 'C =', len( C ), C )
 
-    Z = image_map( '[y0 - a0*y1, y2-y1, y3, y4]', Y, B )
-    OrbTools.p( 'Z =', len( Z ), Z )
-    # OrbTools.p( euclidean_type_form( Z[0] ) )
+    for i in range( len( C ) ):
+        s = str( C[i] )
+        for ( a, b ) in [( 'a0', 'sqrt(1/2)' ), ( 'k', 'p1' ), ( 'x0', '1' ), ( 'x1', 'x' ), ( 'x2', 'y' ), ( 'x3', 'z' )]:
+            s = s.replace( a, b )
+        print( s )
 
 
 if __name__ == '__main__':
