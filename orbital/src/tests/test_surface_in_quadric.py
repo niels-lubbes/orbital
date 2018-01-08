@@ -10,7 +10,7 @@ from orbital.surface_in_quadric import get_prj_mat
 from orbital.surface_in_quadric import approx_QQ
 from orbital.surface_in_quadric import rand_surf_prj
 from orbital.surface_in_quadric import get_surf
-from orbital.surface_in_quadric import test_get_surf
+from orbital.surface_in_quadric import verify_get_surf
 from orbital.surface_in_quadric import get_proj
 
 from orbital.sage_interface import sage_PolynomialRing
@@ -144,7 +144,6 @@ class TestSurfaceInQuadric( object ):
         print( list( dct['UJ'][0] ) )
         print( list( dct['UJ'][1] ) )
 
-
         assert str( list( dct['Q'] ) ) == str( prv_Q )
         assert str( dct['pmz_lst'] ) == '[-c0*s0*c1^2 + c0^2*s1^2 - c0*s0*s1^2 + s0^2*s1^2 + c0*c1^2 - 2*c0^2*s1 + 2*c0*s0*s1 - 2*s0^2*s1 + c0*s1^2 - 2*s0*s1^2 + c0^2 - c0*s0 + s0^2 - 2*c0*s1 + 4*s0*s1 + s1^2 + c0 - 2*s0 - 2*s1 + 1, -c0*s0*c1^2 + s0^2*c1^2 - c0^2*c1*s1 + s0^2*s1^2 + c0^2*c1 + c0*c1^2 - 2*s0*c1^2 - 2*s0^2*s1 - 2*s0*s1^2 + s0^2 + c1^2 + 4*s0*s1 + s1^2 - 2*s0 - 2*s1 + 1, -c0^2*c1^2 + c0^2*c1*s1 - c0*s0*s1^2 + s0^2*s1^2 - c0^2*c1 + 2*c0*s0*s1 - 2*s0^2*s1 + c0*s1^2 - 2*s0*s1^2 - c0*s0 + s0^2 - 2*c0*s1 + 4*s0*s1 + s1^2 + c0 - 2*s0 - 2*s1 + 1, -c0*s0*c1^2 - c0^2*c1*s1 + c0^2*s1^2 + s0^2*s1^2 + c0^2*c1 + c0*c1^2 - 2*c0^2*s1 - 2*s0^2*s1 - 2*s0*s1^2 + c0^2 + s0^2 + 4*s0*s1 + s1^2 - 2*s0 - 2*s1 + 1, c0^2*s1^2 + s0^2*s1^2 - 2*c0^2*s1 - 2*s0^2*s1 - 2*s0*s1^2 + c0^2 + s0^2 + 4*s0*s1 + s1^2 - 2*s0 - 2*s1 + 1, -c0*s0*c1^2 + s0^2*c1^2 - 2*c0^2*c1*s1 + c0*s0*c1*s1 - s0^2*c1*s1 + 2*c0^2*c1 - c0*s0*c1 + s0^2*c1 + c0*c1^2 - 2*s0*c1^2 - c0*c1*s1 + 2*s0*c1*s1 + c0*c1 - 2*s0*c1 + c1^2 - c1*s1 + c1]'
         assert str( dct['imp_lst'] ) == '[2*x1^2 + x0*x2 - x1*x2 - x2*x3 - 4*x0*x4 - 5*x1*x4 + 4*x2*x4 + 3*x3*x4 + x4^2 - x0*x5 - 4*x1*x5 + x2*x5 + x3*x5 + 3*x4*x5 + 2*x5^2, 2*x0*x1 - x0*x2 - x1*x2 - 6*x0*x3 - 2*x1*x3 + 3*x2*x3 + 4*x3^2 + 6*x0*x4 + x1*x4 - 2*x2*x4 - 5*x3*x4 + x4^2 + x0*x5 - x2*x5 - x3*x5 + x4*x5, 2*x0^2 - x0*x2 + x1*x2 - 4*x0*x3 + x2*x3 + 2*x3^2 - x1*x4 - x3*x4 + x4^2 + x0*x5 - x2*x5 - x3*x5 + x4*x5, 4*x1*x3^2 - x2*x3^2 + x3^3 + x0*x2*x4 + x1*x2*x4 - x2^2*x4 + x0*x3*x4 - 11*x1*x3*x4 + x2*x3*x4 - 10*x3^2*x4 - 2*x0*x4^2 + 6*x1*x4^2 + 22*x3*x4^2 - 12*x4^3 - x0*x3*x5 + 2*x2*x3*x5 - 4*x3^2*x5 - x0*x4*x5 + 15*x3*x4*x5 - 11*x4^2*x5 - 2*x0*x5^2 - x2*x5^2 + 2*x3*x5^2 + x4*x5^2, 4*x0*x3^2 - x2*x3^2 - 3*x3^3 + x0*x2*x4 + x1*x2*x4 - x2^2*x4 - 11*x0*x3*x4 + x1*x3*x4 + x2*x3*x4 + 10*x3^2*x4 + 6*x0*x4^2 - 2*x1*x4^2 - 10*x3*x4^2 + 4*x4^3 - 5*x0*x3*x5 + 2*x2*x3*x5 + 4*x3^2*x5 + 7*x0*x4*x5 - 4*x2*x4*x5 - 9*x3*x4*x5 + 5*x4^2*x5 + 2*x0*x5^2 - x2*x5^2 - 2*x3*x5^2 + x4*x5^2, 4*x1*x2*x3 - x2*x3^2 + x3^3 - 3*x0*x2*x4 - 7*x1*x2*x4 + 3*x2^2*x4 - 3*x0*x3*x4 - 3*x1*x3*x4 + 5*x2*x3*x4 - 2*x3^2*x4 + 6*x0*x4^2 + 6*x1*x4^2 - 4*x2*x4^2 + 2*x3*x4^2 - 4*x4^3 - 2*x0*x2*x5 - 2*x1*x2*x5 - x0*x3*x5 + 3*x0*x4*x5 + 2*x1*x4*x5 + 4*x2*x4*x5 + x3*x4*x5 - 5*x4^2*x5 + x2*x5^2 - x4*x5^2, 4*x0*x2*x3 - 5*x2*x3^2 + x3^3 - 7*x0*x2*x4 - 3*x1*x2*x4 + 3*x2^2*x4 - 3*x0*x3*x4 - 3*x1*x3*x4 + 17*x2*x3*x4 - 2*x3^2*x4 + 6*x0*x4^2 + 6*x1*x4^2 - 12*x2*x4^2 + 2*x3*x4^2 - 4*x4^3 - 2*x0*x2*x5 + 2*x1*x2*x5 + 7*x0*x3*x5 - 4*x3^2*x5 - 9*x0*x4*x5 - 2*x1*x4*x5 + 4*x2*x4*x5 + 9*x3*x4*x5 - 5*x4^2*x5 - 4*x0*x5^2 + x2*x5^2 + 4*x3*x5^2 - x4*x5^2, 2*x2^2*x3^2 - 4*x2*x3^3 + 2*x3^4 - 2*x0*x2^2*x4 - 2*x1*x2^2*x4 + 2*x2^3*x4 + 4*x2^2*x3*x4 + 19*x2*x3^2*x4 - 7*x3^3*x4 - x0*x2*x4^2 - x1*x2*x4^2 - 3*x2^2*x4^2 - 3*x0*x3*x4^2 - 3*x1*x3*x4^2 - 25*x2*x3*x4^2 + 4*x3^2*x4^2 + 6*x0*x4^3 + 6*x1*x4^3 + 8*x2*x4^3 + 10*x3*x4^3 - 12*x4^4 - 4*x2^2*x3*x5 + 4*x2*x3^2*x5 - 4*x0*x2*x4*x5 + 4*x2^2*x4*x5 + 3*x0*x3*x4*x5 - 2*x2*x3*x4*x5 - 4*x3^2*x4*x5 - 3*x0*x4^2*x5 + 6*x2*x4^2*x5 + 13*x3*x4^2*x5 - 13*x4^3*x5 + x0*x2*x5^2 - x1*x2*x5^2 + 2*x2^2*x5^2 - x2*x3*x5^2 - 6*x0*x4*x5^2 + x1*x4*x5^2 - x2*x4*x5^2 + 7*x3*x4*x5^2 - 2*x4^2*x5^2 - x0*x5^3 + x2*x5^3 + x3*x5^3 - x4*x5^3]'
@@ -153,7 +152,7 @@ class TestSurfaceInQuadric( object ):
         assert str( list( dct['UJ'][1] ) ) == '[(-1.000000000000000?, 0, 0, 0, 0, 0), (0, -1.000000000000000?, 0, 0, 0, 0), (0, 0, -1.000000000000000?, 0, 0, 0), (0, 0, 0, -1.000000000000000?, 0, 0), (0, 0, 0, 0, -1.000000000000000?, 0), (0, 0, 0, 0, 0, 1.000000000000000?)]'
 
 
-    def test__test_get_surf( self ):
+    def test__verify_get_surf( self ):
 
         ring = PolyRing( 'x,y,v,w' )
         ring.ext_num_field( 't^2 + 1' )
@@ -168,7 +167,7 @@ class TestSurfaceInQuadric( object ):
         prv_Q = None
         dct = get_surf( ls, sig, coef_lst, prv_Q )
 
-        test_dct = test_get_surf( dct )
+        test_dct = verify_get_surf( dct )
         print( test_dct )
 
         assert test_dct['all']
@@ -218,7 +217,7 @@ if __name__ == '__main__':
     # TestSurfaceInQuadric().test__get_prj_mat()
     # TestSurfaceInQuadric().test__approx_QQ()
     # TestSurfaceInQuadric().test__rand_surf_prj()
-    # TestSurfaceInQuadric().test__get_surf()
-    # TestSurfaceInQuadric().test__test_get_surf()
-    TestSurfaceInQuadric().test__get_proj()
+    TestSurfaceInQuadric().test__get_surf()
+    TestSurfaceInQuadric().test__verify_get_surf()
+    # TestSurfaceInQuadric().test__get_proj()
 

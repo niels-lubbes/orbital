@@ -1,5 +1,5 @@
 # Compiled python modules.
-#*.pyc
+*.pyc
 
 # Setuptools distribution folder.
 /dist/
@@ -11,5 +11,5 @@
 .*.md.html
 
 # directories created during testing
-/src/tests/*_REMOVE_ME
+*_REMOVE_ME
 

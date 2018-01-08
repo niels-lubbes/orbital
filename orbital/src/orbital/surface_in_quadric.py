@@ -388,7 +388,7 @@ def get_surf( ls, sig, coef_lst = None, prv_Q = None ):
     return dct
 
 
-def test_get_surf( dct ):
+def verify_get_surf( dct ):
     '''
     Attributes
     ----------
