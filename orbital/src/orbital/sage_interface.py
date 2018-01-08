@@ -33,6 +33,7 @@ sage_POLY:
 sage_RING:
     sage.rings.*
     The type of a ring. For example sage_QQ or sage_ZZ or sage_NumberField.
+    
 '''
 
 from sage.all import *
@@ -53,7 +54,6 @@ def sage_save( *args, **kwargs ):
 def sage_load( *args, **kwargs ):
     return load( *args, **kwargs )
 
-
 #################################################
 # sage.misc                                     #
 #################################################
@@ -68,11 +68,27 @@ def sage_set_verbose( *args, **kwargs ):
 
 
 #################################################
+# sage.functions                                #
+#################################################
+
+# from sage.functions.trig import cos
+def sage_cos( *args, **kwargs ):
+    return cos( *args, **kwargs )
+
+# from sage.functions.trig import sin
+def sage_sin( *args, **kwargs ):
+    return sin( *args, **kwargs )
+
+
+#################################################
 # sage.symbolic                                 #
 #################################################
 
 # from sage.symbolic.ring import SR
 sage_SR = SR
+
+# from sage.symbolic.constants import pi
+sage_pi = pi
 
 # from sage.symbolic.relation import solve
 def sage_solve( *args, **kwargs ):
@@ -88,6 +104,9 @@ sage_ZZ = ZZ
 
 # from sage.rings.rational_field import QQ
 sage_QQ = QQ
+
+# from sage.rings.finite_rings import GF
+sage_GF = GF
 
 # import sage.rings.invariant_theory
 sage_invariant_theory = invariant_theory
@@ -138,6 +157,10 @@ def sage_diagonal_matrix( *args, **kwargs ):
 # from sage.matrix.constructor import vector
 def sage_vector( *args, **kwargs ):
     return vector( *args, **kwargs )
+
+# from sage.matrix import MatrixSpace
+def sage_MatrixSpace( *args, **kwargs ):
+    return MatrixSpace( *args, **kwargs )
 
 
 #################################################

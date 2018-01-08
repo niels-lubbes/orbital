@@ -1,0 +1,15 @@
+# Compiled python modules.
+#*.pyc
+
+# Setuptools distribution folder.
+/dist/
+
+# Python egg metadata, regenerated from source files by setuptools.
+/src/*.egg-info
+
+# md viewer files
+.*.md.html
+
+# directories created during testing
+/src/tests/*_REMOVE_ME
+
