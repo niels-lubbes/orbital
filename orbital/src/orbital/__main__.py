@@ -84,6 +84,9 @@ if __name__ == '__main__':
     # OrbTools.filter( None )  # print all verbose output
     OrbTools.start_timer()
 
+    if 'OUTPUT_PATH' not in os.environ:
+        os.environ['OUTPUT_PATH'] = '~/'
+
 
     #########################################
     #                                       #

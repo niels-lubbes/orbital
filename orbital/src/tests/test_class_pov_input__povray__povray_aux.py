@@ -65,10 +65,6 @@ class TestPovray( object ):
         pmz_CB_lst = get_S1xS1_pmz( pmz_CB_lst )
         pmz_CB_lst = list( P * dct['Q'] * sage_vector( pmz_CB_lst ) )
 
-
-        # if 'OUTPUT_PATH' not in os.environ:
-        os.environ['OUTPUT_PATH'] = './'
-
         # set PovInput as container
         # put very low quality for testing purposes
         pin = PovInput()
@@ -76,7 +72,7 @@ class TestPovray( object ):
         pin.pmz_dct['A'] = ( pmz_AB_lst, 0 )
         pin.pmz_dct['B'] = ( pmz_AB_lst, 1 )
         pin.pmz_dct['C'] = ( pmz_CB_lst, 0 )
-        pin.path = os.environ['OUTPUT_PATH'] + get_time_str() + '_TEST_POVRAY_REMOVE_ME/'
+        pin.path = './' + get_time_str() + '_TEST_POVRAY_REMOVE_ME/'
         pin.fname = 'orb'
         pin.scale = 1
         pin.cam_dct['location'] = ( 0, 0, -10 )
