@@ -39,8 +39,8 @@ class TestPovray( object ):
         bp_tree = BasePointTree( ['xv', 'xw', 'yv', 'yw'] )
         bp = bp_tree.add( 'xv', ( -a0, a0 ), 1 )
         bp = bp_tree.add( 'xv', ( a0, -a0 ), 1 )
-        ls_AB = LinearSeries.get( 2, bp_tree )
-        ls_CB = LinearSeries.get( 1, bp_tree )
+        ls_AB = LinearSeries.get( [2, 2], bp_tree )
+        ls_CB = LinearSeries.get( [1, 1], bp_tree )
 
         # compute surface in quadric of signature (6,1)
         c_lst = [-1, -1, 0, 0, 0, -1, 1, 0, -1, -1, -1]

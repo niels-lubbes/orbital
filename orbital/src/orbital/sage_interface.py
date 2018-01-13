@@ -34,6 +34,8 @@ sage_RING:
     sage.rings.*
     The type of a ring. For example sage_QQ or sage_ZZ or sage_NumberField.
     
+sage_REALNUMBER:
+    sage.rings.real_mpfr.RealNumber
 '''
 
 from sage.all import *
@@ -65,6 +67,10 @@ def sage__eval( *args, **kwargs ):
 # from sage.misc import set_verbose
 def sage_set_verbose( *args, **kwargs ):
     return set_verbose( *args, **kwargs )
+
+# from sage.misc.functional import n
+def sage_n( *args, **kwargs ):
+    return n( *args, **kwargs )
 
 
 #################################################

@@ -334,9 +334,8 @@ def get_surf( ls, sig, coef_lst = None, prv_Q = None ):
         M_pol = [ c_lst[i] * imp_lst[i] for i in i_lst if imp_lst[i].total_degree() == 2 ]
         M_pol = sum( M_pol )
         if M_pol == 0:
-            OrbTools.p( 'No quadratic forms in random projection. Probably signature ', sig, ' does not exists.' )
+            # No quadratic forms in random projection. Possibly signature sig does not exists.
             continue
-
 
         # eigendecomposition (M*V == V*D)
         #

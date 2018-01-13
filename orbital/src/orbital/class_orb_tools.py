@@ -119,7 +119,7 @@ class OrbTools():
         OrbTools.__enable_tool_dct = enable_tool_dct
 
     @staticmethod
-    def get_tool_dct( fname = 'ns_tools' ):
+    def get_tool_dct( fname = 'orb_tools' ):
         '''
         Parameters
         ----------
@@ -163,7 +163,7 @@ class OrbTools():
 
 
     @staticmethod
-    def save_tool_dct( fname = 'ns_tools' ):
+    def save_tool_dct( fname = 'orb_tools' ):
         '''
         Saves ".__tool_dct" to  "fname" if ".enable_tool_dct==True" 
         otherwise do nothing.

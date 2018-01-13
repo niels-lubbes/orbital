@@ -142,18 +142,18 @@ def pov_nopow( poly ):
     return reduce( lambda x, y: x.replace( y, dct[y] ), dct, str( poly ) )
 
 
-def get_pmz_value( pmz_lst, a, b, prec = 50 ):
+def get_pmz_value( pmz_lst, v0, v1, prec = 50 ):
     '''
     Parameters
     ----------
     pmz_lst : list<sage_POLY> 
         A list of 4 polynomials in QQ[c0,s0,c1,s1].
     
-    a : int      
-        An integer in [0,360)
+    v0 : sage_REALNUMBER      
+        A real number in [0,2*pi)
     
-    b : int       
-        An integer in [0,360)
+    v1 : sage_REALNUMBER       
+        A real number in [0,2*pi)
     
     prec : int    
         Number of digits.
@@ -169,20 +169,19 @@ def get_pmz_value( pmz_lst, a, b, prec = 50 ):
             F(a,b)=[ x, y, z  ].
         Here F(a,b) is represented by "pmz_lst" and
         has the following domain and range:  
-              F: [0,360)X[0,360) ---> R^3.
+              F: [0,2*pi)X[0,2*pi) ---> R^3.
         The parametrization is a map in terms of cosine and sine.   
-        If F is not defined at the point, then we return None.       
+        
+        If F is not defined at the point it first looks at (v0-dv,v1-dv) 
+        where dv is very small. If that does not work, then we return None.
+               
     '''
-
-    ra = ( sage_QQ( a ) / 180 ) * sage_pi
-    rb = ( sage_QQ( b ) / 180 ) * sage_pi
-
     c0, s0, c1, s1 = OrbRing.coerce( 'c0,s0,c1,s1' )
 
-    W = pmz_lst[0].subs( {c0:sage_cos( ra ), s0:sage_sin( ra ), c1:sage_cos( rb ), s1:sage_sin( rb )} )
-    X = pmz_lst[1].subs( {c0:sage_cos( ra ), s0:sage_sin( ra ), c1:sage_cos( rb ), s1:sage_sin( rb )} )
-    Y = pmz_lst[2].subs( {c0:sage_cos( ra ), s0:sage_sin( ra ), c1:sage_cos( rb ), s1:sage_sin( rb )} )
-    Z = pmz_lst[3].subs( {c0:sage_cos( ra ), s0:sage_sin( ra ), c1:sage_cos( rb ), s1:sage_sin( rb )} )
+    W = pmz_lst[0].subs( {c0:sage_cos( v0 ), s0:sage_sin( v0 ), c1:sage_cos( v1 ), s1:sage_sin( v1 )} )
+    X = pmz_lst[1].subs( {c0:sage_cos( v0 ), s0:sage_sin( v0 ), c1:sage_cos( v1 ), s1:sage_sin( v1 )} )
+    Y = pmz_lst[2].subs( {c0:sage_cos( v0 ), s0:sage_sin( v0 ), c1:sage_cos( v1 ), s1:sage_sin( v1 )} )
+    Z = pmz_lst[3].subs( {c0:sage_cos( v0 ), s0:sage_sin( v0 ), c1:sage_cos( v1 ), s1:sage_sin( v1 )} )
 
     if W == 0:
         return None
@@ -212,7 +211,7 @@ def get_curve_lst( pin, fam ):
     -------
     list
         Returns a list of lists of points. Each list of points
-        defines points on a curve. 
+        defines points on a curve. v1_lstD
         
         Returns "pin.curve_lst_dct[<fam>]"  if 
             "pin.curve_lst_dct[<fam>]!=None". 
@@ -246,16 +245,26 @@ def get_curve_lst( pin, fam ):
         OrbTools.p( 'Already computed ', fam )
         return pin.curve_lst_dct[fam]
 
+    # construct lists of values in S1xS1
+    v0_lst = pin.curve_dct[fam]['step0']
+    v1_lst = pin.curve_dct[fam]['step1']
+    if type( v0_lst ) == int:
+        v0_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, v0_lst )]
+    if type( v1_lst ) == int:
+        v1_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, v1_lst )]
+
+    # loop through lists of values
     pin.curve_lst_dct[fam] = []
-    for i1 in range( 0, 360, pin.curve_dct[fam]['step1'] ):
+    for v0 in v0_lst:
         curve = []
-        for i0 in range( 0, 360, pin.curve_dct[fam]['step0'] ):
+        for v1 in v1_lst:
+
             pmz_lst, fam_id = pin.pmz_dct[fam]
 
             if fam_id == 0:
-                point = get_pmz_value( pmz_lst, i0, i1, pin.curve_dct[fam]['prec'] )
+                point = get_pmz_value( pmz_lst, v0, v1, pin.curve_dct[fam]['prec'] )
             elif fam_id == 1:
-                point = get_pmz_value( pmz_lst, i1, i0, pin.curve_dct[fam]['prec'] )
+                point = get_pmz_value( pmz_lst, v1, v0, pin.curve_dct[fam]['prec'] )
             else:
                 raise ValueError( 'Expect pin.pmz_dct[fam][1] in [0,1]: ', fam_id )
 
@@ -263,6 +272,8 @@ def get_curve_lst( pin, fam ):
             if point != None:  # map not defined
                 point = [ coord * pin.scale for coord in point  ]
                 curve += [point]
+            else:
+                OrbTools.p( 'Parametric map not defined at (v0,v1) =', ( v0, v1 ) )
 
         # need at least 3 points for cubic interpolation
         if len( curve ) >= 3:

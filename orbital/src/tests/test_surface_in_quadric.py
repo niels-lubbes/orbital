@@ -99,14 +99,12 @@ class TestSurfaceInQuadric( object ):
 
     def test__rand_surf_prj( self ):
 
-        ring = PolyRing( 'x,y,v,w' )
-        ring.ext_num_field( 't^2 + 1' )
-        a0 = ring.root_gens()[0]  # i
+        a0 = PolyRing( 'x,y,v,w' ).ext_num_field( 't^2 + 1' ).root_gens()[0]  # i
         bp_tree = BasePointTree( ['xv', 'xw', 'yv', 'yw'] )
         bp = bp_tree.add( 'xv', ( -a0, a0 ), 1 )  # e1
         bp = bp_tree.add( 'xv', ( a0, -a0 ), 1 )  # e2
 
-        ls = LinearSeries.get( 2, bp_tree )  # |2(l1+l2)-e1-e2|
+        ls = LinearSeries.get( [2, 2], bp_tree )  # |2(l1+l2)-e1-e2|
         prj_dim = 5
         prv_Q = sage_matrix( sage_QQ, [( 1, 1, 1, 1, 1, 0, 1 ), ( 0, 1, 0, 1, 0, 0, 0 ), ( 1, 0, 0, 1, 0, 1, 1 ), ( 1, 0, 1, 1, 0, 1, 0 ), ( 0, 0, 1, 0, 1, 0, 1 ), ( 0, 1, 1, 0, 1, 1, 1 )] )
 
@@ -123,14 +121,12 @@ class TestSurfaceInQuadric( object ):
 
     def test__get_surf( self ):
 
-        ring = PolyRing( 'x,y,v,w' )
-        ring.ext_num_field( 't^2 + 1' )
-        a0 = ring.root_gens()[0]  # i
+        a0 = PolyRing( 'x,y,v,w' ).ext_num_field( 't^2 + 1' ).root_gens()[0]  # i
         bp_tree = BasePointTree( ['xv', 'xw', 'yv', 'yw'] )
         bp = bp_tree.add( 'xv', ( -a0, a0 ), 1 )  # e1
         bp = bp_tree.add( 'xv', ( a0, -a0 ), 1 )  # e2
 
-        ls = LinearSeries.get( 2, bp_tree )  # |2(l1+l2)-e1-e2|
+        ls = LinearSeries.get( [2, 2], bp_tree )  # |2(l1+l2)-e1-e2|
         sig = ( 5, 1 )
         coef_lst = [-1, 1, -1, 1, 0, 1, 1, -1]
         prv_Q = [( 1, 0, 0, 1, 0, 1, 1 ), ( 1, 0, 1, 0, 0, 1, 0 ), ( 1, 0, 0, 1, 0, 0, 0 ), ( 1, 0, 0, 0, 0, 1, 1 ), ( 1, 0, 0, 0, 0, 0, 1 ), ( 0, 1, 1, 0, 1, 1, 0 )]
@@ -154,14 +150,12 @@ class TestSurfaceInQuadric( object ):
 
     def test__verify_get_surf( self ):
 
-        ring = PolyRing( 'x,y,v,w' )
-        ring.ext_num_field( 't^2 + 1' )
-        a0 = ring.root_gens()[0]  # i
+        a0 = PolyRing( 'x,y,v,w' ).ext_num_field( 't^2 + 1' ).root_gens()[0]  # i
         bp_tree = BasePointTree( ['xv', 'xw', 'yv', 'yw'] )
         bp = bp_tree.add( 'xv', ( -a0, a0 ), 1 )  # e1
         bp = bp_tree.add( 'xv', ( a0, -a0 ), 1 )  # e2
 
-        ls = LinearSeries.get( 2, bp_tree )  # |2(l1+l2)-e1-e2|
+        ls = LinearSeries.get( [2, 2], bp_tree )  # |2(l1+l2)-e1-e2|
         sig = ( 6, 1 )
         coef_lst = [-1, -1, 0, 0, 0, -1, 1, 0, -1, -1, -1]
         prv_Q = None
@@ -176,13 +170,11 @@ class TestSurfaceInQuadric( object ):
     def test__get_proj( self ):
 
         # construct dct
-        ring = PolyRing( 'x,y,v,w' )
-        ring.ext_num_field( 't^2 + 1' )
-        a0 = ring.root_gens()[0]  # i
+        a0 = PolyRing( 'x,y,v,w' ).ext_num_field( 't^2 + 1' ).root_gens()[0]  # i
         bp_tree = BasePointTree( ['xv', 'xw', 'yv', 'yw'] )
         bp = bp_tree.add( 'xv', ( -a0, a0 ), 1 )  # e1
         bp = bp_tree.add( 'xv', ( a0, -a0 ), 1 )  # e2
-        ls = LinearSeries.get( 2, bp_tree )  # |2(l1+l2)-e1-e2|
+        ls = LinearSeries.get( [2, 2], bp_tree )  # |2(l1+l2)-e1-e2|
         sig = ( 6, 1 )
         coef_lst = [-1, -1, 0, 0, 0, -1, 1, 0, -1, -1, -1]
         prv_Q = None
@@ -209,7 +201,6 @@ class TestSurfaceInQuadric( object ):
         assert str( pmz_AB_lst ).startswith( '[3687965761301911367110366337978449028075575/' )
 
 
-
 if __name__ == '__main__':
 
     # TestSurfaceInQuadric().test__get_S1xS1_pmz()
@@ -217,7 +208,8 @@ if __name__ == '__main__':
     # TestSurfaceInQuadric().test__get_prj_mat()
     # TestSurfaceInQuadric().test__approx_QQ()
     # TestSurfaceInQuadric().test__rand_surf_prj()
-    TestSurfaceInQuadric().test__get_surf()
-    TestSurfaceInQuadric().test__verify_get_surf()
-    # TestSurfaceInQuadric().test__get_proj()
+    # TestSurfaceInQuadric().test__get_surf()
+    # TestSurfaceInQuadric().test__verify_get_surf()
+    TestSurfaceInQuadric().test__get_proj()
+
 
