@@ -23,6 +23,8 @@ from sage_interface import sage_vector
 from sage_interface import sage_identity_matrix
 from sage_interface import sage_n
 from sage_interface import sage_factor
+from sage_interface import sage_sqrt
+
 
 from class_orb_tools import OrbTools
 
@@ -250,9 +252,9 @@ def usecase__blum_cyclide():
     pin.curve_dct['A'] = {'step0':10, 'step1':15, 'prec':10, 'width':0.08}
     pin.curve_dct['B'] = {'step0':10, 'step1':15, 'prec':10, 'width':0.08}
     pin.curve_dct['C'] = {'step0':10, 'step1':15, 'prec':10, 'width':0.08}
-    pin.curve_dct['D'] = {'step0':v0_lstD, 'step1':15, 'prec':10, 'width':0.08}
-    pin.curve_dct['E'] = {'step0':v0_lstE, 'step1':15, 'prec':10, 'width':0.08}
-    pin.curve_dct['F'] = {'step0':v0_lstF, 'step1':15, 'prec':10, 'width':0.08}
+    pin.curve_dct['D'] = {'step0':10, 'step1':v0_lstD, 'prec':10, 'width':0.08}
+    pin.curve_dct['E'] = {'step0':10, 'step1':v0_lstE, 'prec':10, 'width':0.08}
+    pin.curve_dct['F'] = {'step0':10, 'step1':v0_lstF, 'prec':10, 'width':0.08}
 
     pin.text_dct['A'] = [True, ( 0.5, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
     pin.text_dct['B'] = [True, ( 0.2, 0.3, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
@@ -261,10 +263,7 @@ def usecase__blum_cyclide():
     pin.text_dct['F'] = [True, ( 0.2, 0.3, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
     pin.text_dct['D'] = [True, ( 0.8, 0.6, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
 
-
     # raytrace image/animation
-    create_pov( pin, ['A'] )
-    return
     create_pov( pin, ['A', 'B', 'C', 'D', 'E', 'F'] )
 
 
@@ -277,37 +276,36 @@ def usecase__ring_cyclide():
     x, y, v, w, c0, s0, c1, s1, R, r = sage_var( 'x,y,v,w,c0,s0,c1,s1,R,r' )
     V = sage_vector( [r * c0 + R, 0, r * s0] )
     M = sage_matrix( [( c1, -s1, 0 ), ( s1, c1, 0 ), ( 0, 0, 1 )] )
-    print( M * V )
+    pmz_AB_lst = [1] + list( M * V )
+    OrbTools.p( 'pmz_AB_lst =', pmz_AB_lst )
+    for pmz in pmz_AB_lst:
+        OrbTools.p( '\t\t', sage_factor( pmz ) )
+
     C0 = ( y ** 2 - x ** 2 ) / ( y ** 2 + x ** 2 )
     S0 = 2 * x * y / ( y ** 2 + x ** 2 )
     C1 = ( w ** 2 - v ** 2 ) / ( w ** 2 + v ** 2 )
     S1 = 2 * v * w / ( w ** 2 + v ** 2 )
     den = ( y ** 2 + x ** 2 ) * ( w ** 2 + v ** 2 )
-
     dct = {c0:C0, s0:S0, c1:C1, s1:S1 }
-    pmz_lst = [ ( elt.subs( dct ) * den ).simplify_full() for elt in list( M * V ) ]
-    print( '---' )
-    for pmz in pmz_lst:
-        print( sage_factor( pmz ) )
-    print( '---' )
 
-    pmz_lst = [ pmz.subs( {r:1, R:2} ) for pmz in pmz_lst ]
-    print( '---' )
-    for pmz in pmz_lst:
-        print( sage_factor( pmz ) )
-    print( '---' )
+    pmz_lst = [den] + [ ( elt.subs( dct ) * den ).simplify_full() for elt in list( M * V ) ]
+    OrbTools.p( 'pmz_lst =', pmz_lst )
 
-    ls = LinearSeries( [str( pmz ) for pmz in pmz_lst], PolyRing( 'x,y,v,w' ) )
+    pmz_rR_lst = [ pmz.subs( {r:1, R:2} ) for pmz in pmz_lst ]
+    OrbTools.p( 'pmz_rR_lst =', pmz_rR_lst )
+    for pmz in pmz_rR_lst:
+        OrbTools.p( '\t\t', sage_factor( pmz ) )
+
+    ls = LinearSeries( [str( pmz ) for pmz in pmz_rR_lst], PolyRing( 'x,y,v,w' ) )
     OrbTools.p( ls.get_bp_tree() )
-    return
 
     # construct dct
     a0, a1 = PolyRing( 'x,y,v,w' ).ext_num_field( 't^2+1/3' ).ext_num_field( 't^2+1' ).root_gens()
 
-    p1 = [ 'xv', ( a0, 0 ) ]
-    p2 = [ 'xv', ( -a0, 0 ) ]
-    p3 = [ 'xw', ( a0, 0 ) ]
-    p4 = [ 'xw', ( -a0, 0 ) ]
+    p1 = [ 'xv', ( -a0, a1 ) ]
+    p2 = [ 'xv', ( a0, -a1 ) ]
+    p3 = [ 'xv', ( -a0, -a1 ) ]
+    p4 = [ 'xv', ( a0, a1 ) ]
 
     bpt_1234 = BasePointTree( ['xv', 'xw', 'yv', 'yw'] )
     bpt_1234.add( p1[0], p1[1], 1 )
@@ -338,95 +336,40 @@ def usecase__ring_cyclide():
     ls_11b = LinearSeries.get( [1, 1], bpt_34 )
     OrbTools.p( 'linear series 11b =\n', ls_11b )
 
-    sig = ( 1, 4 )  # ring cyclide
-    pol_lst = ls_22.get_implicit_image()
-
-    # determine signature
-    x_lst = sage_PolynomialRing( sage_QQ, [ 'x' + str( i ) for i in range( sum( sig ) )] ).gens()
-    for pol in pol_lst:
-
-        if pol.degree() == 2:
-            M = sage_invariant_theory.quadratic_form( pol, x_lst ).as_QuadraticForm().matrix()
-            D, V = sage_matrix( sage_QQ, M ).eigenmatrix_right()  # D has first all negative values on diagonal
-            cur_sig = ( len( [ d for d in D.diagonal() if d < 0 ] ), len( [ d for d in D.diagonal() if d > 0 ] ) )
-        else:
-            cur_sig = '[no signature]'
-        OrbTools.p( '\t\t', pol, cur_sig )
-
-    # obtain surface in sphere
-    coef_lst = [2, 1]
-    dct = get_surf( ls_22, sig, coef_lst )
-
-    # construct projection matrix P
-    U, J = dct['UJ']
-    U.swap_rows( 0, 2 )
-    J.swap_columns( 0, 2 )
-    J.swap_rows( 0, 2 )
-    print( '---' )
-    print( approx_QQ( sage_n( U ) ) )
-    print( '---' )
-    print( approx_QQ( J ) )
-    print( '---' )
-    assert dct['M'] == approx_QQ( U.T * J * U )
-    approxU = approx_QQ( sage_n( U ) )
-    P = sage_identity_matrix( 5 ).submatrix( 0, 0, 4, 5 )
-    P[0, 4] = -1;
-    print( P )
-    P = P * approxU
-
-    return
-    # call get_proj
-    f_xyz, pmz_AB_lst = get_proj( dct['imp_lst'], dct['pmz_lst'], P )
-    f_xyz_deg_lst = [f_xyz.degree( sage_var( v ) ) for v in ['x', 'y', 'z']]
-
     # compute reparametrization
     R_xyvw = sage_PolynomialRing( sage_QQ, 'x,y,v,w' )
     x, y, v, w = R_xyvw.gens()
-    X, Y, V, W = sage_var( 'x,y,v,w' )
+    X, Y, V, W, q = sage_var( 'x,y,v,w,q' )
+    c0, s0, c1, s1 = sage_var( 'c0,s0,c1,s1' )
     xyvw_dct = { X:x, Y:y, V:v, W:w }
-    pol_lst = sage__eval( str( ls_22.pol_lst ), R_xyvw.gens_dict() )
+    trig_dct = {X:1 - s0, Y:c0, V:1 - s1, W:c1}
+    pol_lst = sage__eval( str( pmz_rR_lst ), R_xyvw.gens_dict() )
+    # q = sage_n( sage_sqrt( 3 ) ).exact_rational()  # approximation of sqrt(3)
 
     # CB
-    CB_dct = { x:X, y:Y, v:X * W + Y * V, w: X * V - Y * W }
-    pmz_CB_lst = get_S1xS1_pmz( [ pol.subs( CB_dct ).subs( xyvw_dct ) for pol in pol_lst] )
-    pmz_CB_lst = list( P * sage_vector( pmz_CB_lst ) )
+    CB_dct = { x:X, y:Y, v: W * X + q * V * Y, w: V * X - q * W * Y }
+    pmz_CB_lst = [ pol.subs( CB_dct ).subs( trig_dct ) for pol in pol_lst ]
 
     # DB
-    DB_dct = { x:X, y:Y, v:4 * X * W - Y * V, w: X * V + Y * W }
-    pmz_DB_lst = get_S1xS1_pmz( [ pol.subs( DB_dct ).subs( xyvw_dct ) for pol in pol_lst] )
-    pmz_DB_lst = list( P * sage_vector( pmz_DB_lst ) )
-
-    # EB
-    EB_dct = { x:X, y:Y, v:40 * W * X ** 2 + 25 * W * Y ** 2 + 24 * V * X * Y, w:40 * V * X ** 2 + 16 * V * Y ** 2 - 15 * W * X * Y  }
-    pmz_EB_lst = get_S1xS1_pmz( [ pol.subs( EB_dct ).subs( xyvw_dct ) for pol in pol_lst] )
-    pmz_EB_lst = list( P * sage_vector( pmz_EB_lst ) )
-
-    # AF
-    AF_dct = { x:-10 * Y * V ** 2 - 25 * Y * W ** 2 + 9 * X * V * W,
-               y:15 * X * V ** 2 + 24 * X * W ** 2 - 15 * Y * V * W,
-               v:V, w:W  }
-    pmz_AF_lst = get_S1xS1_pmz( [ pol.subs( AF_dct ).subs( xyvw_dct ) for pol in pol_lst] )
-    pmz_AF_lst = list( P * sage_vector( pmz_AF_lst ) )
+    DB_dct = { x:X, y:Y, v: W * X - q * V * Y, w: V * X + q * W * Y  }
+    pmz_DB_lst = [ pol.subs( DB_dct ).subs( trig_dct ) for pol in pol_lst ]
 
     # output
-    OrbTools.p( 'f_xyz =', f_xyz_deg_lst, '\n', f_xyz )
     OrbTools.p( 'pmz_AB_lst =\n', pmz_AB_lst )
     OrbTools.p( 'pmz_CB_lst =\n', pmz_CB_lst )
     OrbTools.p( 'pmz_DB_lst =\n', pmz_DB_lst )
-    OrbTools.p( 'pmz_EB_lst =\n', pmz_EB_lst )
-    OrbTools.p( 'pmz_AF_lst =\n', pmz_AF_lst )
 
     # mathematica
     pmz_lst = [ ( pmz_AB_lst, 'AB' ),
                 ( pmz_CB_lst, 'CB' ),
-                ( pmz_DB_lst, 'DB' ),
-                ( pmz_EB_lst, 'EB' ),
-                ( pmz_AF_lst, 'AF' )]
+                ( pmz_DB_lst, 'DB' )]
 
     for pmz, AB in pmz_lst:
-        s = 'pmz' + AB + '=' + str( pmz )
+        s = 'pmz' + AB + '=' + str( pmz ) + ';'
         s = s.replace( '[', '{' ).replace( ']', '}' )
         print( s )
+
+    return
 
     # PovInput ring cyclide
     #
@@ -435,9 +378,9 @@ def usecase__ring_cyclide():
     pin.path = './' + get_time_str() + '_ring_cyclide/'
     pin.fname = 'orb'
     pin.scale = 1
-    pin.cam_dct['location'] = ( 0, 0, sage_QQ( -21 ) / 10 )
+    pin.cam_dct['location'] = ( 0, 0, -7 )
     pin.cam_dct['lookat'] = ( 0, 0, 0 )
-    pin.cam_dct['rotate'] = ( 310, 0, 0 )
+    pin.cam_dct['rotate'] = ( 0, 40, 0 )
     pin.light_radius = 5
     pin.axes_dct['show'] = False
     pin.axes_dct['len'] = 1.2
@@ -446,24 +389,20 @@ def usecase__ring_cyclide():
     pin.quality = 11
     pin.ani_delay = 10
 
-    pin.impl = f_xyz
+    pin.impl = None
 
     pin.pmz_dct['A'] = ( pmz_AB_lst, 0 )
     pin.pmz_dct['B'] = ( pmz_AB_lst, 1 )
     pin.pmz_dct['C'] = ( pmz_CB_lst, 0 )
     pin.pmz_dct['D'] = ( pmz_DB_lst, 0 )
-    pin.pmz_dct['E'] = ( pmz_EB_lst, 0 )
-    pin.pmz_dct['F'] = ( pmz_AF_lst, 1 )
 
     pin.curve_dct['A'] = {'step0':10, 'step1':15, 'prec':10, 'width':0.05}
     pin.curve_dct['B'] = {'step0':10, 'step1':15, 'prec':10, 'width':0.05}
     pin.curve_dct['C'] = {'step0':10, 'step1':15, 'prec':10, 'width':0.05}
     pin.curve_dct['D'] = {'step0':10, 'step1':15, 'prec':10, 'width':0.05}
-    pin.curve_dct['E'] = {'step0':10, 'step1':15, 'prec':10, 'width':0.05}
-    pin.curve_dct['F'] = {'step0':10, 'step1':15, 'prec':10, 'width':0.05}
 
     # raytrace image/animation
-    create_pov( pin, ['A', 'B', 'C', 'D', 'E', 'F'] )
+    create_pov( pin, ['A', 'B', 'C', 'D'] )
 
 
 if __name__ == '__main__':

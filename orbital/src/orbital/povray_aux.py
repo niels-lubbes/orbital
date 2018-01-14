@@ -184,7 +184,8 @@ def get_pmz_value( pmz_lst, v0, v1, prec = 50 ):
     Z = pmz_lst[3].subs( {c0:sage_cos( v0 ), s0:sage_sin( v0 ), c1:sage_cos( v1 ), s1:sage_sin( v1 )} )
 
     if W == 0:
-        return None
+        W = 0.001
+        # return None
 
     XW = round( X / W, prec )
     YW = round( Y / W, prec )
@@ -255,9 +256,9 @@ def get_curve_lst( pin, fam ):
 
     # loop through lists of values
     pin.curve_lst_dct[fam] = []
-    for v0 in v0_lst:
+    for v1 in v1_lst:
         curve = []
-        for v1 in v1_lst:
+        for v0 in v0_lst:
 
             pmz_lst, fam_id = pin.pmz_dct[fam]
 
@@ -272,8 +273,7 @@ def get_curve_lst( pin, fam ):
             if point != None:  # map not defined
                 point = [ coord * pin.scale for coord in point  ]
                 curve += [point]
-            else:
-                OrbTools.p( 'Parametric map not defined at (v0,v1) =', ( v0, v1 ) )
+
 
         # need at least 3 points for cubic interpolation
         if len( curve ) >= 3:
