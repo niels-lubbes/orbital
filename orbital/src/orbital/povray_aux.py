@@ -178,14 +178,18 @@ def get_pmz_value( pmz_lst, v0, v1, prec = 50 ):
     '''
     c0, s0, c1, s1 = OrbRing.coerce( 'c0,s0,c1,s1' )
 
-    W = pmz_lst[0].subs( {c0:sage_cos( v0 ), s0:sage_sin( v0 ), c1:sage_cos( v1 ), s1:sage_sin( v1 )} )
+
+    if type( pmz_lst[0] ) == int:
+        W = sage_QQ( pmz_lst[0] )
+    else:
+        W = pmz_lst[0].subs( {c0:sage_cos( v0 ), s0:sage_sin( v0 ), c1:sage_cos( v1 ), s1:sage_sin( v1 )} )
+
     X = pmz_lst[1].subs( {c0:sage_cos( v0 ), s0:sage_sin( v0 ), c1:sage_cos( v1 ), s1:sage_sin( v1 )} )
     Y = pmz_lst[2].subs( {c0:sage_cos( v0 ), s0:sage_sin( v0 ), c1:sage_cos( v1 ), s1:sage_sin( v1 )} )
     Z = pmz_lst[3].subs( {c0:sage_cos( v0 ), s0:sage_sin( v0 ), c1:sage_cos( v1 ), s1:sage_sin( v1 )} )
 
     if W == 0:
-        W = 0.001
-        # return None
+        return None
 
     XW = round( X / W, prec )
     YW = round( Y / W, prec )

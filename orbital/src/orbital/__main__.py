@@ -24,7 +24,7 @@ from sage_interface import sage_identity_matrix
 from sage_interface import sage_n
 from sage_interface import sage_factor
 from sage_interface import sage_sqrt
-
+from sage_interface import sage_pi
 
 from class_orb_tools import OrbTools
 
@@ -225,9 +225,9 @@ def usecase__blum_cyclide():
     pin.path = './' + get_time_str() + '_blum_cyclide/'
     pin.fname = 'orb'
     pin.scale = 1
-    pin.cam_dct['location'] = ( 0, 0, -7 )
+    pin.cam_dct['location'] = ( 0, -7, 0 )
     pin.cam_dct['lookat'] = ( 0, 0, 0 )
-    pin.cam_dct['rotate'] = ( 0, 40, 0 )
+    pin.cam_dct['rotate'] = ( 20, 180, 20 )
     pin.light_radius = 5
     pin.axes_dct['show'] = False
     pin.axes_dct['len'] = 1.2
@@ -238,9 +238,18 @@ def usecase__blum_cyclide():
 
     pin.impl = f_xyz
 
-    v0_lstE = [1.8, 2.3, 2.7, 3.1, 3.5, 3.8, 4.134, 4.31, 4.532, 4.7, 4.9, 5.08, 5.25, 5.405, 5.553, 5.7, 5.84]
-    v0_lstF = [1.69, 1.87, 2.07, 2.26, 2.5, 2.72, 2.96, 3.2, 3.42, 3.65, 3.81]
-    v0_lstD = [5.01, 5.12, 5.22, 5.32, 5.44, 5.56, 5.68, 5.81, 5.95, 6.1, 6.27, 6.474]
+    start0 = sage_QQ( 1 ) / 10  # step0=10 step1=15
+    v0_lst = [ start0 + ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 10 )]
+    v1_lst = [ start0 + ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 15 )]
+
+    v1_lst_WE = [1.8, 2.3, 2.7, 3.1, 3.5, 3.8, 4.134, 4.31, 4.532, 4.7, 4.9, 5.08, 5.25, 5.405, 5.553, 5.7, 5.84]
+    v1_lst_WF = [1.69, 1.87, 2.07, 2.26, 2.5, 2.72, 2.96, 3.2, 3.42, 3.65, 3.81]
+    v1_lst_WD = [5.01, 5.12, 5.22, 5.32, 5.44, 5.56, 5.68, 5.81, 5.95, 6.1, 6.27, 6.474]
+
+    v1_lst_SA = [6.5]; v1_lst_SE = [5.4];
+    v1_lst_SB = [5.95]; v1_lst_SF = [2.28];
+    v1_lst_SC = [4.83]; v1_lst_SD = [5.55];
+
 
     pin.pmz_dct['A'] = ( pmz_AB_lst, 0 )
     pin.pmz_dct['B'] = ( pmz_AB_lst, 1 )
@@ -248,13 +257,31 @@ def usecase__blum_cyclide():
     pin.pmz_dct['D'] = ( pmz_DB_lst, 0 )
     pin.pmz_dct['E'] = ( pmz_EB_lst, 0 )
     pin.pmz_dct['F'] = ( pmz_AF_lst, 1 )
+    pin.pmz_dct['WD'] = ( pmz_DB_lst, 0 )
+    pin.pmz_dct['WE'] = ( pmz_EB_lst, 0 )
+    pin.pmz_dct['WF'] = ( pmz_AF_lst, 1 )
+    pin.pmz_dct['SA'] = ( pmz_AB_lst, 0 )
+    pin.pmz_dct['SB'] = ( pmz_AB_lst, 1 )
+    pin.pmz_dct['SC'] = ( pmz_CB_lst, 0 )
+    pin.pmz_dct['SD'] = ( pmz_DB_lst, 0 )
+    pin.pmz_dct['SE'] = ( pmz_EB_lst, 0 )
+    pin.pmz_dct['SF'] = ( pmz_AF_lst, 1 )
 
     pin.curve_dct['A'] = {'step0':10, 'step1':15, 'prec':10, 'width':0.08}
     pin.curve_dct['B'] = {'step0':10, 'step1':15, 'prec':10, 'width':0.08}
     pin.curve_dct['C'] = {'step0':10, 'step1':15, 'prec':10, 'width':0.08}
-    pin.curve_dct['D'] = {'step0':10, 'step1':v0_lstD, 'prec':10, 'width':0.08}
-    pin.curve_dct['E'] = {'step0':10, 'step1':v0_lstE, 'prec':10, 'width':0.08}
-    pin.curve_dct['F'] = {'step0':10, 'step1':v0_lstF, 'prec':10, 'width':0.08}
+    pin.curve_dct['D'] = {'step0':10, 'step1':15, 'prec':10, 'width':0.08}
+    pin.curve_dct['E'] = {'step0':10, 'step1':15, 'prec':10, 'width':0.08}
+    pin.curve_dct['F'] = {'step0':10, 'step1':15, 'prec':10, 'width':0.08}
+    pin.curve_dct['WD'] = {'step0':v0_lst, 'step1':v1_lst_WD, 'prec':10, 'width':0.08}
+    pin.curve_dct['WE'] = {'step0':v0_lst, 'step1':v1_lst_WE, 'prec':10, 'width':0.08}
+    pin.curve_dct['WF'] = {'step0':v0_lst, 'step1':v1_lst_WF, 'prec':10, 'width':0.08}
+    pin.curve_dct['SA'] = {'step0':v0_lst, 'step1':v1_lst_SA, 'prec':10, 'width':0.08}
+    pin.curve_dct['SB'] = {'step0':v0_lst, 'step1':v1_lst_SB, 'prec':10, 'width':0.08}
+    pin.curve_dct['SC'] = {'step0':v0_lst, 'step1':v1_lst_SC, 'prec':10, 'width':0.08}
+    pin.curve_dct['SD'] = {'step0':v0_lst, 'step1':v1_lst_SD, 'prec':10, 'width':0.08}
+    pin.curve_dct['SE'] = {'step0':v0_lst, 'step1':v1_lst_SE, 'prec':10, 'width':0.08}
+    pin.curve_dct['SF'] = {'step0':v0_lst, 'step1':v1_lst_SF, 'prec':10, 'width':0.08}
 
     pin.text_dct['A'] = [True, ( 0.5, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
     pin.text_dct['B'] = [True, ( 0.2, 0.3, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
@@ -262,9 +289,30 @@ def usecase__blum_cyclide():
     pin.text_dct['E'] = [True, ( 0.5, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
     pin.text_dct['F'] = [True, ( 0.2, 0.3, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
     pin.text_dct['D'] = [True, ( 0.8, 0.6, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
+    pin.text_dct['WE'] = [True, ( 0.5, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
+    pin.text_dct['WF'] = [True, ( 0.2, 0.3, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
+    pin.text_dct['WD'] = [True, ( 0.8, 0.6, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
+    pin.text_dct['SA'] = [True, ( 0.5, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
+    pin.text_dct['SB'] = [True, ( 0.2, 0.3, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
+    pin.text_dct['SC'] = [True, ( 0.8, 0.6, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
+    pin.text_dct['SE'] = [True, ( 0.5, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
+    pin.text_dct['SF'] = [True, ( 0.2, 0.3, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
+    pin.text_dct['SD'] = [True, ( 0.8, 0.6, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
+
+
 
     # raytrace image/animation
-    create_pov( pin, ['A', 'B', 'C', 'D', 'E', 'F'] )
+    create_pov( pin, ['A', 'B', 'C', 'D', 'E', 'F', 'WD', 'WE', 'WF', 'SA', 'SB', 'SC', 'SD', 'SE', 'SF'] )
+#     create_pov( pin, ['A', 'B', 'C'] )
+#     create_pov( pin, ['WD', 'WE', 'WF'] )
+#     create_pov( pin, ['A'] )
+#     create_pov( pin, ['B'] )
+#     create_pov( pin, ['C'] )
+#     create_pov( pin, ['D'] )
+#     create_pov( pin, ['E'] )
+#     create_pov( pin, ['F'] )
+#     create_pov( pin, ['A', 'SA', 'SB', 'SC'] )
+
 
 
 def usecase__ring_cyclide():
@@ -276,7 +324,12 @@ def usecase__ring_cyclide():
     x, y, v, w, c0, s0, c1, s1, R, r = sage_var( 'x,y,v,w,c0,s0,c1,s1,R,r' )
     V = sage_vector( [r * c0 + R, 0, r * s0] )
     M = sage_matrix( [( c1, -s1, 0 ), ( s1, c1, 0 ), ( 0, 0, 1 )] )
-    pmz_AB_lst = [1] + list( M * V )
+    pmz_AB_Rr_lst = [1] + list( M * V )
+    OrbTools.p( 'pmz_AB_Rr_lst =', pmz_AB_Rr_lst )
+    for pmz in pmz_AB_Rr_lst:
+        OrbTools.p( '\t\t', sage_factor( pmz ) )
+
+    pmz_AB_lst = [ pmz.subs( {r:1, R:2} ) if type( pmz ) != int else pmz for pmz in pmz_AB_Rr_lst ]
     OrbTools.p( 'pmz_AB_lst =', pmz_AB_lst )
     for pmz in pmz_AB_lst:
         OrbTools.p( '\t\t', sage_factor( pmz ) )
@@ -344,7 +397,7 @@ def usecase__ring_cyclide():
     xyvw_dct = { X:x, Y:y, V:v, W:w }
     trig_dct = {X:1 - s0, Y:c0, V:1 - s1, W:c1}
     pol_lst = sage__eval( str( pmz_rR_lst ), R_xyvw.gens_dict() )
-    # q = sage_n( sage_sqrt( 3 ) ).exact_rational()  # approximation of sqrt(3)
+    q = sage_n( sage_sqrt( 3 ) ).exact_rational()  # approximation of sqrt(3)
 
     # CB
     CB_dct = { x:X, y:Y, v: W * X + q * V * Y, w: V * X - q * W * Y }
@@ -368,8 +421,6 @@ def usecase__ring_cyclide():
         s = 'pmz' + AB + '=' + str( pmz ) + ';'
         s = s.replace( '[', '{' ).replace( ']', '}' )
         print( s )
-
-    return
 
     # PovInput ring cyclide
     #
@@ -396,13 +447,32 @@ def usecase__ring_cyclide():
     pin.pmz_dct['C'] = ( pmz_CB_lst, 0 )
     pin.pmz_dct['D'] = ( pmz_DB_lst, 0 )
 
-    pin.curve_dct['A'] = {'step0':10, 'step1':15, 'prec':10, 'width':0.05}
+    start0 = sage_pi / 2
+    # v0_lst = [ start0 + ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 10 )]
+    v1_lst = [ start0 + ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 15 )]
+
+    pin.curve_dct['A'] = {'step0':10, 'step1':v1_lst, 'prec':10, 'width':0.05}
     pin.curve_dct['B'] = {'step0':10, 'step1':15, 'prec':10, 'width':0.05}
     pin.curve_dct['C'] = {'step0':10, 'step1':15, 'prec':10, 'width':0.05}
     pin.curve_dct['D'] = {'step0':10, 'step1':15, 'prec':10, 'width':0.05}
+    pin.curve_dct['FA'] = {'step0':1, 'step1':15, 'prec':10, 'width':0.02}
+    pin.curve_dct['FB'] = {'step0':1, 'step1':15, 'prec':10, 'width':0.02}
+    pin.curve_dct['FC'] = {'step0':1, 'step1':15, 'prec':10, 'width':0.02}
+    pin.curve_dct['FD'] = {'step0':1, 'step1':15, 'prec':10, 'width':0.02}
+
+    pin.text_dct['A'] = [True, ( 0.5, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
+    pin.text_dct['B'] = [True, ( 0.2, 0.3, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
+    pin.text_dct['C'] = [True, ( 0.8, 0.6, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
+    pin.text_dct['D'] = [True, ( 0.5, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FA'] = [True, ( 0.5, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FB'] = [True, ( 0.2, 0.3, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FC'] = [True, ( 0.8, 0.6, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FD'] = [True, ( 0.5, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
+
+
 
     # raytrace image/animation
-    create_pov( pin, ['A', 'B', 'C', 'D'] )
+    create_pov( pin, ['A', 'B', 'C', 'D', 'FA', 'FB', 'FC', 'FD'] )
 
 
 if __name__ == '__main__':
@@ -424,8 +494,8 @@ if __name__ == '__main__':
     #########################################
 
     # usecase__two_sphere_cyclide()
-    usecase__blum_cyclide()
-    # usecase__ring_cyclide()
+    # usecase__blum_cyclide()
+    usecase__ring_cyclide()
 
 
     #########################################
