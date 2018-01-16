@@ -26,8 +26,6 @@ from class_orb_ring import OrbRing
 from class_pov_input import PovInput
 
 
-
-
 def pov_exp_lst( d, v, tbl = [] ):
     '''
     Called by "pov_coef_lst".
@@ -236,10 +234,10 @@ def get_curve_lst( pin, fam ):
             determined by "pin.curve_dct['A']['step0']".
 
           * The space between <curveA<n>> and <curveA<n+1>> is  
-            determined by "pin.curve_dct['A']['step1']".
+            determined by values in "pin.curve_dct['A']['step1']".
 
           * The precision of points in <curveA<n>> is 
-            determined by "pin.curve_dct['A']['prec']".          
+            determined by values in "pin.curve_dct['A']['prec']".          
           
         Returns pin.curve_lst_dct['A'].
     '''
@@ -250,19 +248,11 @@ def get_curve_lst( pin, fam ):
         OrbTools.p( 'Already computed ', fam )
         return pin.curve_lst_dct[fam]
 
-    # construct lists of values in S1xS1
-    v0_lst = pin.curve_dct[fam]['step0']
-    v1_lst = pin.curve_dct[fam]['step1']
-    if type( v0_lst ) == int:
-        v0_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, v0_lst )]
-    if type( v1_lst ) == int:
-        v1_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, v1_lst )]
-
-    # loop through lists of values
+    # loop through lists of parameter values
     pin.curve_lst_dct[fam] = []
-    for v1 in v1_lst:
+    for v1 in pin.curve_dct[fam]['step1']:
         curve = []
-        for v0 in v0_lst:
+        for v0 in pin.curve_dct[fam]['step0']:
 
             pmz_lst, fam_id = pin.pmz_dct[fam]
 

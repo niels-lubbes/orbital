@@ -26,7 +26,6 @@ class TestOrbRing( object ):
         assert elt in lst
 
 
-
 if __name__ == '__main__':
 
     TestOrbRing().test__coerce()

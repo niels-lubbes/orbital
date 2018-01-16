@@ -83,8 +83,8 @@ class PovInput:
                 
     curve_dct: dict
         {
-            'step0': int, 
-            'step1': int, 
+            'step0': list<sage_REALNUMBER>, 
+            'step1': list<sage_REALNUMBER>, 
             'prec' : int, 
             'width': double
         }
@@ -92,13 +92,21 @@ class PovInput:
         Family A is represented as a list:        
            self.curve_lst_dct['A']=[ <curveA(0)>, <curveA(1)>, ... ]        
         where
+          
           * <curveA(#)> is a list of points on a curve in family A.        
-          * The space between points in <curveA(#)>
-            is determined by "step0".        
-          * The space between <curve(n)> and <curve(n+1)>
-            is determined by "step1".        
-          * The precision of points in <curveA(#)> is
-            determined by "prec".        
+          
+          * The list 'step0' is a list of parameter values for the 
+            points in the curve <curveA(#)> so that each point in 
+            this curve is obtained by evaluating the map map pmz_dct['A'] 
+            at a parameter value. Thus the space between points in 
+            <curveA<n>> is determined by "step0".
+          
+          * The list 'step1' is a list of parameter values for 
+            curves in family. The space between <curve(n)> and <curve(n+1)>
+            is determined by the space between parameters in "step1".        
+          
+          * The precision of points in <curveA(#)> is determined by "prec".        
+          
           * The curves in family A are sweeped out by spheres
             with radius "width".        
         See also "povray_aux.get_curve_lst()"

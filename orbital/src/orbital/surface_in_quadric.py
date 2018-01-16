@@ -352,7 +352,7 @@ def get_surf( ls, sig, coef_lst = None, prv_Q = None ):
         cur_sig = ( num_neg, num_pos )
         if cur_sig not in sig_set:
             sig_set.add( cur_sig )
-            OrbTools.p( '\tsig =', sig, ', sig_set =', sig_set )
+            OrbTools.p( '\t\t sig =', sig, ', sig_set =', sig_set )
 
     OrbTools.p( 'Q        =', list( Q ) )
     OrbTools.p( 'pmz_lst  =', pmz_lst )
