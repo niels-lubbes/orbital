@@ -204,27 +204,30 @@ def blum_cyclide():
     pin.pmz_dct['FE'] = ( pmz_EB_lst, 0 )
     pin.pmz_dct['FF'] = ( pmz_AF_lst, 1 )
 
-    pin.curve_dct['A'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.08}
-    pin.curve_dct['B'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.08}
-    pin.curve_dct['C'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.08}
-    pin.curve_dct['D'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.08}
-    pin.curve_dct['E'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.08}
-    pin.curve_dct['F'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.08}
-    pin.curve_dct['WD'] = {'step0':v0_lst, 'step1':v1_lst_WD, 'prec':10, 'width':0.08}
-    pin.curve_dct['WE'] = {'step0':v0_lst, 'step1':v1_lst_WE, 'prec':10, 'width':0.08}
-    pin.curve_dct['WF'] = {'step0':v0_lst, 'step1':v1_lst_WF, 'prec':10, 'width':0.08}
-    pin.curve_dct['SA'] = {'step0':v0_lst, 'step1':v1_lst_SA, 'prec':10, 'width':0.08}
-    pin.curve_dct['SB'] = {'step0':v0_lst, 'step1':v1_lst_SB, 'prec':10, 'width':0.08}
-    pin.curve_dct['SC'] = {'step0':v0_lst, 'step1':v1_lst_SC, 'prec':10, 'width':0.08}
-    pin.curve_dct['SD'] = {'step0':v0_lst, 'step1':v1_lst_SD, 'prec':10, 'width':0.09}
-    pin.curve_dct['SE'] = {'step0':v0_lst, 'step1':v1_lst_SE, 'prec':10, 'width':0.08}
-    pin.curve_dct['SF'] = {'step0':v0_lst, 'step1':v1_lst_SF, 'prec':10, 'width':0.08}
-    pin.curve_dct['FA'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.02}
-    pin.curve_dct['FB'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.02}
-    pin.curve_dct['FC'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.02}
-    pin.curve_dct['FD'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.02}
-    pin.curve_dct['FE'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.02}
-    pin.curve_dct['FF'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.02}
+    pin.curve_dct['A'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.05}
+    pin.curve_dct['B'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.05}
+    pin.curve_dct['C'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.05}
+    pin.curve_dct['D'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.05}
+    pin.curve_dct['E'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.05}
+    pin.curve_dct['F'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.05}
+
+    pin.curve_dct['WD'] = {'step0':v0_lst, 'step1':v1_lst_WD, 'prec':10, 'width':0.05}
+    pin.curve_dct['WE'] = {'step0':v0_lst, 'step1':v1_lst_WE, 'prec':10, 'width':0.05}
+    pin.curve_dct['WF'] = {'step0':v0_lst, 'step1':v1_lst_WF, 'prec':10, 'width':0.05}
+
+    pin.curve_dct['SA'] = {'step0':v0_lst, 'step1':v1_lst_SA, 'prec':10, 'width':0.05}
+    pin.curve_dct['SB'] = {'step0':v0_lst, 'step1':v1_lst_SB, 'prec':10, 'width':0.05}
+    pin.curve_dct['SC'] = {'step0':v0_lst, 'step1':v1_lst_SC, 'prec':10, 'width':0.05}
+    pin.curve_dct['SD'] = {'step0':v0_lst, 'step1':v1_lst_SD, 'prec':10, 'width':0.06}
+    pin.curve_dct['SE'] = {'step0':v0_lst, 'step1':v1_lst_SE, 'prec':10, 'width':0.05}
+    pin.curve_dct['SF'] = {'step0':v0_lst, 'step1':v1_lst_SF, 'prec':10, 'width':0.05}
+
+    pin.curve_dct['FA'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.01}
+    pin.curve_dct['FB'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.01}
+    pin.curve_dct['FC'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.01}
+    pin.curve_dct['FD'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.01}
+    pin.curve_dct['FE'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.01}
+    pin.curve_dct['FF'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.01}
 
     pin.text_dct['A'] = [True, ( 0.5, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
     pin.text_dct['B'] = [True, ( 0.2, 0.3, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
@@ -256,4 +259,11 @@ def blum_cyclide():
     fam_lst += ['FA', 'FB', 'FC', 'FD', 'FE', 'FF']
     create_pov( pin, fam_lst )
 
+    F_lst = ['FA', 'FB', 'FC']
+    S_lst = ['SA', 'SB', 'SC', 'SD', 'SE', 'SF']
+    create_pov( pin, ['A', 'B', 'C'] )
+    create_pov( pin, ['A', 'B', 'C'] + F_lst )
+    create_pov( pin, ['WD', 'WE', 'WF'] )
+    create_pov( pin, ['WD', 'WE', 'WF'] + F_lst )
+    create_pov( pin, S_lst + F_lst )
 

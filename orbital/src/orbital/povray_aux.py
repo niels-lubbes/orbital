@@ -174,17 +174,19 @@ def get_pmz_value( pmz_lst, v0, v1, prec = 50 ):
         where dv is very small. If that does not work, then we return None.
                
     '''
-    c0, s0, c1, s1 = OrbRing.coerce( 'c0,s0,c1,s1' )
+    c0, s0, c1, s1, t0, t1 = OrbRing.coerce( 'c0,s0,c1,s1,t0,t1' )
+
+    dct = {c0:sage_cos( v0 ), s0:sage_sin( v0 ), c1:sage_cos( v1 ), s1:sage_sin( v1 ), t0:v0, t1:v1}
 
 
     if type( pmz_lst[0] ) == int:
         W = sage_QQ( pmz_lst[0] )
     else:
-        W = pmz_lst[0].subs( {c0:sage_cos( v0 ), s0:sage_sin( v0 ), c1:sage_cos( v1 ), s1:sage_sin( v1 )} )
+        W = pmz_lst[0].subs( dct )
 
-    X = pmz_lst[1].subs( {c0:sage_cos( v0 ), s0:sage_sin( v0 ), c1:sage_cos( v1 ), s1:sage_sin( v1 )} )
-    Y = pmz_lst[2].subs( {c0:sage_cos( v0 ), s0:sage_sin( v0 ), c1:sage_cos( v1 ), s1:sage_sin( v1 )} )
-    Z = pmz_lst[3].subs( {c0:sage_cos( v0 ), s0:sage_sin( v0 ), c1:sage_cos( v1 ), s1:sage_sin( v1 )} )
+    X = pmz_lst[1].subs( dct )
+    Y = pmz_lst[2].subs( dct )
+    Z = pmz_lst[3].subs( dct )
 
     if W == 0:
         return None
@@ -248,13 +250,14 @@ def get_curve_lst( pin, fam ):
         OrbTools.p( 'Already computed ', fam )
         return pin.curve_lst_dct[fam]
 
+    pmz_lst, fam_id = pin.pmz_dct[fam]
+    pmz_lst = OrbRing.coerce( pmz_lst )
+
     # loop through lists of parameter values
     pin.curve_lst_dct[fam] = []
     for v1 in pin.curve_dct[fam]['step1']:
         curve = []
         for v0 in pin.curve_dct[fam]['step0']:
-
-            pmz_lst, fam_id = pin.pmz_dct[fam]
 
             if fam_id == 0:
                 point = get_pmz_value( pmz_lst, v0, v1, pin.curve_dct[fam]['prec'] )
@@ -263,8 +266,8 @@ def get_curve_lst( pin, fam ):
             else:
                 raise ValueError( 'Expect pin.pmz_dct[fam][1] in [0,1]: ', fam_id )
 
-            # add points to curve
-            if point != None:  # map not defined
+            # add points to curve if map is defined
+            if point != None:
                 point = [ coord * pin.scale for coord in point  ]
                 curve += [point]
 

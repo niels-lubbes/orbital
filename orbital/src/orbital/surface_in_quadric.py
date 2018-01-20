@@ -326,7 +326,8 @@ def get_surf( ls, sig, coef_lst = None, prv_Q = None ):
         if coef_lst != None:
             c_lst = coef_lst
         else:
-            c_lst = [ OrbRing.random_elt( [-1, 0, 1] ) for imp in imp_lst ]
+            # c_lst = [ OrbRing.random_elt( [-1, 0, 1] ) for imp in imp_lst ]
+            c_lst = [ OrbRing.random_int( 10 ) for imp in imp_lst ]
 
         # obtain quadric in ideal from "c_lst"
         #

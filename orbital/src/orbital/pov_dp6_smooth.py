@@ -4,28 +4,28 @@ Created on Jan 16, 2018
 @author: Niels Lubbes
 '''
 
-from orbital.sage_interface import sage_PolynomialRing
-from orbital.sage_interface import sage_QQ
-from orbital.sage_interface import sage_var
-from orbital.sage_interface import sage__eval
-from orbital.sage_interface import sage_vector
-from orbital.sage_interface import sage_pi
+from sage_interface import sage_PolynomialRing
+from sage_interface import sage_QQ
+from sage_interface import sage_var
+from sage_interface import sage__eval
+from sage_interface import sage_vector
+from sage_interface import sage_pi
 
 from linear_series.class_linear_series import LinearSeries
 from linear_series.class_base_points import BasePointTree
 from linear_series.class_poly_ring import PolyRing
 
-from orbital.surface_in_quadric import get_surf
-from orbital.surface_in_quadric import approx_QQ
-from orbital.surface_in_quadric import get_prj_mat
-from orbital.surface_in_quadric import get_proj
-from orbital.surface_in_quadric import get_S1xS1_pmz
+from surface_in_quadric import get_surf
+from surface_in_quadric import approx_QQ
+from surface_in_quadric import get_prj_mat
+from surface_in_quadric import get_proj
+from surface_in_quadric import get_S1xS1_pmz
 
-from orbital.class_pov_input import PovInput
+from class_pov_input import PovInput
 
-from orbital.povray import create_pov
+from povray import create_pov
 
-from orbital.povray_aux import get_time_str
+from povray_aux import get_time_str
 
 
 

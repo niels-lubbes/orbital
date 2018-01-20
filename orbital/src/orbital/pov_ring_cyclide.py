@@ -162,11 +162,19 @@ def ring_cyclide():
     pin.pmz_dct['FB'] = ( pmz_AB_lst, 1 )
     pin.pmz_dct['FC'] = ( pmz_CB_lst, 0 )
     pin.pmz_dct['FD'] = ( pmz_DB_lst, 0 )
+    pin.pmz_dct['WA'] = ( pmz_AB_lst, 0 )
+    pin.pmz_dct['WB'] = ( pmz_AB_lst, 1 )
+    pin.pmz_dct['WD'] = ( pmz_DB_lst, 0 )
 
     v0_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 10 )]
     v1_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 15 )]
+
     v1_lst_A = [ sage_pi / 2 + ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 30 )]
     v1_lst_F = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 1 )]
+
+    v1_lst_WA = [0.1, 0.52, 0.94, 1.36, 1.78, 2.2, 2.61, 3.04, 3.45, 3.88, 4.3, 4.712, 5.13, 5.55, 5.965]
+    v1_lst_WB = [0, 0.7, 1.31, 1.8, 2.18, 2.5, 2.77, 3.015, 3.26, 3.51, 3.78, 4.099, 4.49, 4.97, 5.579];
+    v1_lst_WD = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 15 )]
 
     pin.curve_dct['A'] = {'step0':v0_lst, 'step1':v1_lst_A, 'prec':10, 'width':0.05}
     pin.curve_dct['B'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.05}
@@ -176,6 +184,9 @@ def ring_cyclide():
     pin.curve_dct['FB'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.02}
     pin.curve_dct['FC'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.02}
     pin.curve_dct['FD'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.02}
+    pin.curve_dct['WA'] = {'step0':v0_lst, 'step1':v1_lst_WA, 'prec':10, 'width':0.05}
+    pin.curve_dct['WB'] = {'step0':v0_lst, 'step1':v1_lst_WB, 'prec':10, 'width':0.05}
+    pin.curve_dct['WD'] = {'step0':v0_lst, 'step1':v1_lst_WD, 'prec':10, 'width':0.05}
 
     pin.text_dct['A'] = [True, ( 0.5, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
     pin.text_dct['B'] = [True, ( 0.2, 0.3, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
@@ -185,6 +196,17 @@ def ring_cyclide():
     pin.text_dct['FB'] = [True, ( 0.2, 0.3, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
     pin.text_dct['FC'] = [True, ( 0.8, 0.6, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
     pin.text_dct['FD'] = [True, ( 0.5, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
+    pin.text_dct['WA'] = [True, ( 0.5, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
+    pin.text_dct['WB'] = [True, ( 0.2, 0.3, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
+    pin.text_dct['WD'] = [True, ( 0.0, 0.2, 0.1, 0.0 ), 'phong 0.2 phong_size 5' ]
 
     # raytrace image/animation
-    create_pov( pin, ['A', 'B', 'C', 'D', 'FA', 'FB', 'FC', 'FD'] )
+    create_pov( pin, ['A', 'B', 'C', 'D', 'FA', 'FB', 'FC', 'FD', 'WA', 'WB', 'WD'] )
+
+    F_lst = ['FA', 'FC', 'FD']
+    create_pov( pin, ['A', 'C', 'D'] )
+    create_pov( pin, ['A', 'C', 'D'] + F_lst )
+    create_pov( pin, ['WA', 'WB', 'WD'] )
+    create_pov( pin, ['WA', 'WB', 'WD'] + F_lst )
+
+

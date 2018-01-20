@@ -26,6 +26,8 @@ from sage_interface import sage_FractionField
 from pov_blum_cyclide import blum_cyclide
 from pov_ring_cyclide import ring_cyclide
 from pov_dp6_smooth import dp6_smooth
+from pov_quadric_smooth import quadric_smooth
+from pov_perseus_cyclide import perseus_cyclide
 
 
 def usecase__two_sphere_cyclide():
@@ -75,9 +77,11 @@ def usecase_povray():
     '''
     TODO
     '''
-    blum_cyclide()
-    ring_cyclide()
-    dp6_smooth()
+    # blum_cyclide()
+    # ring_cyclide()
+    # dp6_smooth()
+    # quadric_smooth()
+    perseus_cyclide()
 
 
 if __name__ == '__main__':
