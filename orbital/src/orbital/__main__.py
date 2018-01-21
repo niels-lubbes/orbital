@@ -23,11 +23,13 @@ from sage_interface import sage_PolynomialRing
 from sage_interface import sage_NumberField
 from sage_interface import sage_FractionField
 
-from pov_blum_cyclide import blum_cyclide
-from pov_ring_cyclide import ring_cyclide
-from pov_dp6_smooth import dp6_smooth
-from pov_quadric_smooth import quadric_smooth
-from pov_perseus_cyclide import perseus_cyclide
+from pov.pov_blum_cyclide import blum_cyclide
+from pov.pov_ring_cyclide import ring_cyclide
+from pov.pov_dp6_smooth import dp6_smooth
+from pov.pov_quadric_smooth import quadric_smooth
+from pov.pov_perseus_cyclide import perseus_cyclide
+from pov.pov_CH1_cyclide import CH1_cyclide
+from pov.pov_spindle_cyclide import spindle_cyclide
 
 
 def usecase__two_sphere_cyclide():
@@ -81,8 +83,9 @@ def usecase_povray():
     # ring_cyclide()
     # dp6_smooth()
     # quadric_smooth()
-    perseus_cyclide()
-
+    # perseus_cyclide()
+    # CH1_cyclide()
+    spindle_cyclide()
 
 if __name__ == '__main__':
 
