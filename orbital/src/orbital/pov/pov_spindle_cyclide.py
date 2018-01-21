@@ -4,18 +4,19 @@ Created on Jan 21, 2018
 @author: Niels Lubbes
 '''
 
-from sage_interface import sage_var
-from sage_interface import sage_vector
-from sage_interface import sage_matrix
-from sage_interface import sage_factor
-from sage_interface import sage_QQ
-from sage_interface import sage_pi
+from orbital.sage_interface import sage_var
+from orbital.sage_interface import sage_vector
+from orbital.sage_interface import sage_matrix
+from orbital.sage_interface import sage_factor
+from orbital.sage_interface import sage_QQ
+from orbital.sage_interface import sage_pi
 
-from class_orb_tools import OrbTools
+from orbital.class_orb_tools import OrbTools
 
-from class_pov_input import PovInput
-from povray import create_pov
-from povray_aux import get_time_str
+from orbital.class_pov_input import PovInput
+
+from orbital.povray.povray import create_pov
+from orbital.povray.povray_aux import get_time_str
 
 
 def spindle_cyclide():
@@ -82,6 +83,5 @@ def spindle_cyclide():
 
     # raytrace image/animation
     create_pov( pin, ['A', 'B'] )
-    return
     create_pov( pin, ['A', 'B', 'FA', 'FB'] )
 

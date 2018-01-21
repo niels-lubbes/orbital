@@ -85,7 +85,8 @@ def usecase_povray():
     # quadric_smooth()
     # perseus_cyclide()
     # CH1_cyclide()
-    spindle_cyclide()
+    # spindle_cyclide()
+
 
 if __name__ == '__main__':
 

@@ -4,30 +4,30 @@ Created on Jan 16, 2018
 @author: Niels Lubbes
 '''
 
-from sage_interface import sage_QQ
-from sage_interface import sage_PolynomialRing
-from sage_interface import sage__eval
-from sage_interface import sage_var
-from sage_interface import sage_identity_matrix
-from sage_interface import sage_invariant_theory
-from sage_interface import sage_matrix
-from sage_interface import sage_vector
-from sage_interface import sage_pi
+from orbital.sage_interface import sage_QQ
+from orbital.sage_interface import sage_PolynomialRing
+from orbital.sage_interface import sage__eval
+from orbital.sage_interface import sage_var
+from orbital.sage_interface import sage_identity_matrix
+from orbital.sage_interface import sage_invariant_theory
+from orbital.sage_interface import sage_matrix
+from orbital.sage_interface import sage_vector
+from orbital.sage_interface import sage_pi
 
-from class_orb_tools import OrbTools
+from orbital.class_orb_tools import OrbTools
+
+from orbital.surface_in_quadric import get_S1xS1_pmz
+from orbital.surface_in_quadric import approx_QQ
+from orbital.surface_in_quadric import get_surf
+from orbital.surface_in_quadric import get_proj
+
+from orbital.povray.class_pov_input import PovInput
+from orbital.povray.povray import create_pov
+from orbital.povray.povray_aux import get_time_str
 
 from linear_series.class_poly_ring import PolyRing
 from linear_series.class_base_points import BasePointTree
 from linear_series.class_linear_series import LinearSeries
-
-from surface_in_quadric import get_S1xS1_pmz
-from surface_in_quadric import approx_QQ
-from surface_in_quadric import get_surf
-from surface_in_quadric import get_proj
-
-from class_pov_input import PovInput
-from povray import create_pov
-from povray_aux import get_time_str
 
 
 def blum_cyclide():

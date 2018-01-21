@@ -9,11 +9,11 @@ from orbital.sage_interface import sage_var
 from orbital.sage_interface import sage_pi
 from orbital.sage_interface import sage_QQ
 
-from orbital.class_pov_input import PovInput
+from orbital.povray.class_pov_input import PovInput
 
-from orbital.povray import create_pov
+from orbital.povray.povray import create_pov
 
-from orbital.povray_aux import get_time_str
+from orbital.povray.povray_aux import get_time_str
 
 
 class TestPovray( object ):

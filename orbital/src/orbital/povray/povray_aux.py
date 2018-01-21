@@ -12,18 +12,18 @@ from copy import copy
 from time import gmtime
 from time import strftime
 
-from sage_interface import sage_PolynomialRing
-from sage_interface import sage_QQ
-from sage_interface import sage__eval
-from sage_interface import sage_cos
-from sage_interface import sage_sin
-from sage_interface import sage_pi
+from orbital.sage_interface import sage_PolynomialRing
+from orbital.sage_interface import sage_QQ
+from orbital.sage_interface import sage__eval
+from orbital.sage_interface import sage_cos
+from orbital.sage_interface import sage_sin
+from orbital.sage_interface import sage_pi
 
-from class_orb_tools import OrbTools
+from orbital.class_orb_tools import OrbTools
 
-from class_orb_ring import OrbRing
+from orbital.class_orb_ring import OrbRing
 
-from class_pov_input import PovInput
+from orbital.povray.class_pov_input import PovInput
 
 
 def pov_exp_lst( d, v, tbl = [] ):

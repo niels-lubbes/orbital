@@ -10,15 +10,15 @@ import os
 import subprocess
 from subprocess import call
 
-from class_pov_input import PovInput
+from orbital.povray.class_pov_input import PovInput
 
-from povray_aux import get_curve_lst
-from povray_aux import convert_pngs_gif
-from povray_aux import strftime
-from povray_aux import create_dir
-from povray_aux import pov_coef_lst
+from orbital.povray.povray_aux import get_curve_lst
+from orbital.povray.povray_aux import convert_pngs_gif
+from orbital.povray.povray_aux import strftime
+from orbital.povray.povray_aux import create_dir
+from orbital.povray.povray_aux import pov_coef_lst
 
-from class_orb_tools import OrbTools
+from orbital.class_orb_tools import OrbTools
 
 
 def create_pov( pin, fam_lst = [], show_surf = False, ani = False, ft_lst = [] ):

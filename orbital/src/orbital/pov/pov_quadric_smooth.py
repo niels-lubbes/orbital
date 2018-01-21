@@ -4,32 +4,24 @@ Created on Jan 16, 2018
 @author: Niels Lubbes
 '''
 
-from sage_interface import sage_QQ
-from sage_interface import sage_PolynomialRing
-from sage_interface import sage__eval
-from sage_interface import sage_var
-from sage_interface import sage_matrix
-from sage_interface import sage_vector
-from sage_interface import sage_factor
-from sage_interface import sage_n
-from sage_interface import sage_factor
-from sage_interface import sage_sqrt
-from sage_interface import sage_pi
+from orbital.sage_interface import sage_QQ
+from orbital.sage_interface import sage_var
+from orbital.sage_interface import sage_matrix
+from orbital.sage_interface import sage_vector
+from orbital.sage_interface import sage_factor
+from orbital.sage_interface import sage_pi
 
-from class_orb_tools import OrbTools
+from orbital.class_orb_tools import OrbTools
 
-from linear_series.class_poly_ring import PolyRing
-from linear_series.class_base_points import BasePointTree
-from linear_series.class_linear_series import LinearSeries
+from orbital.class_orb_ring import OrbRing
 
-from class_pov_input import PovInput
-from povray import create_pov
-from povray_aux import get_time_str
-
-from class_orb_ring import OrbRing
+from orbital.povray.class_pov_input import PovInput
+from orbital.povray.povray import create_pov
+from orbital.povray.povray_aux import get_time_str
 
 
 def quadric_smooth():
+    # construct povray image of rulings on hyperboloid of one sheet
 
     c0, s0, c1, s1, t0, t1 = OrbRing.coerce( 'c0,s0,c1,s1,t0,t1' )
     P0 = sage_vector( [-2, -1, -0.5] )
@@ -66,6 +58,7 @@ def quadric_smooth():
     pin.light_radius = 5
     pin.axes_dct['show'] = False
     pin.axes_dct['len'] = 1.2
+
     pin.width = 400
     pin.height = 200
     pin.quality = 1
