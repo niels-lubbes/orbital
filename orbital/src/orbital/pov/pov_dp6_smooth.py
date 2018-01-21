@@ -28,6 +28,8 @@ from linear_series.class_poly_ring import PolyRing
 
 
 def dp6_smooth():
+    # Creates povray image of the projection of a
+    # smooth sextic del Pezzo surface in S^5.
 
     # compute parametrizations of canonical model
     a0 = PolyRing( 'x,y,v,w' ).ext_num_field( 't^2 + 1' ).root_gens()[0]
@@ -78,21 +80,36 @@ def dp6_smooth():
     pin.quality = 11
     pin.ani_delay = 1
 
-    pin.impl = f_xyz
+    pin.impl = None
 
     v0_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 10 )]
     v1_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 15 )]
+    v1_F_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 2 )]
 
     pin.pmz_dct['A'] = ( pmz_AB_lst, 0 )
     pin.pmz_dct['B'] = ( pmz_AB_lst, 1 )
     pin.pmz_dct['C'] = ( pmz_CB_lst, 0 )
+    pin.pmz_dct['FA'] = ( pmz_AB_lst, 0 )
+    pin.pmz_dct['FB'] = ( pmz_AB_lst, 1 )
+    pin.pmz_dct['FC'] = ( pmz_CB_lst, 0 )
 
     pin.curve_dct['A'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.05}
     pin.curve_dct['B'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.05}
     pin.curve_dct['C'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.05}
+    pin.curve_dct['FA'] = {'step0':v0_lst, 'step1':v1_F_lst, 'prec':10, 'width':0.05}
+    pin.curve_dct['FB'] = {'step0':v0_lst, 'step1':v1_F_lst, 'prec':10, 'width':0.05}
+    pin.curve_dct['FC'] = {'step0':v0_lst, 'step1':v1_F_lst, 'prec':10, 'width':0.05}
+
+    col_F = ( 0.1, 0.1, 0.1, 0.0 )
+    pin.text_dct['A'] = [True, ( 0.4, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
+    pin.text_dct['B'] = [True, ( 0.2, 0.3, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
+    pin.text_dct['C'] = [True, ( 0.8, 0.6, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FA'] = [True, col_F, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FB'] = [True, col_F, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FC'] = [True, col_F, 'phong 0.2 phong_size 5' ]
 
     # raytrace image/animation
-    create_pov( pin, ['A', 'B'] )
+    create_pov( pin, ['A', 'B', 'C', 'FA', 'FB', 'FC'] )
 
 
 

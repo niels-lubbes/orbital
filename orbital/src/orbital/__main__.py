@@ -8,28 +8,31 @@ Created on Nov 23, 2017
 import os
 import sys
 
-from class_orb_tools import OrbTools
+from orbital.class_orb_tools import OrbTools
 
-from poly_maps import image_map
-from poly_maps import invert_birational_map
-from poly_maps import compose_maps
-from poly_maps import euclidean_type_form
-from poly_maps import preimage_map
-from poly_maps import ring_dict
-from poly_maps import hilbert_poly
+from orbital.poly_maps import image_map
+from orbital.poly_maps import invert_birational_map
+from orbital.poly_maps import compose_maps
+from orbital.poly_maps import euclidean_type_form
+from orbital.poly_maps import preimage_map
+from orbital.poly_maps import ring_dict
+from orbital.poly_maps import hilbert_poly
 
-from sage_interface import sage_set_verbose
-from sage_interface import sage_PolynomialRing
-from sage_interface import sage_NumberField
-from sage_interface import sage_FractionField
+from orbital.sage_interface import sage_set_verbose
+from orbital.sage_interface import sage_PolynomialRing
+from orbital.sage_interface import sage_QQ
+from orbital.sage_interface import sage_NumberField
+from orbital.sage_interface import sage_FractionField
 
-from pov.pov_blum_cyclide import blum_cyclide
-from pov.pov_ring_cyclide import ring_cyclide
-from pov.pov_dp6_smooth import dp6_smooth
-from pov.pov_quadric_smooth import quadric_smooth
-from pov.pov_perseus_cyclide import perseus_cyclide
-from pov.pov_CH1_cyclide import CH1_cyclide
-from pov.pov_spindle_cyclide import spindle_cyclide
+from orbital.pov.pov_blum_cyclide import blum_cyclide
+from orbital.pov.pov_ring_cyclide import ring_cyclide
+from orbital.pov.pov_dp6_smooth import dp6_smooth
+from orbital.pov.pov_quadric_smooth import quadric_smooth
+from orbital.pov.pov_perseus_cyclide import perseus_cyclide
+from orbital.pov.pov_CH1_cyclide import CH1_cyclide
+from orbital.pov.pov_spindle_cyclide import spindle_cyclide
+from orbital.pov.pov_horn_cyclide import horn_cyclide
+from orbital.pov.pov_veronese import veronese
 
 
 def usecase__two_sphere_cyclide():
@@ -86,7 +89,8 @@ def usecase_povray():
     # perseus_cyclide()
     # CH1_cyclide()
     # spindle_cyclide()
-
+    # horn_cyclide()
+    veronese()
 
 if __name__ == '__main__':
 
