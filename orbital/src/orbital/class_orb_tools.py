@@ -5,6 +5,8 @@ Created on Nov 23, 2017
 '''
 
 from sage_interface import sage_save
+from sage_interface import sage_load
+
 import inspect
 import time
 import sys
@@ -118,6 +120,7 @@ class OrbTools():
     def set_enable_tool_dct( enable_tool_dct ):
         OrbTools.__enable_tool_dct = enable_tool_dct
 
+
     @staticmethod
     def get_tool_dct( fname = 'orb_tools' ):
         '''
@@ -150,7 +153,7 @@ class OrbTools():
             try:
 
                 OrbTools.p( 'Loading from:', file_name )
-                OrbTools.__tool_dct = load( file_name )
+                OrbTools.__tool_dct = sage_load( file_name )
 
             except Exception as e:
 
