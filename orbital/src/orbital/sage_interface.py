@@ -85,6 +85,10 @@ def sage_cos( *args, **kwargs ):
 def sage_sin( *args, **kwargs ):
     return sin( *args, **kwargs )
 
+# from sage.functions.trig import arctan
+def sage_arctan( *args, **kwargs ):
+    return arctan( *args, **kwargs )
+
 # from sage.functions.other import sqrt
 def sage_sqrt( *args, **kwargs ):
     return sqrt( *args, **kwargs )
