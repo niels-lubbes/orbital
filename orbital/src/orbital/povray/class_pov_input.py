@@ -160,17 +160,19 @@ class PovInput:
 
         self.curve_dct = {}
         self.curve_dct['A'] = {'step0':2 * 36, 'step1':36, 'prec':5, 'width':0.02}
-        self.curve_dct['B'] = {'step0':2 * 36, 'step1':36, 'prec':5, 'width':0.02}
-        self.curve_dct['C'] = {'step0':2 * 36, 'step1':36, 'prec':5, 'width':0.02}
-
-        self.curve_lst_dct = {}  # used by "povray_aux.get_curve_lst()"
 
         self.text_dct = {}
         self.text_dct['SURF'] = [True, ( 0.2, 0.7, 0.3, 0.0 ), 'F_Glass10']
         self.text_dct['A'] = [True, ( 0.5, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
-        self.text_dct['B'] = [True, ( 0.2, 0.3, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
-        self.text_dct['C'] = [True, ( 0.8, 0.6, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
 
+        # Examples for colors
+        # -------------------
+        # red   = ( 0.5, 0.0, 0.0, 0.0 )
+        # green = ( 0.2, 0.3, 0.2, 0.0 )
+        # beige = ( 0.8, 0.6, 0.2, 0.0 )
+
+
+        self.curve_lst_dct = {}  # used by "povray_aux.get_curve_lst()"
 
 
     # human readable string representation of object
