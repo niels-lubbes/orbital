@@ -2,7 +2,6 @@
 Use of this source code is governed by a MIT-style license that can be found in the LICENSE file.
 Created on Nov 23, 2017
 @author: Niels Lubbes
-
 '''
 
 import os
@@ -33,6 +32,7 @@ from orbital.pov.pov_CH1_cyclide import CH1_cyclide
 from orbital.pov.pov_spindle_cyclide import spindle_cyclide
 from orbital.pov.pov_horn_cyclide import horn_cyclide
 from orbital.pov.pov_veronese import veronese
+from orbital.pov.pov_dp8_clifford import dp8_clifford
 
 
 def usecase__two_sphere_cyclide():
@@ -90,7 +90,9 @@ def usecase_povray():
     # CH1_cyclide()
     # spindle_cyclide()
     # horn_cyclide()
-    veronese()
+    # veronese()
+    dp8_clifford()
+
 
 if __name__ == '__main__':
 
