@@ -157,10 +157,10 @@ if __name__ == '__main__':
     # TestPolyMaps().test__ring_dict()
     # TestPolyMaps().test__invert_map__stereographic_projection()
     # TestPolyMaps().test__invert_birational_map__stereographic_projection()
-    TestPolyMaps().test__image_map__two_sphere_cyclide()
+    # TestPolyMaps().test__image_map__two_sphere_cyclide()
     # TestPolyMaps().test__preimage_map__central_projection()
     # TestPolyMaps().test__preimage_map__stereographic_projection()
-    # TestPolyMaps().test__compose_maps__P3()
+    TestPolyMaps().test__compose_maps__P3()
     # TestPolyMaps().test__euclidean_type_form__31()
     # TestPolyMaps().test__hilbert_poly__P4()
 

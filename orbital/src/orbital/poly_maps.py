@@ -394,8 +394,9 @@ def compose_maps( g, f, base = sage_QQ ):
     '''
     Computes the composition of polynomial maps.
     
-    The parameters and return value are polynomials 
-    in either x=(x0,...,xn) or y=(y0,...,yn) with n<=50.
+    Both parameters and return value are all polynomials 
+    in either x=(x0,...,xn) or y=(y0,...,yn) with n<=50,
+    but not both.
     
     The input parameters are explicitly converted to 
     strings, in case they are not strings.
@@ -407,10 +408,14 @@ def compose_maps( g, f, base = sage_QQ ):
         defines a projective map:
         f: P^a ---> P^b
         where P^a denotes projective n-space.    
+        If the value is not a string, then it will
+        be converted to a string.
     
     g : string(list<sage_POLY>)
         A string of a list of c+1 polynomials that
-        defines a projective map: g: P^b ---> P^c.    
+        defines a projective map: g: P^b ---> P^c.   
+        If the value is not a string, then it will
+        be converted to a string.         
     
     base : sage_RING 
         Ground field of polynomials.       
@@ -418,36 +423,40 @@ def compose_maps( g, f, base = sage_QQ ):
     Returns
     -------
     list<sage_POLY>
-        The composition of the maps g o f: P^a ---> P^c.    
+        The composition of the maps f o g: P^a ---> P^c.    
     '''
     # make sure that the input are strings
     g = str( g )
     f = str( f )
 
-    # if the input are polynomials in x then the output
-    # is a list of poynomials in y
-    ( vx, vy ) = ( 'x', 'y' ) if 'x' in f else ( 'y', 'x' )
+    # check variables
+    ( vf, vg ) = ( 'x', 'y' ) if 'x' in f else ( 'y', 'x' )
+    if vg not in g:
+        g = g.replace( vf, vg )
 
-    # detect the number of x-variables occurring
+
+    # detect the number of vf-variables occurring
     n_lst = []
     n = 0
     while n < 50:
-        if vx + str( n ) in f or vx + str( n ) in g:
+        if vf + str( n ) in f or vg + str( n ) in g:
             n_lst += [n]
         n = n + 1
     n = max( n_lst )
 
     # construct the ring
-    x_lst = [ vx + str( i ) for i in range( n + 1 ) ]
-    ring = sage_PolynomialRing( base, x_lst )
-    x_lst = ring.gens()
+    v_lst = []
+    v_lst += [ vf + str( i ) for i in range( n + 1 ) ]
+    v_lst += [ vg + str( i ) for i in range( n + 1 ) ]
+    ring = sage_PolynomialRing( base, v_lst )
+    vg_lst = ring.gens()[n + 1:]
     dct = ring_dict( ring )
     g_lst = sage__eval( g, dct )
     f_lst = sage__eval( f, dct )
 
-
+    # compose the maps
     for i in range( len( f_lst ) ):
-        g_lst = [ g.subs( {x_lst[i]:f_lst[i]} ) for g in g_lst ]
+        g_lst = [ g.subs( {vg_lst[i]:f_lst[i]} ) for g in g_lst ]
 
     OrbTools.p( g_lst )
 
