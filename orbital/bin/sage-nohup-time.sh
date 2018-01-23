@@ -6,7 +6,7 @@
 # in the files err/out respectively.
 #
 
-export PYTHONPATH=$PYTHONPATH:../src/
+export SAGE_PATH=$SAGE_PATH:../src/
 export OUTPUT_PATH=/home/LOCAL/nlubbes/OUTPUT/
 
 rm err out
