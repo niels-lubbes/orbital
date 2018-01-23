@@ -33,7 +33,7 @@ from linear_series.class_linear_series import LinearSeries
 def blum_cyclide():
 
     # construct dct
-    a0 = PolyRing( 'x,y,v,w' ).ext_num_field( 't^2 + 1' ).root_gens()[0]  # i
+    a0 = PolyRing( 'x,y,v,w', True ).ext_num_field( 't^2 + 1' ).root_gens()[0]  # i
 
     bpt_1234 = BasePointTree( ['xv', 'xw', 'yv', 'yw'] )
     bpt_1234.add( 'xv', ( -1 * a0, 1 * a0 ), 1 )  # e1
@@ -50,18 +50,15 @@ def blum_cyclide():
     bpt_34.add( 'xw', ( 2 * a0, -2 * a0 ), 1 )  # e4
 
     ls_22 = LinearSeries.get( [2, 2], bpt_1234 )  # |2(l1+l2)-e1-e2-e3-e4|
-    OrbTools.p( 'linear series 22 =\n', ls_22 )
-
     ls_21 = LinearSeries.get( [2, 1], bpt_1234 )
-    OrbTools.p( 'linear series 21 =\n', ls_21 )
-
     ls_12 = LinearSeries.get( [1, 2], bpt_1234 )
-    OrbTools.p( 'linear series 12 =\n', ls_12 )
-
     ls_11a = LinearSeries.get( [1, 1], bpt_12 )
-    OrbTools.p( 'linear series 11a =\n', ls_11a )
-
     ls_11b = LinearSeries.get( [1, 1], bpt_34 )
+
+    OrbTools.p( 'linear series 22 =\n', ls_22 )
+    OrbTools.p( 'linear series 21 =\n', ls_21 )
+    OrbTools.p( 'linear series 12 =\n', ls_12 )
+    OrbTools.p( 'linear series 11a =\n', ls_11a )
     OrbTools.p( 'linear series 11b =\n', ls_11b )
 
     sig = ( 4, 1 )

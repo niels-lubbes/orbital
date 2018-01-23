@@ -32,7 +32,7 @@ def dp6_smooth():
     # smooth sextic del Pezzo surface in S^5.
 
     # compute parametrizations of canonical model
-    a0 = PolyRing( 'x,y,v,w' ).ext_num_field( 't^2 + 1' ).root_gens()[0]
+    a0 = PolyRing( 'x,y,v,w', True ).ext_num_field( 't^2 + 1' ).root_gens()[0]
     bp_tree = BasePointTree( ['xv', 'xw', 'yv', 'yw'] )
     bp = bp_tree.add( 'xv', ( -a0, a0 ), 1 )
     bp = bp_tree.add( 'xv', ( a0, -a0 ), 1 )

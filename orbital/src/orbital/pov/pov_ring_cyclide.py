@@ -62,7 +62,7 @@ def ring_cyclide():
     for pmz in pmz_rR_lst:
         OrbTools.p( '\t\t', sage_factor( pmz ) )
 
-    ls = LinearSeries( [str( pmz ) for pmz in pmz_rR_lst], PolyRing( 'x,y,v,w' ) )
+    ls = LinearSeries( [str( pmz ) for pmz in pmz_rR_lst], PolyRing( 'x,y,v,w' , True ) )
     OrbTools.p( ls.get_bp_tree() )
 
     # construct dct
@@ -88,18 +88,15 @@ def ring_cyclide():
     bpt_34.add( p4[0], p4[1], 1 )
 
     ls_22 = LinearSeries.get( [2, 2], bpt_1234 )  # |2(l1+l2)-e1-e2-e3-e4|
-    OrbTools.p( 'linear series 22 =\n', ls_22 )
-
     ls_21 = LinearSeries.get( [2, 1], bpt_1234 )
-    OrbTools.p( 'linear series 21 =\n', ls_21 )
-
     ls_12 = LinearSeries.get( [1, 2], bpt_1234 )
-    OrbTools.p( 'linear series 12 =\n', ls_12 )
-
     ls_11a = LinearSeries.get( [1, 1], bpt_12 )
-    OrbTools.p( 'linear series 11a =\n', ls_11a )
-
     ls_11b = LinearSeries.get( [1, 1], bpt_34 )
+
+    OrbTools.p( 'linear series 22 =\n', ls_22 )
+    OrbTools.p( 'linear series 21 =\n', ls_21 )
+    OrbTools.p( 'linear series 12 =\n', ls_12 )
+    OrbTools.p( 'linear series 11a =\n', ls_11a )
     OrbTools.p( 'linear series 11b =\n', ls_11b )
 
     # compute reparametrization

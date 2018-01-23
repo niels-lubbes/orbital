@@ -74,13 +74,14 @@ def dp8_clifford():
     v1_lst_A += [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 180, 360, 20 )]
     v1_lst_B = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 10 )]
 
-
-    v1_lst_F = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 1 )]
+    v1_lst_FA = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 180, 2 )]
+    v1_lst_FA += [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 180, 360, 4 )]
+    v1_lst_FB = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 2 )]
 
     pin.curve_dct['A'] = {'step0':v0_lst, 'step1':v1_lst_A, 'prec':10, 'width':0.05}
     pin.curve_dct['B'] = {'step0':v0_lst, 'step1':v1_lst_B, 'prec':10, 'width':0.05}
-    pin.curve_dct['FA'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.02}
-    pin.curve_dct['FB'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.02}
+    pin.curve_dct['FA'] = {'step0':v0_lst, 'step1':v1_lst_FA, 'prec':10, 'width':0.02}
+    pin.curve_dct['FB'] = {'step0':v0_lst, 'step1':v1_lst_FB, 'prec':10, 'width':0.02}
 
     col_a = ( 0.6, 0.4, 0.1, 0.0 )
     col_b = ( 0.1, 0.15, 0.0, 0.0 )
