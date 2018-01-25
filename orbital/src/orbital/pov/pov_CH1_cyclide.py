@@ -26,53 +26,41 @@ from linear_series.class_linear_series import LinearSeries
 
 
 def CH1_cyclide():
+    '''
+    Creates povray image of a CH1 cyclide, which is
+    an inversion of a Circular Hyperboloid of 1 sheet.    
+    '''
 
-    # Construct linear series for CH1 cyclide, which is
-    # an inversion of a circular hyperboloid of one sheet.
-    #
-    # We first construct a trigonometric parametrization
-    # by rotating a circle.
-    #
-    # We convert via the following formulas, the trigonometric
-    # parametrization to a rational parametrization.
+    # Construct a trigonometric parametrization by rotating a circle.
+    r, R = 1, 1
+    c0, s0, c1, s1 = sage_var( 'c0,s0,c1,s1' )
+    x, y, v, w, a0 = sage_var( 'x,y,v,w,a0' )
+    q2 = sage_QQ( 1 ) / 2
+    MX = sage_matrix( [( 1, 0, 0 ), ( 0, c1, s1 ), ( 0, -s1, c1 )] )
+    MXc = MX.subs( {c1:a0, s1:a0} )  # a0=1/sqrt(2)=cos(pi/4)=sin(pi/4)
+    MZ = sage_matrix( [( c1, s1, 0 ), ( -s1, c1, 0 ), ( 0, 0, 1 )] )
+    V = sage_vector( [r * c0, 0, r * s0] )
+    V = MXc * V
+    V[0] = V[0] + R
+    pmz_AB_lst = list( MZ * V )
+    OrbTools.p( 'V =', V )
+    OrbTools.p( 'pmz_AB_lst =', pmz_AB_lst )
+    for pmz in pmz_AB_lst: OrbTools.p( '\t\t', sage_factor( pmz ) )
+
+
+    # Convert the trigonometric parametrization to a rational parametrization
+    # We convert via the following formulas,
     #
     #     cos(s) = (y^2-x^2) / (y^2+x^2)
     #     sin(s) = 2*x*y / (y^2+x^2)
     #     y=1; x = arctan( s/2 )
     #
-    #     cos(pi/4)=1/sqrt(2)
-    #     sin(pi/4)=1/sqrt(2)
-    #
-    # After that we do a basepoint analysis on the obtained rational
-    # parametrization.
-    #
-    r, R = 1, 1
-    c0, s0, c1, s1 = sage_var( 'c0,s0,c1,s1' )
-    x, y, v, w, a0 = sage_var( 'x,y,v,w,a0' )
-    q2 = sage_QQ( 1 ) / 2
-
-    MX = sage_matrix( [( 1, 0, 0 ), ( 0, c1, s1 ), ( 0, -s1, c1 )] )
-    MXc = MX.subs( {c1:a0, s1:a0} )  # a0=1/sqrt(2)=cos(pi/4)=sin(pi/4)
-    MZ = sage_matrix( [( c1, s1, 0 ), ( -s1, c1, 0 ), ( 0, 0, 1 )] )
-
-    V = sage_vector( [r * c0, 0, r * s0] )
-    V = MXc * V
-    V[0] = V[0] + R
-    OrbTools.p( 'V =', V )
-
-    pmz_AB_lst = list( MZ * V )
-
-    OrbTools.p( 'pmz_AB_lst =', pmz_AB_lst )
-    for pmz in pmz_AB_lst:
-        OrbTools.p( '\t\t', sage_factor( pmz ) )
-
     C0 = ( y ** 2 - x ** 2 ) / ( y ** 2 + x ** 2 )
     S0 = 2 * x * y / ( y ** 2 + x ** 2 )
     C1 = ( w ** 2 - v ** 2 ) / ( w ** 2 + v ** 2 )
     S1 = 2 * v * w / ( w ** 2 + v ** 2 )
     den = ( y ** 2 + x ** 2 ) * ( w ** 2 + v ** 2 )
     dct = {c0:C0, s0:S0, c1:C1, s1:S1 }
-
     pmz_lst = [den] + [ ( elt.subs( dct ) * den ).simplify_full() for elt in list( MZ * V ) ]
     OrbTools.p( 'pmz_lst =', pmz_lst )
     for pmz in pmz_lst:
@@ -131,10 +119,7 @@ def CH1_cyclide():
 
     X = 1 - s0; Y = c0;
     V = 1 - s1; W = c1;
-    CB_dct = {x:X,
-              y:Y,
-              v:W * X - 2 * a0 * V * Y,
-              w:V * X + 2 * a0 * W * Y};
+    CB_dct = {x:X, y:Y, v:W * X - 2 * a0 * V * Y, w:V * X + 2 * a0 * W * Y};
     pmz_CB_lst = [ pmz.subs( CB_dct ) for pmz in pmz_lst ]  # CB  11b
 
     # output
@@ -151,11 +136,8 @@ def CH1_cyclide():
     pmz_CB_lst = OrbRing.approx_QQ_pol_lst( pmz_CB_lst, ci_idx )
 
     # mathematica input
-    pmz_lst = [ ( pmz_lst, 'ZZ' ),
-                ( pmz_AB_lst, 'AB' ),
-                ( pmz_CB_lst, 'CB' ) ]
     ms = ''
-    for pmz, AB in pmz_lst:
+    for pmz, AB in [ ( pmz_lst, 'ZZ' ), ( pmz_AB_lst, 'AB' ), ( pmz_CB_lst, 'CB' ) ]:
         s = 'pmz' + AB + '=' + str( pmz ) + ';'
         s = s.replace( '[', '{' ).replace( ']', '}' )
         ms += '\n' + s
@@ -209,18 +191,20 @@ def CH1_cyclide():
     pin.curve_dct['FB'] = {'step0':v0_lst, 'step1':v1_lst_FB, 'prec':prec, 'width':0.02}
     pin.curve_dct['FC'] = {'step0':v0_lst, 'step1':v1_lst_FC, 'prec':prec, 'width':0.02}
 
-    pin.text_dct['A'] = [True, ( 0.4, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['B'] = [True, ( 0.0, 0.0, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['C'] = [True, ( 0.0, 0.2, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
+    col_A = ( 0.6, 0.4, 0.1, 0.0 )
+    col_B = ( 0.1, 0.15, 0.0, 0.0 )
+    col_C = ( 0.2, 0.3, 0.2, 0.0 )
+    colFF = ( 0.1, 0.1, 0.1, 0.0 )
 
-    col_F = ( 0.1, 0.1, 0.1, 0.0 )
-    pin.text_dct['FA'] = [True, col_F, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FB'] = [True, col_F, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FC'] = [True, col_F, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['A'] = [True, col_A , 'phong 0.2 phong_size 5' ]
+    pin.text_dct['B'] = [True, col_B , 'phong 0.2 phong_size 5' ]
+    pin.text_dct['C'] = [True, col_C , 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FA'] = [True, colFF, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FB'] = [True, colFF, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FC'] = [True, colFF, 'phong 0.2 phong_size 5' ]
 
     # raytrace image/animation
     create_pov( pin, ['A', 'B', 'C'] )
-    return
     create_pov( pin, ['A', 'B', 'C', 'FA', 'FB', 'FC'] )
     create_pov( pin, ['A', 'B', 'FA', 'FB'] )
     create_pov( pin, ['B', 'C', 'FA', 'FB'] )

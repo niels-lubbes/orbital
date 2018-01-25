@@ -20,14 +20,14 @@ from orbital.povray.povray_aux import get_time_str
 
 
 def horn_cyclide():
+    '''
+    Creates povray image of horn cyclide. The horn cyclide is 
+    an inversion of a circular cone.
+    '''
 
-    # Construct linear series for the horn cyclide, which is
-    # an inversion of a circular cone.
+    # Construct a trigonometric parametrization by rotating a circle.
     #
-    # We construct a trigonometric parametrization
-    # by rotating a circle.
-    #
-    r = 1; R = sage_QQ( 1 ) / 2;
+    r = 1; R = sage_QQ( 1 ) / 2;  # radii of circles
     x, y, v, w = sage_var( 'x,y,v,w' )
     c0, s0, c1, s1 = sage_var( 'c0,s0,c1,s1' )
     V = sage_vector( [r * c0 + R, 0, r * s0] )
@@ -75,14 +75,15 @@ def horn_cyclide():
     pin.curve_dct['FA'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.02}
     pin.curve_dct['FB'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.02}
 
-    col_F = ( 0.1, 0.1, 0.1, 0.0 )
-    pin.text_dct['A'] = [True, ( 0.4, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['B'] = [True, ( 0.0, 0.2, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FA'] = [True, col_F, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FB'] = [True, col_F, 'phong 0.2 phong_size 5' ]
+    col_A = ( 0.6, 0.4, 0.1, 0.0 )
+    col_B = ( 0.1, 0.15, 0.0, 0.0 )
+    colFF = ( 0.1, 0.1, 0.1, 0.0 )
+    pin.text_dct['A'] = [True, col_A, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['B'] = [True, col_B, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FA'] = [True, colFF, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FB'] = [True, colFF, 'phong 0.2 phong_size 5' ]
 
     # raytrace image/animation
     create_pov( pin, ['A', 'B'] )
-    return
     create_pov( pin, ['A', 'B', 'FA', 'FB'] )
 

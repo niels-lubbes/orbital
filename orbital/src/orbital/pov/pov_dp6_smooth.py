@@ -4,10 +4,8 @@ Created on Jan 16, 2018
 @author: Niels Lubbes
 '''
 
-from orbital.sage_interface import sage_PolynomialRing
 from orbital.sage_interface import sage_QQ
 from orbital.sage_interface import sage_var
-from orbital.sage_interface import sage__eval
 from orbital.sage_interface import sage_vector
 from orbital.sage_interface import sage_pi
 
@@ -28,8 +26,11 @@ from linear_series.class_poly_ring import PolyRing
 
 
 def dp6_smooth():
-    # Creates povray image of the projection of a
-    # smooth sextic del Pezzo surface in S^5.
+    '''
+    Creates povray image of the projection of a smooth sextic del Pezzo 
+    surface in S^5. This surface contains 3 families of conics that 
+    form a hexagonal web. 
+    '''
 
     # compute parametrizations of canonical model
     a0 = PolyRing( 'x,y,v,w', True ).ext_num_field( 't^2 + 1' ).root_gens()[0]
@@ -43,7 +44,7 @@ def dp6_smooth():
     c_lst = [-1, -1, 0, 0, 0, -1, 1, 0, -1, -1, -1]
     dct = get_surf( ls_AB, ( 6, 1 ), c_lst )
 
-    # compute projection to R^3
+    # compute projection to P^3
     approxU = approx_QQ( dct['UJ'][0] )
     P = get_prj_mat( 4, 7, 0 )
     P[0, 6] = -1;P[3, 3] = 0;P[3, 4] = 1
@@ -51,15 +52,12 @@ def dp6_smooth():
     f_xyz, pmz_AB_lst = get_proj( dct['imp_lst'], dct['pmz_lst'], P )
 
     # compute reparametrization
-    R_xyvw = sage_PolynomialRing( sage_QQ, 'x,y,v,w' )
-    x, y, v, w = R_xyvw.gens()
-    X, Y, V, W = sage_var( 'x,y,v,w' )
-    xyvw_dct = { X:x, Y:y, V:v, W:w }
-    XYZW_dct = { x:X, y:Y, v:V, w:W }
+    ring = PolyRing( 'x,y,v,w,c0,s0,c1,s1' )  # construct polynomial ring with new generators
+    x, y, v, w, c0, s0, c1, s1 = ring.gens()
+    X = 1 - s0; Y = c0;  # see get_S1xS1_pmz()
+    V = 1 - s1; W = c1;
     CB_dct = { x:X, y:Y, v:X * W + Y * V, w: X * V - Y * W }
-    pol_lst = sage__eval( str( ls_AB.pol_lst ), R_xyvw.gens_dict() )
-    pmz_CB_lst = [ pol.subs( CB_dct ).subs( xyvw_dct ) for pol in pol_lst]
-    pmz_CB_lst = get_S1xS1_pmz( pmz_CB_lst )
+    pmz_CB_lst = [ p.subs( CB_dct ) for p in ring.coerce( ls_AB.pol_lst )]
     pmz_CB_lst = list( P * dct['Q'] * sage_vector( pmz_CB_lst ) )
 
     # set PovInput as container
@@ -75,11 +73,10 @@ def dp6_smooth():
     pin.light_radius = 5
     pin.axes_dct['show'] = False
     pin.axes_dct['len'] = 1.2
-    pin.width = 400
     pin.height = 800
+    pin.width = 400
     pin.quality = 11
     pin.ani_delay = 1
-
     pin.impl = None
 
     v0_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 10 )]
@@ -109,7 +106,11 @@ def dp6_smooth():
     pin.text_dct['FC'] = [True, col_F, 'phong 0.2 phong_size 5' ]
 
     # raytrace image/animation
+    create_pov( pin, ['A', 'B', 'C'] )
     create_pov( pin, ['A', 'B', 'C', 'FA', 'FB', 'FC'] )
+    create_pov( pin, ['A', 'FA', 'FB', 'FC'] )
+    create_pov( pin, ['B', 'FA', 'FB', 'FC'] )
+    create_pov( pin, ['C', 'FA', 'FB', 'FC'] )
 
 
 

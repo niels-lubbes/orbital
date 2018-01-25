@@ -6,7 +6,6 @@ Created on Jan 16, 2018
 
 from orbital.sage_interface import sage_QQ
 from orbital.sage_interface import sage_PolynomialRing
-from orbital.sage_interface import sage__eval
 from orbital.sage_interface import sage_var
 from orbital.sage_interface import sage_identity_matrix
 from orbital.sage_interface import sage_invariant_theory
@@ -16,7 +15,6 @@ from orbital.sage_interface import sage_pi
 
 from orbital.class_orb_tools import OrbTools
 
-from orbital.surface_in_quadric import get_S1xS1_pmz
 from orbital.surface_in_quadric import approx_QQ
 from orbital.surface_in_quadric import get_surf
 from orbital.surface_in_quadric import get_proj
@@ -31,6 +29,10 @@ from linear_series.class_linear_series import LinearSeries
 
 
 def blum_cyclide():
+    '''
+    Construct a povray image of 6 families of circles on a smooth Darboux cyclide.
+    This surface is also known as the Blum cyclide.
+    '''
 
     # construct dct
     a0 = PolyRing( 'x,y,v,w', True ).ext_num_field( 't^2 + 1' ).root_gens()[0]  # i
@@ -99,33 +101,20 @@ def blum_cyclide():
     f_xyz_deg_lst = [f_xyz.degree( sage_var( v ) ) for v in ['x', 'y', 'z']]
 
     # compute reparametrization
-    R_xyvw = sage_PolynomialRing( sage_QQ, 'x,y,v,w' )
-    x, y, v, w = R_xyvw.gens()
-    X, Y, V, W = sage_var( 'x,y,v,w' )
-    xyvw_dct = { X:x, Y:y, V:v, W:w }
-    pol_lst = sage__eval( str( ls_22.pol_lst ), R_xyvw.gens_dict() )
-
-    # CB
+    ring = PolyRing( 'x,y,v,w,c0,s0,c1,s1' )  # construct polynomial ring with new generators
+    p_lst = ring.coerce( ls_22.pol_lst )
+    x, y, v, w, c0, s0, c1, s1 = ring.gens()
+    X = 1 - s0; Y = c0;  # see get_S1xS1_pmz()
+    V = 1 - s1; W = c1;
     CB_dct = { x:X, y:Y, v:X * W + Y * V, w: X * V - Y * W }
-    pmz_CB_lst = get_S1xS1_pmz( [ pol.subs( CB_dct ).subs( xyvw_dct ) for pol in pol_lst] )
-    pmz_CB_lst = list( P * sage_vector( pmz_CB_lst ) )
-
-    # DB
     DB_dct = { x:X, y:Y, v:4 * X * W - Y * V, w: X * V + Y * W }
-    pmz_DB_lst = get_S1xS1_pmz( [ pol.subs( DB_dct ).subs( xyvw_dct ) for pol in pol_lst] )
-    pmz_DB_lst = list( P * sage_vector( pmz_DB_lst ) )
-
-    # EB
     EB_dct = { x:X, y:Y, v:40 * W * X ** 2 + 25 * W * Y ** 2 + 24 * V * X * Y, w:40 * V * X ** 2 + 16 * V * Y ** 2 - 15 * W * X * Y  }
-    pmz_EB_lst = get_S1xS1_pmz( [ pol.subs( EB_dct ).subs( xyvw_dct ) for pol in pol_lst] )
-    pmz_EB_lst = list( P * sage_vector( pmz_EB_lst ) )
+    AF_dct = { x:-10 * Y * V ** 2 - 25 * Y * W ** 2 + 9 * X * V * W, y:15 * X * V ** 2 + 24 * X * W ** 2 - 15 * Y * V * W, v:V, w:W  }
+    pmz_CB_lst = list( P * sage_vector( [ p.subs( CB_dct ) for p in p_lst] ) )
+    pmz_DB_lst = list( P * sage_vector( [ p.subs( DB_dct ) for p in p_lst] ) )
+    pmz_EB_lst = list( P * sage_vector( [ p.subs( EB_dct ) for p in p_lst] ) )
+    pmz_AF_lst = list( P * sage_vector( [ p.subs( AF_dct ) for p in p_lst] ) )
 
-    # AF
-    AF_dct = { x:-10 * Y * V ** 2 - 25 * Y * W ** 2 + 9 * X * V * W,
-               y:15 * X * V ** 2 + 24 * X * W ** 2 - 15 * Y * V * W,
-               v:V, w:W  }
-    pmz_AF_lst = get_S1xS1_pmz( [ pol.subs( AF_dct ).subs( xyvw_dct ) for pol in pol_lst] )
-    pmz_AF_lst = list( P * sage_vector( pmz_AF_lst ) )
 
     # output
     OrbTools.p( 'f_xyz =', f_xyz_deg_lst, '\n', f_xyz )
@@ -160,11 +149,11 @@ def blum_cyclide():
     pin.light_radius = 5
     pin.axes_dct['show'] = False
     pin.axes_dct['len'] = 1.2
-    pin.width = 800
     pin.height = 400
+    pin.width = 800
     pin.quality = 11
     pin.ani_delay = 10
-    pin.impl = f_xyz
+    pin.impl = None
 
     start0 = sage_QQ( 1 ) / 10  # step0=10 step1=15
     v0_lst = [ start0 + ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 10 )]
@@ -226,27 +215,35 @@ def blum_cyclide():
     pin.curve_dct['FE'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.01}
     pin.curve_dct['FF'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.01}
 
-    pin.text_dct['A'] = [True, ( 0.5, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['B'] = [True, ( 0.2, 0.3, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['C'] = [True, ( 0.8, 0.6, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['E'] = [True, ( 0.5, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['F'] = [True, ( 0.2, 0.3, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['D'] = [True, ( 0.8, 0.6, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['WE'] = [True, ( 0.5, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['WF'] = [True, ( 0.2, 0.3, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['WD'] = [True, ( 0.8, 0.6, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['SA'] = [True, ( 0.5, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['SB'] = [True, ( 0.2, 0.3, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['SC'] = [True, ( 0.8, 0.6, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['SE'] = [True, ( 0.5, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['SF'] = [True, ( 0.2, 0.3, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['SD'] = [True, ( 0.8, 0.6, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FA'] = [True, ( 0.1, 0.1, 0.1, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FB'] = [True, ( 0.1, 0.1, 0.1, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FC'] = [True, ( 0.1, 0.1, 0.1, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FE'] = [True, ( 0.1, 0.1, 0.1, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FF'] = [True, ( 0.1, 0.1, 0.1, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FD'] = [True, ( 0.1, 0.1, 0.1, 0.0 ), 'phong 0.2 phong_size 5' ]
+    col_A = ( 0.5, 0.0, 0.0, 0.0 )
+    col_B = ( 0.2, 0.3, 0.2, 0.0 )
+    col_C = ( 0.8, 0.6, 0.2, 0.0 )
+    col_E = ( 0.5, 0.0, 0.0, 0.0 )
+    col_F = ( 0.2, 0.3, 0.2, 0.0 )
+    col_D = ( 0.8, 0.6, 0.2, 0.0 )
+    colFF = ( 0.1, 0.1, 0.1, 0.0 )
+
+    pin.text_dct['A'] = [True, col_A, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['B'] = [True, col_B, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['C'] = [True, col_C, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['E'] = [True, col_E, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['F'] = [True, col_F, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['D'] = [True, col_D, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['WE'] = [True, col_E, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['WF'] = [True, col_F, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['WD'] = [True, col_D, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['SA'] = [True, col_A, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['SB'] = [True, col_B, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['SC'] = [True, col_C, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['SE'] = [True, col_E, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['SF'] = [True, col_F, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['SD'] = [True, col_D, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FA'] = [True, colFF, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FB'] = [True, colFF, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FC'] = [True, colFF, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FE'] = [True, colFF, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FF'] = [True, colFF, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FD'] = [True, colFF, 'phong 0.2 phong_size 5' ]
 
     # raytrace image/animation
     fam_lst = []
@@ -263,4 +260,13 @@ def blum_cyclide():
     create_pov( pin, ['WD', 'WE', 'WF'] )
     create_pov( pin, ['WD', 'WE', 'WF'] + F_lst )
     create_pov( pin, S_lst + F_lst )
+
+    # ABC - EFD
+    create_pov( pin, ['A', 'B'] + F_lst )
+    create_pov( pin, ['E', 'F'] + F_lst )
+
+
+
+
+
 

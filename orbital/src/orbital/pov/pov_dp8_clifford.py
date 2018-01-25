@@ -29,17 +29,17 @@ def dp8_clifford():
     The surface is created as the Clifford translation of a
     great circle along a little circle.        
     '''
-    c0, s0, c1, s1 = OrbRing.coerce( 'c0,s0,c1,s1' )
 
+    # construct surface as pointwise hamiltonian product of
+    # two circles in S^3
+    #
+    c0, s0, c1, s1 = OrbRing.coerce( 'c0,s0,c1,s1' )
     x0, y0, z0, s = 1, 1, 0, 1
     a01, a02, a03, a12, a13, a23 = [90] + 5 * [0]
-
     M = get_xfer_S3( a01, a02, a03, a12, a13, a23, x0, y0, z0, s )
-
     v = sage_vector( [c0, s0, 0, 0, 1] )
     w = sage_vector( [c1, s1, 0, 0, 1] )
     pmz_AB_lst = [1] + get_prj_S3( get_hp_S3( v, M * w ) )
-
     for pmz in pmz_AB_lst:
         OrbTools.p( '\t\t', sage_factor( pmz ) )
 
@@ -83,17 +83,16 @@ def dp8_clifford():
     pin.curve_dct['FA'] = {'step0':v0_lst, 'step1':v1_lst_FA, 'prec':10, 'width':0.02}
     pin.curve_dct['FB'] = {'step0':v0_lst, 'step1':v1_lst_FB, 'prec':10, 'width':0.02}
 
-    col_a = ( 0.6, 0.4, 0.1, 0.0 )
-    col_b = ( 0.1, 0.15, 0.0, 0.0 )
-    col_F = ( 0.1, 0.1, 0.1, 0.0 )
-    pin.text_dct['A'] = [True, col_a, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['B'] = [True, col_b, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FA'] = [True, col_F, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FB'] = [True, col_F, 'phong 0.2 phong_size 5' ]
+    col_A = ( 0.6, 0.4, 0.1, 0.0 )
+    col_B = ( 0.1, 0.15, 0.0, 0.0 )
+    colFF = ( 0.1, 0.1, 0.1, 0.0 )
+    pin.text_dct['A'] = [True, col_A, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['B'] = [True, col_B, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FA'] = [True, colFF, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FB'] = [True, colFF, 'phong 0.2 phong_size 5' ]
 
     # raytrace image/animation
     create_pov( pin, ['A', 'B'] )
-    return
     create_pov( pin, ['A', 'B', 'FA', 'FB'] )
     create_pov( pin, ['A', 'FA', 'FB'] )
     create_pov( pin, ['A', 'FA', 'FB'] )

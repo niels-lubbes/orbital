@@ -4,7 +4,6 @@ Created on Jan 17, 2018
 @author: Niels Lubbes
 '''
 from orbital.sage_interface import sage_QQ
-from orbital.sage_interface import sage__eval
 from orbital.sage_interface import sage_var
 from orbital.sage_interface import sage_matrix
 from orbital.sage_interface import sage_vector
@@ -27,63 +26,58 @@ from linear_series.class_linear_series import LinearSeries
 
 
 def perseus_cyclide():
+    '''
+    Creates povray image of the Perseus cyclide.
+    '''
 
-    # Construct linear series for Perseus cyclide.
-    #
+
     # We first construct a trigonometric parametrization
     # by rotating a circle.
-    #
-    # We convert via the following formulas, the trigonometric
-    # parametrization to a rational parametrization.
-    #
-    #     cos(s) = (y^2-x^2) / (y^2+x^2)
-    #     sin(s) = 2*x*y / (y^2+x^2)
-    #     y=1; x = arctan( s/2 )
-    #
-    #     cos(pi/3)=1/2
-    #     sin(pi/3)=sqrt(3)/2
-    #
-    # After that we do a basepoint analysis on the obtained rational
-    # parametrization.
+    #     cos(pi/3) = 1/2
+    #     sin(pi/3) = sqrt(3)/2
     #
     r, R = 1, 2
     c0, s0, c1, s1 = sage_var( 'c0,s0,c1,s1' )
     x, y, v, w, a0 = sage_var( 'x,y,v,w,a0' )
     q2 = sage_QQ( 1 ) / 2
-
     MZ = sage_matrix( [( c1, s1, 0 ), ( -s1, c1, 0 ), ( 0, 0, 1 )] )
     MZc = MZ.subs( {c1:q2, s1:q2 * a0} )
-
     V = sage_vector( [r * c0, 0, r * s0] )
     V = MZc * V
     V[0] = V[0] + R
-    OrbTools.p( 'V =', V )
-
     pmz_AB_lst = list( MZ * V )
 
+    OrbTools.p( 'V =', V )
     OrbTools.p( 'pmz_AB_lst =', pmz_AB_lst )
     for pmz in pmz_AB_lst:
         OrbTools.p( '\t\t', sage_factor( pmz ) )
 
+    # We convert the trigonometric parametrization to a
+    # rational parametrization, via the following formulas:
+    #
+    #     cos(s) = (y^2-x^2) / (y^2+x^2)
+    #     sin(s) = 2*x*y / (y^2+x^2)
+    #     y=1; x = arctan( s/2 )
+    #
     C0 = ( y ** 2 - x ** 2 ) / ( y ** 2 + x ** 2 )
     S0 = 2 * x * y / ( y ** 2 + x ** 2 )
     C1 = ( w ** 2 - v ** 2 ) / ( w ** 2 + v ** 2 )
     S1 = 2 * v * w / ( w ** 2 + v ** 2 )
     den = ( y ** 2 + x ** 2 ) * ( w ** 2 + v ** 2 )
     dct = {c0:C0, s0:S0, c1:C1, s1:S1 }
-
     pmz_lst = [den] + [ ( elt.subs( dct ) * den ).simplify_full() for elt in list( MZ * V ) ]
     OrbTools.p( 'pmz_lst =', pmz_lst )
     for pmz in pmz_lst:
         OrbTools.p( '\t\t', sage_factor( pmz ) )
 
     # do a basepoint analysis on the rational parametrization
-    # The True argument is for resetting the number field to QQ!
+    #
     ring = PolyRing( 'x,y,v,w', True ).ext_num_field( 't^2-3' )
     ls = LinearSeries( [str( pmz ) for pmz in pmz_lst], ring )
     OrbTools.p( ls.get_bp_tree() )
 
     # construct linear series for families of conics
+    #
     ring = PolyRing( 'x,y,v,w' )  # construct polynomial ring over new ground field
     OrbTools.p( ring )
     x, y, v, w = ring.gens()
@@ -108,27 +102,26 @@ def perseus_cyclide():
     bpt_34.add( p3[0], p3[1], 1 )
     bpt_34.add( p4[0], p4[1], 1 )
 
-    if True:
-        ls_22 = LinearSeries.get( [2, 2], bpt_1234 )  # |2(l1+l2)-e1-e2-e3-e4|
-        ls_21 = LinearSeries.get( [2, 1], bpt_1234 )
-        ls_12 = LinearSeries.get( [1, 2], bpt_1234 )
-        ls_11a = LinearSeries.get( [1, 1], bpt_12 )
-        ls_11b = LinearSeries.get( [1, 1], bpt_34 )
+    ls_22 = LinearSeries.get( [2, 2], bpt_1234 )
+    ls_21 = LinearSeries.get( [2, 1], bpt_1234 )
+    ls_12 = LinearSeries.get( [1, 2], bpt_1234 )
+    ls_11a = LinearSeries.get( [1, 1], bpt_12 )
+    ls_11b = LinearSeries.get( [1, 1], bpt_34 )
 
-        OrbTools.p( 'linear series 22 =\n', ls_22 )
-        OrbTools.p( 'linear series 21 =\n', ls_21 )
-        OrbTools.p( 'linear series 12 =\n', ls_12 )
-        OrbTools.p( 'linear series 11a =\n', ls_11a )
-        OrbTools.p( 'linear series 11b =\n', ls_11b )
+    OrbTools.p( 'linear series 22 =\n', ls_22 )
+    OrbTools.p( 'linear series 21 =\n', ls_21 )
+    OrbTools.p( 'linear series 12 =\n', ls_12 )
+    OrbTools.p( 'linear series 11a =\n', ls_11a )
+    OrbTools.p( 'linear series 11b =\n', ls_11b )
 
 
     # compute reparametrization from the linear series of families
-    ring = PolyRing( 'x,y,v,w,c0,s0,c1,s1' )  # construct polynomial ring with new generators
+    ring = PolyRing( 'x,y,v,w,c0,s0,c1,s1' )
     OrbTools.p( ring )
     x, y, v, w, c0, s0, c1, s1 = ring.gens()
     a0, a1, a2, a3 = ring.root_gens()
-    pmz_AB_lst = [1] + sage__eval( str( pmz_AB_lst ), ring.ring_dct )
-    pmz_lst = sage__eval( str( pmz_lst ), ring.ring_dct )
+    pmz_AB_lst = [1] + ring.coerce( pmz_AB_lst )
+    pmz_lst = ring.coerce( pmz_lst )
 
     q2 = sage_QQ( 1 ) / 2
     a = 2 * a0 / 3
@@ -162,14 +155,8 @@ def perseus_cyclide():
     pmz_EB_lst = OrbRing.approx_QQ_pol_lst( pmz_EB_lst, ci_idx )
 
     # mathematica input
-    pmz_lst = [ ( pmz_lst, 'ZZ' ),
-                ( pmz_AB_lst, 'AB' ),
-                ( pmz_CB_lst, 'CB' ),
-                ( pmz_DB_lst, 'DB' ),
-                ( pmz_EB_lst, 'EB' )
-                ]
     ms = ''
-    for pmz, AB in pmz_lst:
+    for pmz, AB in [ ( pmz_lst, 'ZZ' ), ( pmz_AB_lst, 'AB' ), ( pmz_CB_lst, 'CB' ), ( pmz_DB_lst, 'DB' ), ( pmz_EB_lst, 'EB' )]:
         s = 'pmz' + AB + '=' + str( pmz ) + ';'
         s = s.replace( '[', '{' ).replace( ']', '}' )
         ms += '\n' + s
@@ -214,7 +201,6 @@ def perseus_cyclide():
     v1_lst_D = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 36 )]  # 15
     v1_lst_E = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 15 )]  # 15
 
-
     v1_lst_F = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 2 )]
 
     prec = 50
@@ -231,19 +217,24 @@ def perseus_cyclide():
     pin.curve_dct['FD'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':prec, 'width':0.02}
     pin.curve_dct['FE'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':prec, 'width':0.02}
 
+    col_A = ( 0.4, 0.0, 0.0, 0.0 )
+    col_B = ( 0.0, 0.0, 0.2, 0.0 )
+    col_C = ( 0.0, 0.2, 0.0, 0.0 )
+    col_D = ( 0.2, 0.0, 0.1, 0.0 )
+    col_E = ( 0.1, 0.3, 0.0, 0.0 )
+    colFF = ( 0.1, 0.1, 0.1, 0.0 )
 
-    pin.text_dct['A'] = [True, ( 0.4, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['B'] = [True, ( 0.0, 0.0, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['C'] = [True, ( 0.0, 0.2, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['D'] = [True, ( 0.2, 0.0, 0.1, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['E'] = [True, ( 0.1, 0.3, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
+    pin.text_dct['A'] = [True, col_A, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['B'] = [True, col_B, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['C'] = [True, col_C, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['D'] = [True, col_D, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['E'] = [True, col_E, 'phong 0.2 phong_size 5' ]
 
-    col_F = ( 0.1, 0.1, 0.1, 0.0 )
-    pin.text_dct['FA'] = [True, col_F, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FB'] = [True, col_F, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FC'] = [True, col_F, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FD'] = [True, col_F, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FE'] = [True, col_F, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FA'] = [True, colFF, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FB'] = [True, colFF, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FC'] = [True, colFF, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FD'] = [True, colFF, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FE'] = [True, colFF, 'phong 0.2 phong_size 5' ]
 
 
     # raytrace image/animation

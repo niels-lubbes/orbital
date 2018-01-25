@@ -33,7 +33,6 @@ from orbital.pov.pov_spindle_cyclide import spindle_cyclide
 from orbital.pov.pov_horn_cyclide import horn_cyclide
 from orbital.pov.pov_veronese import veronese
 from orbital.pov.pov_dp8_clifford import dp8_clifford
-from orbital.pov.pov_veronese_blowup import veronese_blowup
 
 
 def usecase__two_sphere_cyclide():
@@ -77,6 +76,7 @@ def usecase__two_sphere_cyclide():
         for ( a, b ) in [( 'a0', 'sqrt(1/2)' ), ( 'k', 'p1' ), ( 'x0', '1' ), ( 'x1', 'x' ), ( 'x2', 'y' ), ( 'x3', 'z' )]:
             s = s.replace( a, b )
         print( s )
+
 
 def detect_circles():
     #         { 5, <<x^4 + 3*x^2*y^2 + y^4 + 3*x^2*z^2 + 3*y^2*z^2 + z^4, -2*x^3*z - 2*x*y^2*z - 2*x*z^3, -2*x^3*y - 2*x*y^3 - 2*x*y*z^2, 2*x^2*y*z + 2*y^3*z + 2*y*z^3, -x^4 - x^2*y^2 - y^4 - x^2*z^2 - y^2*z^2 - z^4>>, QQ( <a0|t^2 - t + 1>, <a1|t^4 + 3*t^2 + 1>, <a2|t^2 + 2*a0>, <a3|t^2 - 3*a1^2 - 6> )[x, y, z] }
@@ -126,17 +126,16 @@ def usecase_povray():
     '''
     Create povray images. This may take a long time.
     '''
-    # blum_cyclide()
-    # ring_cyclide()
-    # dp6_smooth()
-    # quadric_smooth()
-    # perseus_cyclide()
-    # CH1_cyclide()
-    # spindle_cyclide()
-    # horn_cyclide()
-    # veronese()
-    # dp8_clifford()
-    veronese_blowup()
+    blum_cyclide()
+    ring_cyclide()
+    dp6_smooth()
+    quadric_smooth()
+    perseus_cyclide()
+    CH1_cyclide()
+    spindle_cyclide()
+    horn_cyclide()
+    veronese()
+    dp8_clifford()
 
 
 

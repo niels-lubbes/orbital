@@ -5,27 +5,21 @@ Created on Jan 21, 2018
 '''
 
 from orbital.sage_interface import sage_var
-from orbital.sage_interface import sage_vector
-from orbital.sage_interface import sage_matrix
 from orbital.sage_interface import sage_factor
 from orbital.sage_interface import sage_QQ
 from orbital.sage_interface import sage_pi
-from orbital.sage_interface import sage_n
 
 from orbital.class_orb_tools import OrbTools
-
-from orbital.class_orb_ring import OrbRing
 
 from orbital.povray.class_pov_input import PovInput
 from orbital.povray.povray import create_pov
 from orbital.povray.povray_aux import get_time_str
 
-from linear_series.class_poly_ring import PolyRing
-from linear_series.class_base_points import BasePointTree
-from linear_series.class_linear_series import LinearSeries
-
 
 def veronese():
+    '''
+    Construct povray image of a 3-web of conics on the Veronese surface.
+    '''
 
     # Construct projection of Veronese surface.
     #
@@ -52,6 +46,7 @@ def veronese():
         OrbTools.p( 'pmz_' + A + '_lst =', pmz_lst )
         for pmz in pmz_lst:
             OrbTools.p( '\t\t', sage_factor( pmz ) )
+
 
     # PovInput Veronese surface
     #
@@ -98,14 +93,17 @@ def veronese():
     pin.curve_dct['FB'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':prec, 'width':0.001}
     pin.curve_dct['FC'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':prec, 'width':0.001}
 
-    pin.text_dct['A'] = [True, ( 0.4, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['B'] = [True, ( 0.2, 0.3, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['C'] = [True, ( 0.8, 0.6, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
+    col_A = ( 0.6, 0.4, 0.1, 0.0 )
+    col_B = ( 0.1, 0.15, 0.0, 0.0 )
+    col_C = ( 0.2, 0.3, 0.2, 0.0 )
+    colFF = ( 0.1, 0.1, 0.1, 0.0 )
 
-    col_F = ( 0.1, 0.1, 0.1, 0.0 )
-    pin.text_dct['FA'] = [True, col_F, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FB'] = [True, col_F, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FC'] = [True, col_F, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['A'] = [True, col_A, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['B'] = [True, col_B, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['C'] = [True, col_C, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FA'] = [True, colFF, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FB'] = [True, colFF, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FC'] = [True, colFF, 'phong 0.2 phong_size 5' ]
 
 
     # raytrace image/animation

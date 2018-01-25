@@ -20,14 +20,15 @@ from orbital.povray.povray_aux import get_time_str
 
 
 def spindle_cyclide():
+    '''
+    Constructs a povray image of a spindle cyclide. The spindle cyclide is
+    an inversion of a circular cylinder.
+    '''
 
-    # Construct linear series for the spindle cyclide, which is
-    # an inversion of a circular cylinder.
-    #
     # We construct a trigonometric parametrization
-    # by rotating a circle.
+    # of the cyclide by rotating a circle.
     #
-    r = 1; R = 1;
+    r = 1; R = 1;  # radii of circles
     x, y, v, w = sage_var( 'x,y,v,w' )
     c0, s0, c1, s1 = sage_var( 'c0,s0,c1,s1' )
     V = sage_vector( [r * c0 + R, 0, r * s0] )
@@ -75,11 +76,13 @@ def spindle_cyclide():
     pin.curve_dct['FA'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.02}
     pin.curve_dct['FB'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.02}
 
-    col_F = ( 0.1, 0.1, 0.1, 0.0 )
+    col_A = ( 0.6, 0.4, 0.1, 0.0 )
+    col_B = ( 0.1, 0.15, 0.0, 0.0 )
+    colFF = ( 0.1, 0.1, 0.1, 0.0 )
     pin.text_dct['A'] = [True, ( 0.4, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
     pin.text_dct['B'] = [True, ( 0.0, 0.2, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FA'] = [True, col_F, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FB'] = [True, col_F, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FA'] = [True, colFF, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FB'] = [True, colFF, 'phong 0.2 phong_size 5' ]
 
     # raytrace image/animation
     create_pov( pin, ['A', 'B'] )

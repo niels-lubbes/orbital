@@ -5,14 +5,11 @@ Created on Jan 16, 2018
 '''
 
 from orbital.sage_interface import sage_QQ
-from orbital.sage_interface import sage_PolynomialRing
-from orbital.sage_interface import sage__eval
 from orbital.sage_interface import sage_var
 from orbital.sage_interface import sage_matrix
 from orbital.sage_interface import sage_vector
 from orbital.sage_interface import sage_factor
 from orbital.sage_interface import sage_n
-from orbital.sage_interface import sage_factor
 from orbital.sage_interface import sage_sqrt
 from orbital.sage_interface import sage_pi
 
@@ -29,43 +26,36 @@ from linear_series.class_linear_series import LinearSeries
 
 
 def ring_cyclide():
+    '''
+    Creates povray image of 4 families of circles on a ring cyclide. 
+    '''
 
-    # cos(a) = (1-m^2) / (1+m^2)
-    # sin(a) = 2*m / (1+m^2)
-    # m = arctan( a/2 )
-    #
-    x, y, v, w, c0, s0, c1, s1, R, r = sage_var( 'x,y,v,w,c0,s0,c1,s1,R,r' )
+    # We construct a trigonometric parametrization of the ring cyclide,
+    # by rotating a circle of radius r along a circle of radius R.
+    R = 2; r = 1;
+    x, y, v, w, c0, s0, c1, s1 = sage_var( 'x,y,v,w,c0,s0,c1,s1' )
     V = sage_vector( [r * c0 + R, 0, r * s0] )
     M = sage_matrix( [( c1, -s1, 0 ), ( s1, c1, 0 ), ( 0, 0, 1 )] )
-    pmz_AB_Rr_lst = [1] + list( M * V )
-    OrbTools.p( 'pmz_AB_Rr_lst =', pmz_AB_Rr_lst )
-    for pmz in pmz_AB_Rr_lst:
-        OrbTools.p( '\t\t', sage_factor( pmz ) )
-
-    pmz_AB_lst = [ pmz.subs( {r:1, R:2} ) if type( pmz ) != int else pmz for pmz in pmz_AB_Rr_lst ]
+    pmz_AB_lst = [1] + list( M * V )
     OrbTools.p( 'pmz_AB_lst =', pmz_AB_lst )
     for pmz in pmz_AB_lst:
         OrbTools.p( '\t\t', sage_factor( pmz ) )
 
+    # convert pmz_AB_lst to rational parametrization pmz_lst
     C0 = ( y ** 2 - x ** 2 ) / ( y ** 2 + x ** 2 )
     S0 = 2 * x * y / ( y ** 2 + x ** 2 )
     C1 = ( w ** 2 - v ** 2 ) / ( w ** 2 + v ** 2 )
     S1 = 2 * v * w / ( w ** 2 + v ** 2 )
     den = ( y ** 2 + x ** 2 ) * ( w ** 2 + v ** 2 )
     dct = {c0:C0, s0:S0, c1:C1, s1:S1 }
-
     pmz_lst = [den] + [ ( elt.subs( dct ) * den ).simplify_full() for elt in list( M * V ) ]
     OrbTools.p( 'pmz_lst =', pmz_lst )
 
-    pmz_rR_lst = [ pmz.subs( {r:1, R:2} ) for pmz in pmz_lst ]
-    OrbTools.p( 'pmz_rR_lst =', pmz_rR_lst )
-    for pmz in pmz_rR_lst:
-        OrbTools.p( '\t\t', sage_factor( pmz ) )
-
-    ls = LinearSeries( [str( pmz ) for pmz in pmz_rR_lst], PolyRing( 'x,y,v,w' , True ) )
+    # find basepoints
+    ls = LinearSeries( pmz_lst, PolyRing( 'x,y,v,w' , True ) )
     OrbTools.p( ls.get_bp_tree() )
 
-    # construct dct
+    # construct linear series for families of conics
     a0, a1 = PolyRing( 'x,y,v,w' ).ext_num_field( 't^2+1/3' ).ext_num_field( 't^2+1' ).root_gens()
 
     p1 = [ 'xv', ( -a0, a1 ) ]
@@ -100,22 +90,16 @@ def ring_cyclide():
     OrbTools.p( 'linear series 11b =\n', ls_11b )
 
     # compute reparametrization
-    R_xyvw = sage_PolynomialRing( sage_QQ, 'x,y,v,w' )
-    x, y, v, w = R_xyvw.gens()
-    X, Y, V, W, q = sage_var( 'x,y,v,w,q' )
-    c0, s0, c1, s1 = sage_var( 'c0,s0,c1,s1' )
-    xyvw_dct = { X:x, Y:y, V:v, W:w }
-    trig_dct = {X:1 - s0, Y:c0, V:1 - s1, W:c1}
-    pol_lst = sage__eval( str( pmz_rR_lst ), R_xyvw.gens_dict() )
+    ring = PolyRing( 'x,y,v,w,c0,s0,c1,s1' )  # construct polynomial ring with new generators
+    pmz_lst = ring.coerce( pmz_lst )
+    x, y, v, w, c0, s0, c1, s1 = ring.gens()
+    X = 1 - s0; Y = c0;  # see get_S1xS1_pmz()
+    V = 1 - s1; W = c1;
     q = sage_n( sage_sqrt( 3 ) ).exact_rational()  # approximation of sqrt(3)
-
-    # CB
     CB_dct = { x:X, y:Y, v: W * X + q * V * Y, w: V * X - q * W * Y }
-    pmz_CB_lst = [ pol.subs( CB_dct ).subs( trig_dct ) for pol in pol_lst ]
-
-    # DB
-    DB_dct = { x:X, y:Y, v: W * X - q * V * Y, w: V * X + q * W * Y  }
-    pmz_DB_lst = [ pol.subs( DB_dct ).subs( trig_dct ) for pol in pol_lst ]
+    DB_dct = { x:X, y:Y, v: W * X - q * V * Y, w: V * X + q * W * Y }
+    pmz_CB_lst = [ pmz.subs( CB_dct ) for pmz in pmz_lst ]
+    pmz_DB_lst = [ pmz.subs( DB_dct ) for pmz in pmz_lst ]
 
     # output
     OrbTools.p( 'pmz_AB_lst =\n', pmz_AB_lst )
@@ -123,11 +107,7 @@ def ring_cyclide():
     OrbTools.p( 'pmz_DB_lst =\n', pmz_DB_lst )
 
     # mathematica
-    pmz_lst = [ ( pmz_AB_lst, 'AB' ),
-                ( pmz_CB_lst, 'CB' ),
-                ( pmz_DB_lst, 'DB' )]
-
-    for pmz, AB in pmz_lst:
+    for pmz, AB in [ ( pmz_AB_lst, 'AB' ), ( pmz_CB_lst, 'CB' ), ( pmz_DB_lst, 'DB' )]:
         s = 'pmz' + AB + '=' + str( pmz ) + ';'
         s = s.replace( '[', '{' ).replace( ']', '}' )
         print( s )
@@ -165,10 +145,10 @@ def ring_cyclide():
     pin.pmz_dct['WD'] = ( pmz_DB_lst, 0 )
 
     v0_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 10 )]
-    v1_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 15 )]
+    v1_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 30 )]
 
-    v1_lst_A = [ sage_pi / 2 + ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 30 )]
-    v1_lst_F = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 1 )]
+    v1_lst_A = [ sage_pi / 2 + ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 15 )]
+    v1_lstFF = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 1 )]
 
     v1_lst_WA = [0.1, 0.52, 0.94, 1.36, 1.78, 2.2, 2.61, 3.04, 3.45, 3.88, 4.3, 4.712, 5.13, 5.55, 5.965]
     v1_lst_WB = [0, 0.7, 1.31, 1.8, 2.18, 2.5, 2.77, 3.015, 3.26, 3.51, 3.78, 4.099, 4.49, 4.97, 5.579];
@@ -178,33 +158,41 @@ def ring_cyclide():
     pin.curve_dct['B'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.05}
     pin.curve_dct['C'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.05}
     pin.curve_dct['D'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.05}
-    pin.curve_dct['FA'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.02}
-    pin.curve_dct['FB'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.02}
-    pin.curve_dct['FC'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.02}
-    pin.curve_dct['FD'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.02}
+    pin.curve_dct['FA'] = {'step0':v0_lst, 'step1':v1_lstFF, 'prec':10, 'width':0.02}
+    pin.curve_dct['FB'] = {'step0':v0_lst, 'step1':v1_lstFF, 'prec':10, 'width':0.02}
+    pin.curve_dct['FC'] = {'step0':v0_lst, 'step1':v1_lstFF, 'prec':10, 'width':0.02}
+    pin.curve_dct['FD'] = {'step0':v0_lst, 'step1':v1_lstFF, 'prec':10, 'width':0.02}
     pin.curve_dct['WA'] = {'step0':v0_lst, 'step1':v1_lst_WA, 'prec':10, 'width':0.05}
     pin.curve_dct['WB'] = {'step0':v0_lst, 'step1':v1_lst_WB, 'prec':10, 'width':0.05}
     pin.curve_dct['WD'] = {'step0':v0_lst, 'step1':v1_lst_WD, 'prec':10, 'width':0.05}
 
-    pin.text_dct['A'] = [True, ( 0.5, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['B'] = [True, ( 0.2, 0.3, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['C'] = [True, ( 0.8, 0.6, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['D'] = [True, ( 0.0, 0.2, 0.1, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FA'] = [True, ( 0.5, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FB'] = [True, ( 0.2, 0.3, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FC'] = [True, ( 0.8, 0.6, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FD'] = [True, ( 0.5, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['WA'] = [True, ( 0.5, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['WB'] = [True, ( 0.2, 0.3, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['WD'] = [True, ( 0.0, 0.2, 0.1, 0.0 ), 'phong 0.2 phong_size 5' ]
+    # A = | rotated circle
+    # B = - horizontal circle
+    # C = \ villarceau circle
+    # D = / villarceau circle
+    col_A = ( 0.6, 0.4, 0.1, 0.0 )
+    col_C = ( 0.1, 0.15, 0.0, 0.0 )
+    col_D = ( 0.2, 0.3, 0.2, 0.0 )
+    col_B = col_C
+    colFF = ( 0.1, 0.1, 0.1, 0.0 )
+
+    pin.text_dct['A'] = [True, col_A, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['B'] = [True, col_B, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['C'] = [True, col_C, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['D'] = [True, col_D, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FA'] = [True, colFF, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FB'] = [True, colFF, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FC'] = [True, colFF, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FD'] = [True, colFF, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['WA'] = [True, col_A, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['WB'] = [True, col_B, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['WD'] = [True, col_D, 'phong 0.2 phong_size 5' ]
 
     # raytrace image/animation
-    create_pov( pin, ['A', 'B', 'C', 'D', 'FA', 'FB', 'FC', 'FD', 'WA', 'WB', 'WD'] )
-
-    F_lst = ['FA', 'FC', 'FD']
     create_pov( pin, ['A', 'C', 'D'] )
-    create_pov( pin, ['A', 'C', 'D'] + F_lst )
+    create_pov( pin, ['A', 'C', 'D'] + ['FA', 'FC', 'FD'] )
     create_pov( pin, ['WA', 'WB', 'WD'] )
-    create_pov( pin, ['WA', 'WB', 'WD'] + F_lst )
+    create_pov( pin, ['WA', 'WB', 'WD'] + ['FA', 'FC', 'FD'] )
+    create_pov( pin, ['A', 'B', 'C', 'D', 'FA', 'FB', 'FC', 'FD', 'WA', 'WB', 'WD'] )
 
 

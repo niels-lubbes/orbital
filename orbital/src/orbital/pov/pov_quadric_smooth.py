@@ -21,29 +21,26 @@ from orbital.povray.povray_aux import get_time_str
 
 
 def quadric_smooth():
-    # construct povray image of rulings on hyperboloid of one sheet
+    '''
+    Construct povray image of rulings on hyperboloid of one sheet.
+    '''
 
-    c0, s0, c1, s1, t0, t1 = OrbRing.coerce( 'c0,s0,c1,s1,t0,t1' )
-    P0 = sage_vector( [-2, -1, -0.5] )
-    Q0 = sage_vector( [2, -1, -0.5] )
-    P1 = sage_vector( [2, -1, -0.5] )
-    Q1 = sage_vector( [-2, -1, -0.5] )
-    V0 = t0 * P0 + ( t0 - 1 ) * Q0;
-    V1 = t0 * P1 + ( t0 - 1 ) * Q1;
-
-    M0 = sage_matrix( [( c1, s1, 0 ), ( -s1, c1, 0 ), ( 0, 0, 1 )] )
-    M1 = sage_matrix( [( c1, s1, 0 ), ( -s1, c1, 0 ), ( 0, 0, 1 )] )
-
-    pmz_A_lst = [1] + list( M0 * V0 )
-    pmz_B_lst = [1] + list( M1 * V1 )
+    # construct the two rulings on the hyperboloid
+    # by rotating lines L1 and L2
+    c0, s0, c1, s1, t0 = OrbRing.coerce( 'c0,s0,c1,s1,t0' )
+    P = sage_vector( [-2, -1, -0.5] )
+    Q = sage_vector( [2, -1, -0.5] )
+    L0 = t0 * P + ( t0 - 1 ) * Q;
+    L1 = t0 * Q + ( t0 - 1 ) * P;
+    M = sage_matrix( [( c1, s1, 0 ), ( -s1, c1, 0 ), ( 0, 0, 1 )] )
+    pmz_A_lst = [1] + list( M * L0 )
+    pmz_B_lst = [1] + list( M * L1 )
 
     OrbTools.p( 'pmz_A_lst =', pmz_A_lst )
-    for pmz in pmz_A_lst:
-        OrbTools.p( '\t\t', pmz )
+    for pmz in pmz_A_lst: OrbTools.p( '\t\t', pmz )
 
     OrbTools.p( 'pmz_B_lst =', pmz_B_lst )
-    for pmz in pmz_B_lst:
-        OrbTools.p( '\t\t', pmz )
+    for pmz in pmz_B_lst: OrbTools.p( '\t\t', pmz )
 
     # PovInput ring cyclide
     #
