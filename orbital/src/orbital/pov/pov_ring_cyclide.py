@@ -142,17 +142,19 @@ def ring_cyclide():
     pin.pmz_dct['FD'] = ( pmz_DB_lst, 0 )
     pin.pmz_dct['WA'] = ( pmz_AB_lst, 0 )
     pin.pmz_dct['WB'] = ( pmz_AB_lst, 1 )
+    pin.pmz_dct['WC'] = ( pmz_CB_lst, 0 )
     pin.pmz_dct['WD'] = ( pmz_DB_lst, 0 )
 
     v0_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 10 )]
     v1_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 30 )]
 
-    v1_lst_A = [ sage_pi / 2 + ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 15 )]
+    v1_lst_A = [ sage_pi / 2 + ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 12 )]
     v1_lstFF = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 1 )]
 
     v1_lst_WA = [0.1, 0.52, 0.94, 1.36, 1.78, 2.2, 2.61, 3.04, 3.45, 3.88, 4.3, 4.712, 5.13, 5.55, 5.965]
     v1_lst_WB = [0, 0.7, 1.31, 1.8, 2.18, 2.5, 2.77, 3.015, 3.26, 3.51, 3.78, 4.099, 4.49, 4.97, 5.579];
-    v1_lst_WD = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 15 )]
+    v1_lst_WD = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 24 )]
+    v1_lst_WC = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 24 )]
 
     pin.curve_dct['A'] = {'step0':v0_lst, 'step1':v1_lst_A, 'prec':10, 'width':0.05}
     pin.curve_dct['B'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.05}
@@ -164,16 +166,19 @@ def ring_cyclide():
     pin.curve_dct['FD'] = {'step0':v0_lst, 'step1':v1_lstFF, 'prec':10, 'width':0.02}
     pin.curve_dct['WA'] = {'step0':v0_lst, 'step1':v1_lst_WA, 'prec':10, 'width':0.05}
     pin.curve_dct['WB'] = {'step0':v0_lst, 'step1':v1_lst_WB, 'prec':10, 'width':0.05}
+    pin.curve_dct['WC'] = {'step0':v0_lst, 'step1':v1_lst_WC, 'prec':10, 'width':0.05}
     pin.curve_dct['WD'] = {'step0':v0_lst, 'step1':v1_lst_WD, 'prec':10, 'width':0.05}
+
 
     # A = | rotated circle
     # B = - horizontal circle
-    # C = \ villarceau circle
-    # D = / villarceau circle
-    col_A = ( 0.6, 0.4, 0.1, 0.0 )
-    col_C = ( 0.1, 0.15, 0.0, 0.0 )
-    col_D = ( 0.2, 0.3, 0.2, 0.0 )
-    col_B = col_C
+    # C = / villarceau circle
+    # D = \ villarceau circle
+    col_A = ( 0.2, 0.0, 0.0, 0.0 )  # red
+    col_B = ( 0.0, 0.0, 0.1, 0.0 )  # blue
+    col_C = ( 0.1, 0.15, 0.0, 0.0 )  # green
+    col_D = ( 0.6, 0.4, 0.1, 0.0 )  # beige
+
     colFF = ( 0.1, 0.1, 0.1, 0.0 )
 
     pin.text_dct['A'] = [True, col_A, 'phong 0.2 phong_size 5' ]
@@ -186,13 +191,19 @@ def ring_cyclide():
     pin.text_dct['FD'] = [True, colFF, 'phong 0.2 phong_size 5' ]
     pin.text_dct['WA'] = [True, col_A, 'phong 0.2 phong_size 5' ]
     pin.text_dct['WB'] = [True, col_B, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['WC'] = [True, col_C, 'phong 0.2 phong_size 5' ]
     pin.text_dct['WD'] = [True, col_D, 'phong 0.2 phong_size 5' ]
 
+
+
     # raytrace image/animation
-    create_pov( pin, ['A', 'C', 'D'] )
-    create_pov( pin, ['A', 'C', 'D'] + ['FA', 'FC', 'FD'] )
+    create_pov( pin, ['WA', 'WB', 'WC', 'WD'] )
+    return
+    create_pov( pin, ['WA', 'WB', 'WC', 'WD'] + +['FA', 'FC', 'FD'] )
+
     create_pov( pin, ['WA', 'WB', 'WD'] )
     create_pov( pin, ['WA', 'WB', 'WD'] + ['FA', 'FC', 'FD'] )
-    create_pov( pin, ['A', 'B', 'C', 'D', 'FA', 'FB', 'FC', 'FD', 'WA', 'WB', 'WD'] )
 
+    create_pov( pin, ['A', 'C', 'D'] )
+    create_pov( pin, ['A', 'C', 'D'] + ['FA', 'FC', 'FD'] )
 

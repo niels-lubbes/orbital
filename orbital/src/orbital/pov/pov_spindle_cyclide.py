@@ -47,13 +47,13 @@ def spindle_cyclide():
     pin.scale = 1
     pin.cam_dct['location'] = ( 0, -4, 0 )
     pin.cam_dct['lookat'] = ( 0, 0, 0 )
-    pin.cam_dct['rotate'] = ( 20, 0, 0 )
-    pin.light_radius = 5
+    pin.cam_dct['rotate'] = ( 45, 0, 0 )
+    pin.light_radius = 10
     pin.axes_dct['show'] = False
     pin.axes_dct['len'] = 1.2
-    pin.width = 800
     pin.height = 400
-    pin.quality = 1
+    pin.width = 800
+    pin.quality = 11
     pin.ani_delay = 10
 
     pin.impl = None
@@ -69,12 +69,14 @@ def spindle_cyclide():
     v1_lst_A = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 270, 15 )]
     v1_lst_B = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 180, 15 )]
 
-    v1_lst_F = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 1 )]
+    v1_lstFA = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 270, 1 )]
+    v1_lstFB = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 180, 1 )]
+
 
     pin.curve_dct['A'] = {'step0':v0_lst, 'step1':v1_lst_A, 'prec':10, 'width':0.05}
     pin.curve_dct['B'] = {'step0':v0_lst, 'step1':v1_lst_B, 'prec':10, 'width':0.05}
-    pin.curve_dct['FA'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.02}
-    pin.curve_dct['FB'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.02}
+    pin.curve_dct['FA'] = {'step0':v0_lst, 'step1':v1_lstFA, 'prec':10, 'width':0.02}
+    pin.curve_dct['FB'] = {'step0':v0_lst, 'step1':v1_lstFB, 'prec':10, 'width':0.02}
 
     col_A = ( 0.6, 0.4, 0.1, 0.0 )
     col_B = ( 0.1, 0.15, 0.0, 0.0 )

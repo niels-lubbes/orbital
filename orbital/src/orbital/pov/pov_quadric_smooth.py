@@ -57,8 +57,8 @@ def quadric_smooth():
     pin.axes_dct['len'] = 1.2
 
     pin.width = 400
-    pin.height = 200
-    pin.quality = 1
+    pin.height = 800
+    pin.quality = 11
     pin.ani_delay = 10
 
     pin.impl = None

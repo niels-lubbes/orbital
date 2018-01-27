@@ -158,11 +158,11 @@ def blum_cyclide():
     start0 = sage_QQ( 1 ) / 10  # step0=10 step1=15
     v0_lst = [ start0 + ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 10 )]
     v1_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 15 )]
-    v1_lst_F = [ start0 + ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 1 )]
+    v1_lst_F = [ start0 + ( sage_QQ( i ) / 360 ) * sage_pi for i in range( 0, 720, 1 )]
 
     v1_lst_WE = [1.8, 2.3, 2.7, 3.1, 3.5, 3.8, 4.134, 4.31, 4.532, 4.7, 4.9, 5.08, 5.25, 5.405, 5.553, 5.7, 5.84]
     v1_lst_WF = [1.69, 1.87, 2.07, 2.26, 2.5, 2.72, 2.96, 3.2, 3.42, 3.65, 3.81]
-    v1_lst_WD = [5.01, 5.12, 5.22, 5.32, 5.44, 5.56, 5.68, 5.81, 5.95, 6.1, 6.27, 6.474]
+    v1_lst_WD = [5.01, 5.12, 5.22, 5.32, 5.44, 5.56, 5.68, 5.81]  # , 5.95, 6.1, 6.27, 6.474]
 
     v1_lst_SA = [6.5]; v1_lst_SE = [5.4];
     v1_lst_SB = [5.95]; v1_lst_SF = [2.28];
@@ -246,13 +246,6 @@ def blum_cyclide():
     pin.text_dct['FD'] = [True, colFF, 'phong 0.2 phong_size 5' ]
 
     # raytrace image/animation
-    fam_lst = []
-    fam_lst += ['A', 'B', 'C', 'D', 'E', 'F']
-    fam_lst += ['WD', 'WE', 'WF']
-    fam_lst += ['SA', 'SB', 'SC', 'SD', 'SE', 'SF']
-    fam_lst += ['FA', 'FB', 'FC', 'FD', 'FE', 'FF']
-    create_pov( pin, fam_lst )
-
     F_lst = ['FA', 'FB', 'FC']
     S_lst = ['SA', 'SB', 'SC', 'SD', 'SE', 'SF']
     create_pov( pin, ['A', 'B', 'C'] )

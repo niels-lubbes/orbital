@@ -120,8 +120,6 @@ def detect_circles():
     return
 
 
-
-
 def usecase_povray():
     '''
     Create povray images. This may take a long time.
@@ -136,8 +134,6 @@ def usecase_povray():
     horn_cyclide()
     veronese()
     dp8_clifford()
-
-
 
 
 if __name__ == '__main__':

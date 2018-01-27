@@ -46,13 +46,13 @@ def horn_cyclide():
     pin.scale = 1
     pin.cam_dct['location'] = ( 0, -4, 0 )
     pin.cam_dct['lookat'] = ( 0, 0, 0 )
-    pin.cam_dct['rotate'] = ( 20, 0, 0 )
-    pin.light_radius = 5
+    pin.cam_dct['rotate'] = ( 45, 0, 0 )
+    pin.light_radius = 10
     pin.axes_dct['show'] = False
     pin.axes_dct['len'] = 1.2
-    pin.width = 800
     pin.height = 400
-    pin.quality = 1
+    pin.width = 800
+    pin.quality = 11
     pin.ani_delay = 10
 
     pin.impl = None

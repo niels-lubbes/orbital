@@ -56,9 +56,9 @@ def dp8_clifford():
     pin.light_radius = 5
     pin.axes_dct['show'] = False
     pin.axes_dct['len'] = 1.2
-    pin.width = 800
     pin.height = 400
-    pin.quality = 1
+    pin.width = 800
+    pin.quality = 11
     pin.ani_delay = 10
 
     pin.impl = None
@@ -74,9 +74,9 @@ def dp8_clifford():
     v1_lst_A += [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 180, 360, 20 )]
     v1_lst_B = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 10 )]
 
-    v1_lst_FA = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 180, 2 )]
-    v1_lst_FA += [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 180, 360, 4 )]
-    v1_lst_FB = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 2 )]
+    v1_lst_FA = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 180, 1 )]
+    v1_lst_FA += [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 180, 360, 2 )]
+    v1_lst_FB = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 1 )]
 
     pin.curve_dct['A'] = {'step0':v0_lst, 'step1':v1_lst_A, 'prec':10, 'width':0.05}
     pin.curve_dct['B'] = {'step0':v0_lst, 'step1':v1_lst_B, 'prec':10, 'width':0.05}

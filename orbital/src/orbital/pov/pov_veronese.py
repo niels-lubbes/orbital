@@ -61,9 +61,9 @@ def veronese():
     pin.light_radius = 2
     pin.axes_dct['show'] = False
     pin.axes_dct['len'] = 0.5
-    pin.width = 400
-    pin.height = 200
-    pin.quality = 1
+    pin.height = 400
+    pin.width = 800
+    pin.quality = 11
     pin.ani_delay = 10
 
     pin.impl = None
@@ -81,7 +81,7 @@ def veronese():
     v1_B_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 18 )]
     v1_C_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 9 )]
 
-    v1_lst_F = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 4 )]
+    v1_lst_F = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 2 )]
 
     prec = 50
 
