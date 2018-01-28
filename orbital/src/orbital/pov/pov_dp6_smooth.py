@@ -45,7 +45,9 @@ def dp6_smooth():
     dct = get_surf( ls_AB, ( 6, 1 ), c_lst )
 
     # compute projection to P^3
-    approxU = approx_QQ( dct['UJ'][0] )
+    U, J = dct['UJ']
+    U.swap_rows( 0, 6 );J.swap_columns( 0, 6 );J.swap_rows( 0, 6 )
+    approxU = approx_QQ( U )
     P = get_prj_mat( 4, 7, 0 )
     P[0, 6] = -1;P[3, 3] = 0;P[3, 4] = 1
     P = P * approxU
@@ -73,8 +75,8 @@ def dp6_smooth():
     pin.light_radius = 5
     pin.axes_dct['show'] = False
     pin.axes_dct['len'] = 1.2
-    pin.height = 800
-    pin.width = 400
+    pin.height = 400
+    pin.width = 800
     pin.quality = 11
     pin.ani_delay = 1
     pin.impl = None
@@ -90,20 +92,24 @@ def dp6_smooth():
     pin.pmz_dct['FB'] = ( pmz_AB_lst, 1 )
     pin.pmz_dct['FC'] = ( pmz_CB_lst, 0 )
 
-    pin.curve_dct['A'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.05}
-    pin.curve_dct['B'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.05}
-    pin.curve_dct['C'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.05}
-    pin.curve_dct['FA'] = {'step0':v0_lst, 'step1':v1_F_lst, 'prec':10, 'width':0.05}
-    pin.curve_dct['FB'] = {'step0':v0_lst, 'step1':v1_F_lst, 'prec':10, 'width':0.05}
-    pin.curve_dct['FC'] = {'step0':v0_lst, 'step1':v1_F_lst, 'prec':10, 'width':0.05}
+    pin.curve_dct['A'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.01}
+    pin.curve_dct['B'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.01}
+    pin.curve_dct['C'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.01}
+    pin.curve_dct['FA'] = {'step0':v0_lst, 'step1':v1_F_lst, 'prec':10, 'width':0.005}
+    pin.curve_dct['FB'] = {'step0':v0_lst, 'step1':v1_F_lst, 'prec':10, 'width':0.005}
+    pin.curve_dct['FC'] = {'step0':v0_lst, 'step1':v1_F_lst, 'prec':10, 'width':0.005}
 
-    col_F = ( 0.1, 0.1, 0.1, 0.0 )
-    pin.text_dct['A'] = [True, ( 0.4, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['B'] = [True, ( 0.2, 0.3, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['C'] = [True, ( 0.8, 0.6, 0.2, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FA'] = [True, col_F, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FB'] = [True, col_F, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FC'] = [True, col_F, 'phong 0.2 phong_size 5' ]
+    col_A = ( 0.4, 0.0, 0.0, 0.0 )
+    col_B = ( 0.2, 0.3, 0.2, 0.0 )
+    col_C = ( 0.8, 0.6, 0.2, 0.0 )
+    colFF = ( 0.1, 0.1, 0.1, 0.0 )
+
+    pin.text_dct['A'] = [True, col_A, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['B'] = [True, col_B, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['C'] = [True, col_C, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FA'] = [True, colFF, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FB'] = [True, colFF, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FC'] = [True, colFF, 'phong 0.2 phong_size 5' ]
 
     # raytrace image/animation
     create_pov( pin, ['A', 'B', 'C'] )
