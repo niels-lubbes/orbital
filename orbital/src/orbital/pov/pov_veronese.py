@@ -81,7 +81,7 @@ def veronese():
     v1_B_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 18 )]
     v1_C_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 9 )]
 
-    v1_lst_F = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 2 )]
+    v1_lst_F = [ ( sage_QQ( i ) / ( 3 * 180 ) ) * sage_pi for i in range( 0, 3 * 360, 1 )]
 
     prec = 50
 
@@ -110,4 +110,5 @@ def veronese():
     create_pov( pin, ['A', 'B', 'C'] )
     create_pov( pin, ['A', 'B', 'C', 'FA', 'FB', 'FC'] )
     create_pov( pin, ['A', 'B', 'C', 'FA', 'FB'] )
+    create_pov( pin, ['FA', 'FB', 'FC'] )
 

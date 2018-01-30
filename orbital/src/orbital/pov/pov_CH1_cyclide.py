@@ -150,15 +150,15 @@ def CH1_cyclide():
     pin.path = './' + get_time_str() + '_CH1_cyclide/'
     pin.fname = 'orb'
     pin.scale = 1
-    pin.cam_dct['location'] = ( 0, -4, 0 )
+    pin.cam_dct['location'] = ( 0, -5, 0 )
     pin.cam_dct['lookat'] = ( 0, 0, 0 )
     pin.cam_dct['rotate'] = ( 20, 0, 0 )
     pin.light_radius = 5
     pin.axes_dct['show'] = False
     pin.axes_dct['len'] = 1.2
-    pin.width = 400
-    pin.height = 200
-    pin.quality = 1
+    pin.height = 400
+    pin.width = 800
+    pin.quality = 11
     pin.ani_delay = 10
 
     pin.impl = None

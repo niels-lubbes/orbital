@@ -198,7 +198,6 @@ def ring_cyclide():
 
     # raytrace image/animation
     create_pov( pin, ['WA', 'WB', 'WC', 'WD'] )
-    return
     create_pov( pin, ['WA', 'WB', 'WC', 'WD'] + +['FA', 'FC', 'FD'] )
 
     create_pov( pin, ['WA', 'WB', 'WD'] )

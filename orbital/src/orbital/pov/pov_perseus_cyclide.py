@@ -239,5 +239,5 @@ def perseus_cyclide():
 
     # raytrace image/animation
     create_pov( pin, ['C', 'D', 'FC', 'FD'] )
-    create_pov( pin, ['A', 'E', 'FC', 'FD'] )
-    create_pov( pin, ['B', 'FC', 'FD'] )
+    create_pov( pin, ['A', 'B', 'FC', 'FD'] )
+    create_pov( pin, ['E', 'B', 'FC', 'FD'] )

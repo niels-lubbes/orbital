@@ -45,7 +45,7 @@ def spindle_cyclide():
     pin.path = './' + get_time_str() + '_spindle_cyclide/'
     pin.fname = 'orb'
     pin.scale = 1
-    pin.cam_dct['location'] = ( 0, -4, 0 )
+    pin.cam_dct['location'] = ( 0, -5, 0 )
     pin.cam_dct['lookat'] = ( 0, 0, 0 )
     pin.cam_dct['rotate'] = ( 45, 0, 0 )
     pin.light_radius = 10
@@ -69,7 +69,7 @@ def spindle_cyclide():
     v1_lst_A = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 270, 15 )]
     v1_lst_B = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 180, 15 )]
 
-    v1_lstFA = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 270, 1 )]
+    v1_lstFA = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 270 - 15, 1 )]
     v1_lstFB = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 180, 1 )]
 
 
@@ -81,8 +81,8 @@ def spindle_cyclide():
     col_A = ( 0.6, 0.4, 0.1, 0.0 )
     col_B = ( 0.1, 0.15, 0.0, 0.0 )
     colFF = ( 0.1, 0.1, 0.1, 0.0 )
-    pin.text_dct['A'] = [True, ( 0.4, 0.0, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
-    pin.text_dct['B'] = [True, ( 0.0, 0.2, 0.0, 0.0 ), 'phong 0.2 phong_size 5' ]
+    pin.text_dct['A'] = [True, col_A, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['B'] = [True, col_B, 'phong 0.2 phong_size 5' ]
     pin.text_dct['FA'] = [True, colFF, 'phong 0.2 phong_size 5' ]
     pin.text_dct['FB'] = [True, colFF, 'phong 0.2 phong_size 5' ]
 
