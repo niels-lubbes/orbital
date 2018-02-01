@@ -78,48 +78,6 @@ def usecase__two_sphere_cyclide():
         print( s )
 
 
-def detect_circles():
-    #         { 5, <<x^4 + 3*x^2*y^2 + y^4 + 3*x^2*z^2 + 3*y^2*z^2 + z^4, -2*x^3*z - 2*x*y^2*z - 2*x*z^3, -2*x^3*y - 2*x*y^3 - 2*x*y*z^2, 2*x^2*y*z + 2*y^3*z + 2*y*z^3, -x^4 - x^2*y^2 - y^4 - x^2*z^2 - y^2*z^2 - z^4>>, QQ( <a0|t^2 - t + 1>, <a1|t^4 + 3*t^2 + 1>, <a2|t^2 + 2*a0>, <a3|t^2 - 3*a1^2 - 6> )[x, y, z] }
-    #         chart=z, depth=0, mult=1, sol=(a0 - 1, -a0), { 5, <<x^4 + 3*x^2*y^2 + y^4 + 3*x^2 + 3*y^2 + 1, -2*x^3 - 2*x*y^2 - 2*x, -2*x^3*y - 2*x*y^3 - 2*x*y, 2*x^2*y + 2*y^3 + 2*y, -x^4 - x^2*y^2 - y^4 - x^2 - y^2 - 1>>, QQ( <a0|t^2 - t + 1>, <a1|t^4 + 3*t^2 + 1>, <a2|t^2 + 2*a0>, <a3|t^2 - 3*a1^2 - 6> )[x, y] }
-    #         chart=z, depth=0, mult=1, sol=(-a0 + 1, a0), { 5, <<x^4 + 3*x^2*y^2 + y^4 + 3*x^2 + 3*y^2 + 1, -2*x^3 - 2*x*y^2 - 2*x, -2*x^3*y - 2*x*y^3 - 2*x*y, 2*x^2*y + 2*y^3 + 2*y, -x^4 - x^2*y^2 - y^4 - x^2 - y^2 - 1>>, QQ( <a0|t^2 - t + 1>, <a1|t^4 + 3*t^2 + 1>, <a2|t^2 + 2*a0>, <a3|t^2 - 3*a1^2 - 6> )[x, y] }
-    #         chart=z, depth=0, mult=1, sol=(a0 - 1, a0), { 5, <<x^4 + 3*x^2*y^2 + y^4 + 3*x^2 + 3*y^2 + 1, -2*x^3 - 2*x*y^2 - 2*x, -2*x^3*y - 2*x*y^3 - 2*x*y, 2*x^2*y + 2*y^3 + 2*y, -x^4 - x^2*y^2 - y^4 - x^2 - y^2 - 1>>, QQ( <a0|t^2 - t + 1>, <a1|t^4 + 3*t^2 + 1>, <a2|t^2 + 2*a0>, <a3|t^2 - 3*a1^2 - 6> )[x, y] }
-    #         chart=z, depth=0, mult=1, sol=(-a0, -a0 + 1), { 5, <<x^4 + 3*x^2*y^2 + y^4 + 3*x^2 + 3*y^2 + 1, -2*x^3 - 2*x*y^2 - 2*x, -2*x^3*y - 2*x*y^3 - 2*x*y, 2*x^2*y + 2*y^3 + 2*y, -x^4 - x^2*y^2 - y^4 - x^2 - y^2 - 1>>, QQ( <a0|t^2 - t + 1>, <a1|t^4 + 3*t^2 + 1>, <a2|t^2 + 2*a0>, <a3|t^2 - 3*a1^2 - 6> )[x, y] }
-    #         chart=z, depth=0, mult=1, sol=(a0, -a0 + 1), { 5, <<x^4 + 3*x^2*y^2 + y^4 + 3*x^2 + 3*y^2 + 1, -2*x^3 - 2*x*y^2 - 2*x, -2*x^3*y - 2*x*y^3 - 2*x*y, 2*x^2*y + 2*y^3 + 2*y, -x^4 - x^2*y^2 - y^4 - x^2 - y^2 - 1>>, QQ( <a0|t^2 - t + 1>, <a1|t^4 + 3*t^2 + 1>, <a2|t^2 + 2*a0>, <a3|t^2 - 3*a1^2 - 6> )[x, y] }
-    #         chart=z, depth=0, mult=1, sol=(-a0, a0 - 1), { 5, <<x^4 + 3*x^2*y^2 + y^4 + 3*x^2 + 3*y^2 + 1, -2*x^3 - 2*x*y^2 - 2*x, -2*x^3*y - 2*x*y^3 - 2*x*y, 2*x^2*y + 2*y^3 + 2*y, -x^4 - x^2*y^2 - y^4 - x^2 - y^2 - 1>>, QQ( <a0|t^2 - t + 1>, <a1|t^4 + 3*t^2 + 1>, <a2|t^2 + 2*a0>, <a3|t^2 - 3*a1^2 - 6> )[x, y] }
-    #         chart=z, depth=0, mult=1, sol=(-a0 + 1, -a0), { 5, <<x^4 + 3*x^2*y^2 + y^4 + 3*x^2 + 3*y^2 + 1, -2*x^3 - 2*x*y^2 - 2*x, -2*x^3*y - 2*x*y^3 - 2*x*y, 2*x^2*y + 2*y^3 + 2*y, -x^4 - x^2*y^2 - y^4 - x^2 - y^2 - 1>>, QQ( <a0|t^2 - t + 1>, <a1|t^4 + 3*t^2 + 1>, <a2|t^2 + 2*a0>, <a3|t^2 - 3*a1^2 - 6> )[x, y] }
-    #         chart=z, depth=0, mult=1, sol=(a0, a0 - 1), { 5, <<x^4 + 3*x^2*y^2 + y^4 + 3*x^2 + 3*y^2 + 1, -2*x^3 - 2*x*y^2 - 2*x, -2*x^3*y - 2*x*y^3 - 2*x*y, 2*x^2*y + 2*y^3 + 2*y, -x^4 - x^2*y^2 - y^4 - x^2 - y^2 - 1>>, QQ( <a0|t^2 - t + 1>, <a1|t^4 + 3*t^2 + 1>, <a2|t^2 + 2*a0>, <a3|t^2 - 3*a1^2 - 6> )[x, y] }
-
-    # yz, zx, xy
-
-    p_lst = '[ x0^2+x1^2+x2^2, -x0*x1, -x1*x2, x0*x2 ]'
-    s_lst = '[x0^2+x1^2+x2^2+x3^2, 2*x0*x1, 2*x0*x2, 2*x0*x3, -x0^2+x1^2+x2^2+x3^2]'
-    sp_lst = compose_maps( s_lst, p_lst )
-    OrbTools.p( 'sp_lst =' )
-    for sp in sp_lst: OrbTools.p( '\t\t', sp )
-
-    # stereographic project from center (1:0:0:0:-1)
-    # q_lst = [ sp_lst[0] + sp_lst[4], sp_lst[1], sp_lst[2], sp_lst[3] ]
-    q_lst = sp_lst
-
-    # get rid of common components and substitute (x,y,z)-variables
-    ring = PolyRing( 'x,y,z,x0,x1,x2' )
-    q_lst = ring.coerce( q_lst )
-    x, y, z, x0, x1, x2 = ring.gens()
-    # q_lst = [ q / 2 for q in q_lst ]
-    q_lst = [ q.subs( {x0:z, x1:x, x2:y} ) for q in q_lst ]
-    OrbTools.p( 'q_lst =' )
-    for q in q_lst: OrbTools.p( '\t\t', sage_factor( q ) )
-    OrbTools.p( 'gcd(q_lst) =', sage_gcd( q_lst ) )
-
-    # check base points
-    ring = PolyRing( 'x,y,z', True )
-    q_lst = ring.coerce( q_lst )
-    ls = LinearSeries( q_lst, ring )
-    OrbTools.p( ls.get_bp_tree() )
-
-    return
-
-
 def usecase_povray():
     '''
     Create povray images. This may take a long time.
