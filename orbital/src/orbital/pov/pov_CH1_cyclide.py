@@ -153,7 +153,9 @@ def CH1_cyclide():
     pin.cam_dct['location'] = ( 0, -5, 0 )
     pin.cam_dct['lookat'] = ( 0, 0, 0 )
     pin.cam_dct['rotate'] = ( 20, 0, 0 )
-    pin.light_radius = 5
+    pin.shadow = True
+    pin.light_lst = [( 0, 0, 0 ), ( 10, 0, 0 ), ( 0, 10, 0 ), ( 0, 0, 10 ),
+                     ( -10, 0, 0 ), ( 0, -10, 0 ), ( 0, 0, -10 )]
     pin.axes_dct['show'] = False
     pin.axes_dct['len'] = 1.2
     pin.height = 400
@@ -173,9 +175,9 @@ def CH1_cyclide():
 
     v0_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 10 )]
 
-    v1_lst_A = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 180, 360, 15 )]
-    v1_lst_B = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 180, 15 )]
-    v1_lst_C = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 180, 15 )]
+    v1_lst_A = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 180, 360, 10 )]
+    v1_lst_B = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 180, 10 )]
+    v1_lst_C = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 180, 10 )]
 
     v1_lst_FA = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 180, 360, 2 )]
     v1_lst_FB = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 180, 2 )]
@@ -183,9 +185,9 @@ def CH1_cyclide():
 
     prec = 50
 
-    pin.curve_dct['A'] = {'step0':v0_lst, 'step1':v1_lst_A, 'prec':prec, 'width':0.05}
-    pin.curve_dct['B'] = {'step0':v0_lst, 'step1':v1_lst_B, 'prec':prec, 'width':0.05}
-    pin.curve_dct['C'] = {'step0':v0_lst, 'step1':v1_lst_C, 'prec':prec, 'width':0.05}
+    pin.curve_dct['A'] = {'step0':v0_lst, 'step1':v1_lst_A, 'prec':prec, 'width':0.03}
+    pin.curve_dct['B'] = {'step0':v0_lst, 'step1':v1_lst_B, 'prec':prec, 'width':0.03}
+    pin.curve_dct['C'] = {'step0':v0_lst, 'step1':v1_lst_C, 'prec':prec, 'width':0.03}
 
     pin.curve_dct['FA'] = {'step0':v0_lst, 'step1':v1_lst_FA, 'prec':prec, 'width':0.02}
     pin.curve_dct['FB'] = {'step0':v0_lst, 'step1':v1_lst_FB, 'prec':prec, 'width':0.02}

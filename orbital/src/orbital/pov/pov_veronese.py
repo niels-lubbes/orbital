@@ -91,6 +91,10 @@ def veronese():
     pin.pmz_dct['FB'] = ( pmz_B_lst, 1 )
     pin.pmz_dct['FC'] = ( pmz_C_lst, 1 )
 
+    pin.pmz_dct['FA2'] = ( pmz_A_lst, 0 )
+    pin.pmz_dct['FB2'] = ( pmz_B_lst, 1 )
+    pin.pmz_dct['FC2'] = ( pmz_C_lst, 1 )
+
     pin.pmz_dct['C1'] = ( pmz_C1_lst, 0 )
     pin.pmz_dct['C2'] = ( pmz_C2_lst, 0 )
     pin.pmz_dct['C3'] = ( pmz_C3_lst, 0 )
@@ -103,6 +107,7 @@ def veronese():
     v1_C_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 9 )]
 
     v1_lst_F = [ ( sage_QQ( i ) / ( 3 * 180 ) ) * sage_pi for i in range( 0, 3 * 360, 1 )]
+    v1_lst_F2 = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 2 )]
 
     v0_lst_CC = [ sage_QQ( i ) / 10 for i in range( -100, 100, 1 )]
 
@@ -115,6 +120,10 @@ def veronese():
     pin.curve_dct['FA'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':prec, 'width':0.001}
     pin.curve_dct['FB'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':prec, 'width':0.001}
     pin.curve_dct['FC'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':prec, 'width':0.001}
+
+    pin.curve_dct['FA2'] = {'step0':v0_lst, 'step1':v1_lst_F2, 'prec':prec, 'width':0.001}
+    pin.curve_dct['FB2'] = {'step0':v0_lst, 'step1':v1_lst_F2, 'prec':prec, 'width':0.001}
+    pin.curve_dct['FC2'] = {'step0':v0_lst, 'step1':v1_lst_F2, 'prec':prec, 'width':0.001}
 
     pin.curve_dct['C1'] = {'step0':v0_lst_CC, 'step1':[0], 'prec':prec, 'width':0.01}
     pin.curve_dct['C2'] = {'step0':v0_lst_CC, 'step1':[0], 'prec':prec, 'width':0.01}
@@ -135,6 +144,10 @@ def veronese():
     pin.text_dct['FB'] = [True, colFF, 'phong 0.2 phong_size 5' ]
     pin.text_dct['FC'] = [True, colFF, 'phong 0.2 phong_size 5' ]
 
+    pin.text_dct['FA2'] = [True, colFF, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FB2'] = [True, colFF, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['FC2'] = [True, colFF, 'phong 0.2 phong_size 5' ]
+
     pin.text_dct['C1'] = [True, colCC, 'phong 0.2 phong_size 5' ]
     pin.text_dct['C2'] = [True, colCC, 'phong 0.2 phong_size 5' ]
     pin.text_dct['C3'] = [True, colCC, 'phong 0.2 phong_size 5' ]
@@ -147,13 +160,12 @@ def veronese():
 
     # four circles on projection Veronese surface
     pin.cam_dct['rotate'] = ( 60, 10, 45 )
-    create_pov( pin, ['FA', 'FB', 'FC'] )
-    create_pov( pin, ['C1', 'C2', 'C3', 'C4'] + ['FA', 'FB', 'FC'] )
+    create_pov( pin, ['FA2', 'FB2', 'FC2'] )
+    create_pov( pin, ['C1', 'C2', 'C3', 'C4'] + ['FA2', 'FB2', 'FC2'] )
 
     # hexagonal web on Veronese surface
     pin.cam_dct['rotate'] = ( 35, 0, 45 )
     create_pov( pin, ['A', 'B', 'C'] )
     create_pov( pin, ['A', 'B', 'C', 'FA', 'FB', 'FC'] )
-    create_pov( pin, ['A', 'B', 'C', 'FA', 'FB'] )
-    create_pov( pin, ['FA', 'FB', 'FC'] )
+    create_pov( pin, ['FA2', 'FB2', 'FC2'] )
 

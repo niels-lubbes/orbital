@@ -47,7 +47,9 @@ def horn_cyclide():
     pin.cam_dct['location'] = ( 0, -4, 0 )
     pin.cam_dct['lookat'] = ( 0, 0, 0 )
     pin.cam_dct['rotate'] = ( 45, 0, 0 )
-    pin.light_radius = 10
+    pin.shadow = True
+    pin.light_lst = [( 0, 0, 0 ), ( 10, 0, 0 ), ( 0, 10, 0 ), ( 0, 0, 10 ),
+                     ( -10, 0, 0 ), ( 0, -10, 0 ), ( 0, 0, -10 )]
     pin.axes_dct['show'] = False
     pin.axes_dct['len'] = 1.2
     pin.height = 400
@@ -68,11 +70,11 @@ def horn_cyclide():
     v1_lst_A = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 270, 15 )]
     v1_lst_B = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 180, 15 )]
 
-    v1_lstFA = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 270 - 15, 1 )]
-    v1_lstFB = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 180, 1 )]
+    v1_lstFA = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 270 - 15, 2 )]
+    v1_lstFB = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 180, 2 )]
 
-    pin.curve_dct['A'] = {'step0':v0_lst, 'step1':v1_lst_A, 'prec':10, 'width':0.05}
-    pin.curve_dct['B'] = {'step0':v0_lst, 'step1':v1_lst_B, 'prec':10, 'width':0.05}
+    pin.curve_dct['A'] = {'step0':v0_lst, 'step1':v1_lst_A, 'prec':10, 'width':0.03}
+    pin.curve_dct['B'] = {'step0':v0_lst, 'step1':v1_lst_B, 'prec':10, 'width':0.03}
     pin.curve_dct['FA'] = {'step0':v0_lst, 'step1':v1_lstFA, 'prec':10, 'width':0.02}
     pin.curve_dct['FB'] = {'step0':v0_lst, 'step1':v1_lstFB, 'prec':10, 'width':0.02}
 

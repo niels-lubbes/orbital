@@ -78,8 +78,8 @@ def dp8_clifford():
     v1_lst_FA += [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 180, 360, 2 )]
     v1_lst_FB = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 1 )]
 
-    pin.curve_dct['A'] = {'step0':v0_lst, 'step1':v1_lst_A, 'prec':10, 'width':0.05}
-    pin.curve_dct['B'] = {'step0':v0_lst, 'step1':v1_lst_B, 'prec':10, 'width':0.05}
+    pin.curve_dct['A'] = {'step0':v0_lst, 'step1':v1_lst_A, 'prec':10, 'width':0.04}
+    pin.curve_dct['B'] = {'step0':v0_lst, 'step1':v1_lst_B, 'prec':10, 'width':0.04}
     pin.curve_dct['FA'] = {'step0':v0_lst, 'step1':v1_lst_FA, 'prec':10, 'width':0.02}
     pin.curve_dct['FB'] = {'step0':v0_lst, 'step1':v1_lst_FB, 'prec':10, 'width':0.02}
 
@@ -95,7 +95,7 @@ def dp8_clifford():
     create_pov( pin, ['A', 'B'] )
     create_pov( pin, ['A', 'B', 'FA', 'FB'] )
     create_pov( pin, ['A', 'FA', 'FB'] )
-    create_pov( pin, ['A', 'FA', 'FB'] )
+    create_pov( pin, ['B', 'FA', 'FB'] )
 
 
 

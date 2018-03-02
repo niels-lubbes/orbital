@@ -146,7 +146,7 @@ def ring_cyclide():
     pin.pmz_dct['WD'] = ( pmz_DB_lst, 0 )
 
     v0_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 10 )]
-    v1_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 30 )]
+    v1_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 24 )]
 
     v1_lst_A = [ sage_pi / 2 + ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 12 )]
     v1_lstFF = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 1 )]
@@ -174,10 +174,10 @@ def ring_cyclide():
     # B = - horizontal circle
     # C = / villarceau circle
     # D = \ villarceau circle
-    col_A = ( 0.2, 0.0, 0.0, 0.0 )  # red
-    col_B = ( 0.0, 0.0, 0.1, 0.0 )  # blue
-    col_C = ( 0.1, 0.15, 0.0, 0.0 )  # green
-    col_D = ( 0.6, 0.4, 0.1, 0.0 )  # beige
+    col_A = ( 0.4, 0.0, 0.0, 0.0 )  # red
+    col_B = ( 0.0, 0.0, 0.4, 0.0 )  # blue
+    col_C = ( 0.1, 0.3, 0.0, 0.0 )  # green
+    col_D = ( 0.8, 0.6, 0.2, 0.0 )  # beige
 
     colFF = ( 0.1, 0.1, 0.1, 0.0 )
 
@@ -197,12 +197,13 @@ def ring_cyclide():
 
 
     # raytrace image/animation
+    create_pov( pin, ['A', 'C', 'D'] )
+    create_pov( pin, ['A', 'C', 'D'] + ['FA', 'FC', 'FD'] )
+
     create_pov( pin, ['WA', 'WB', 'WC', 'WD'] )
     create_pov( pin, ['WA', 'WB', 'WC', 'WD'] + ['FA', 'FC', 'FD'] )
 
     create_pov( pin, ['WA', 'WB', 'WD'] )
     create_pov( pin, ['WA', 'WB', 'WD'] + ['FA', 'FC', 'FD'] )
 
-    create_pov( pin, ['A', 'C', 'D'] )
-    create_pov( pin, ['A', 'C', 'D'] + ['FA', 'FC', 'FD'] )
 

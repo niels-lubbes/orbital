@@ -194,34 +194,34 @@ def perseus_cyclide():
     pin.pmz_dct['FD'] = ( pmz_DB_lst, 0 )
     pin.pmz_dct['FE'] = ( pmz_EB_lst, 0 )
 
-    v0_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 10 )]  # 10
-    v1_lst_A = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 15 )]  # 15
-    v1_lst_B = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 36 )]  # 15
-    v1_lst_C = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 36 )]  # 15
-    v1_lst_D = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 36 )]  # 15
-    v1_lst_E = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 15 )]  # 15
+    v0_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 10 )]
+    v1_lst_A = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 5 )]
+    v1_lst_B = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 15 )]
+    v1_lst_C = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 36 )]
+    v1_lst_D = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 36 )]
+    v1_lst_E = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 5 )]
 
-    v1_lst_F = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 2 )]
+    v1_lst_F = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 1 )]
 
     prec = 50
 
-    pin.curve_dct['A'] = {'step0':v0_lst, 'step1':v1_lst_A, 'prec':prec, 'width':0.05}
-    pin.curve_dct['B'] = {'step0':v0_lst, 'step1':v1_lst_B, 'prec':prec, 'width':0.05}
+    pin.curve_dct['A'] = {'step0':v0_lst, 'step1':v1_lst_A, 'prec':prec, 'width':0.04}
+    pin.curve_dct['B'] = {'step0':v0_lst, 'step1':v1_lst_B, 'prec':prec, 'width':0.04}
     pin.curve_dct['C'] = {'step0':v0_lst, 'step1':v1_lst_C, 'prec':prec, 'width':0.05}
     pin.curve_dct['D'] = {'step0':v0_lst, 'step1':v1_lst_D, 'prec':prec, 'width':0.05}
-    pin.curve_dct['E'] = {'step0':v0_lst, 'step1':v1_lst_E, 'prec':prec, 'width':0.05}
+    pin.curve_dct['E'] = {'step0':v0_lst, 'step1':v1_lst_E, 'prec':prec, 'width':0.04}
 
-    pin.curve_dct['FA'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':prec, 'width':0.02}
-    pin.curve_dct['FB'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':prec, 'width':0.02}
-    pin.curve_dct['FC'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':prec, 'width':0.02}
-    pin.curve_dct['FD'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':prec, 'width':0.02}
-    pin.curve_dct['FE'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':prec, 'width':0.02}
+    pin.curve_dct['FA'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':prec, 'width':0.01}
+    pin.curve_dct['FB'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':prec, 'width':0.01}
+    pin.curve_dct['FC'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':prec, 'width':0.01}
+    pin.curve_dct['FD'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':prec, 'width':0.01}
+    pin.curve_dct['FE'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':prec, 'width':0.01}
 
-    col_A = ( 0.4, 0.0, 0.0, 0.0 )
-    col_B = ( 0.0, 0.0, 0.2, 0.0 )
-    col_C = ( 0.0, 0.2, 0.0, 0.0 )
-    col_D = ( 0.2, 0.0, 0.1, 0.0 )
-    col_E = ( 0.1, 0.3, 0.0, 0.0 )
+    col_A = ( 0.6, 0.0, 0.0, 0.0 )
+    col_B = ( 0.0, 0.0, 0.4, 0.0 )
+    col_C = ( 0.0, 0.4, 0.0, 0.0 )
+    col_D = ( 0.4, 0.0, 0.1, 0.0 )
+    col_E = ( 0.2, 0.6, 0.0, 0.0 )
     colFF = ( 0.1, 0.1, 0.1, 0.0 )
 
     pin.text_dct['A'] = [True, col_A, 'phong 0.2 phong_size 5' ]
