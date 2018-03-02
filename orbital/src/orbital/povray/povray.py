@@ -213,7 +213,7 @@ def create_pov_preamble_camera( pin ):
     if not pin.shadow:
         q = 'shadowless'
 
-    if light_lst == []:
+    if pin.light_lst == []:
         s += 'light_source { < 0,  0, -1>*LIGHT_RADIUS  color red 1 green 1 blue 1 ' + q + ' }\n'
         s += 'light_source { < 0, -1,  0>*LIGHT_RADIUS  color red 1 green 1 blue 1 ' + q + ' }\n'
         s += 'light_source { <-1,  0,  0>*LIGHT_RADIUS  color red 1 green 1 blue 1 ' + q + ' }\n'
@@ -221,7 +221,7 @@ def create_pov_preamble_camera( pin ):
         s += 'light_source { < 0,  1,  0>*LIGHT_RADIUS  color red 1 green 1 blue 1 ' + q + ' }\n'
         s += 'light_source { < 1,  0,  0>*LIGHT_RADIUS  color red 1 green 1 blue 1 ' + q + ' }\n'
     else:
-        for light in light_lst:
+        for light in pin.light_lst:
             r = str( light ).replace( '(', '<' ).replace( ')', '>' )
             s += 'light_source { ' + r + ' color red 1 green 1 blue 1 ' + q + ' }\n'
 
