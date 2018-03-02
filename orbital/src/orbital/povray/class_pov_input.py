@@ -55,10 +55,18 @@ class PovInput:
         Each value is a triple of integers denoting the location and 
         direction of camera. Finally, the camera is rotated along 
         x- ,y- and z- axes with specified angles. 
-            
+
+    shadow : bool
+        If False, then the Povray light type is shadowless. 
+
+    light_lst : list<(double,double,double)>
+        A list of 3-tuples (x,y,z) corresponding to coordinates
+        for lights
+                    
     light_radius : int
-        Lights are positioned on a sphere of given radius.
-    
+        Preconfigured lights are positioned on a sphere of given radius.
+        This is option is only used if light_lst is the empty list.
+       
     width : int 
         Width of image.
     
@@ -151,7 +159,10 @@ class PovInput:
         self.cam_dct['lookat'] = ( 0, 0, 0 )
         self.cam_dct['rotate'] = ( 0, 0, 0 )
 
+        self.shadow = True
+        self.light_lst = []
         self.light_radius = 10
+
         self.width = 100
         self.height = 75
         self.quality = 3  # quality is between 0-11
@@ -170,7 +181,6 @@ class PovInput:
         # red   = ( 0.5, 0.0, 0.0, 0.0 )
         # green = ( 0.2, 0.3, 0.2, 0.0 )
         # beige = ( 0.8, 0.6, 0.2, 0.0 )
-
 
         self.curve_lst_dct = {}  # used by "povray_aux.get_curve_lst()"
 

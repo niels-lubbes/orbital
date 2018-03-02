@@ -172,8 +172,16 @@ def create_pov_preamble_declares( pin ):
     return s
 
 
-def create_pov_preamble_camera():
+def create_pov_preamble_camera( pin ):
     '''
+    Parameters
+    ----------
+    pin : PovInput 
+        PovInput object where the following 
+        attributes are set:                                
+            "pin.shadow"    
+            "pin.light_lst"
+    
     Returns
     -------
     string
@@ -201,12 +209,22 @@ def create_pov_preamble_camera():
     s += 'background { color rgb<1,1,1> }\n'
     s += '\n'
 
-    s += 'light_source { < 0,  0, -1>*LIGHT_RADIUS  color red 1 green 1 blue 1 }\n'
-    s += 'light_source { < 0, -1,  0>*LIGHT_RADIUS  color red 1 green 1 blue 1 }\n'
-    s += 'light_source { <-1,  0,  0>*LIGHT_RADIUS  color red 1 green 1 blue 1 }\n'
-    s += 'light_source { < 0,  0,  1>*LIGHT_RADIUS  color red 1 green 1 blue 1 }\n'
-    s += 'light_source { < 0,  1,  0>*LIGHT_RADIUS  color red 1 green 1 blue 1 }\n'
-    s += 'light_source { < 1,  0,  0>*LIGHT_RADIUS  color red 1 green 1 blue 1 }\n'
+    q = ''
+    if not pin.shadow:
+        q = 'shadowless'
+
+    if light_lst == []:
+        s += 'light_source { < 0,  0, -1>*LIGHT_RADIUS  color red 1 green 1 blue 1 ' + q + ' }\n'
+        s += 'light_source { < 0, -1,  0>*LIGHT_RADIUS  color red 1 green 1 blue 1 ' + q + ' }\n'
+        s += 'light_source { <-1,  0,  0>*LIGHT_RADIUS  color red 1 green 1 blue 1 ' + q + ' }\n'
+        s += 'light_source { < 0,  0,  1>*LIGHT_RADIUS  color red 1 green 1 blue 1 ' + q + ' }\n'
+        s += 'light_source { < 0,  1,  0>*LIGHT_RADIUS  color red 1 green 1 blue 1 ' + q + ' }\n'
+        s += 'light_source { < 1,  0,  0>*LIGHT_RADIUS  color red 1 green 1 blue 1 ' + q + ' }\n'
+    else:
+        for light in light_lst:
+            r = str( light ).replace( '(', '<' ).replace( ')', '>' )
+            s += 'light_source { ' + r + ' color red 1 green 1 blue 1 ' + q + ' }\n'
+
     s += '\n'
 
     return s
@@ -228,7 +246,7 @@ def create_pov_preamble( pin ):
     s = ''
     s += create_pov_preamble_includes()
     s += create_pov_preamble_declares( pin )
-    s += create_pov_preamble_camera()
+    s += create_pov_preamble_camera( pin )
 
     return s
 
