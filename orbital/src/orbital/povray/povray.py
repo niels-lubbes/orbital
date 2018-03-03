@@ -117,8 +117,7 @@ def create_pov_preamble_declares( pin ):
     pin : PovInput 
         PovInput object where the following 
         attributes are set:                                
-            "pin.cam_dct"
-            "pin.light_radius"
+            "pin.cam_dct"            
             "pin.axes_dct"
             "pin.curve_dct"
             "pin.text_dct"
@@ -141,8 +140,6 @@ def create_pov_preamble_declares( pin ):
     s += '#declare CAM_ROT_X    = ' + str( pin.cam_dct['rotate'][0] ) + ';\n'
     s += '#declare CAM_ROT_Y    = ' + str( pin.cam_dct['rotate'][1] ) + ';\n'
     s += '#declare CAM_ROT_Z    = ' + str( pin.cam_dct['rotate'][2] ) + ';\n'
-    s += '\n'
-    s += '#declare LIGHT_RADIUS = ' + str( pin.light_radius ) + ';\n'
     s += '\n'
     s += '#declare SHOW_AXES    = ' + str( pin.axes_dct['show'] ).lower() + ';\n'
     s += '#declare AXES_LEN     = ' + str( pin.axes_dct['len'] ) + ';\n'
@@ -209,21 +206,13 @@ def create_pov_preamble_camera( pin ):
     s += 'background { color rgb<1,1,1> }\n'
     s += '\n'
 
-    q = ''
+    sdow = ''
     if not pin.shadow:
-        q = 'shadowless'
+        sdow = 'shadowless'
 
-    if pin.light_lst == []:
-        s += 'light_source { < 0,  0, -1>*LIGHT_RADIUS  color red 1 green 1 blue 1 ' + q + ' }\n'
-        s += 'light_source { < 0, -1,  0>*LIGHT_RADIUS  color red 1 green 1 blue 1 ' + q + ' }\n'
-        s += 'light_source { <-1,  0,  0>*LIGHT_RADIUS  color red 1 green 1 blue 1 ' + q + ' }\n'
-        s += 'light_source { < 0,  0,  1>*LIGHT_RADIUS  color red 1 green 1 blue 1 ' + q + ' }\n'
-        s += 'light_source { < 0,  1,  0>*LIGHT_RADIUS  color red 1 green 1 blue 1 ' + q + ' }\n'
-        s += 'light_source { < 1,  0,  0>*LIGHT_RADIUS  color red 1 green 1 blue 1 ' + q + ' }\n'
-    else:
-        for light in pin.light_lst:
-            r = str( light ).replace( '(', '<' ).replace( ')', '>' )
-            s += 'light_source { ' + r + ' color red 1 green 1 blue 1 ' + q + ' }\n'
+    for light in pin.light_lst:
+        coord = str( light ).replace( '(', '<' ).replace( ')', '>' )
+        s += 'light_source { ' + coord + ' color red 1 green 1 blue 1 ' + sdow + ' }\n'
 
     s += '\n'
 

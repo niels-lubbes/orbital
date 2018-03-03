@@ -56,17 +56,13 @@ class PovInput:
         direction of camera. Finally, the camera is rotated along 
         x- ,y- and z- axes with specified angles. 
 
-    shadow : bool
-        If False, then the Povray light type is shadowless. 
-
     light_lst : list<(double,double,double)>
         A list of 3-tuples (x,y,z) corresponding to coordinates
         for lights
-                    
-    light_radius : int
-        Preconfigured lights are positioned on a sphere of given radius.
-        This is option is only used if light_lst is the empty list.
-       
+
+    shadow : bool
+        If False, then the Povray light type is shadowless. 
+                           
     width : int 
         Width of image.
     
@@ -159,9 +155,9 @@ class PovInput:
         self.cam_dct['lookat'] = ( 0, 0, 0 )
         self.cam_dct['rotate'] = ( 0, 0, 0 )
 
+        self.light_lst = [( 0, 0, -5 ), ( 0, -5, 0 ), ( -5, 0, 0 ),
+                          ( 0, 0, 5 ), ( 0, 5, 0 ), ( 5, 0, 0 ) ]
         self.shadow = True
-        self.light_lst = []
-        self.light_radius = 10
 
         self.width = 100
         self.height = 75
