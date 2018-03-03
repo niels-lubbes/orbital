@@ -122,7 +122,9 @@ def ring_cyclide():
     pin.cam_dct['location'] = ( 0, -7, 0 )
     pin.cam_dct['lookat'] = ( 0, 0, 0 )
     pin.cam_dct['rotate'] = ( 45, 0, 0 )
-    pin.light_radius = 5
+    pin.shadow = True
+    pin.light_lst = [( 0, 0, -5 ), ( 0, -5, 0 ), ( -5, 0, 0 ),
+                     ( 0, 0, 5 ), ( 0, 5, 0 ), ( 5, 0, 0 ) ]
     pin.axes_dct['show'] = False
     pin.axes_dct['len'] = 1.2
     pin.width = 800

@@ -70,10 +70,12 @@ def veronese():
     pin.path = './' + get_time_str() + '_veronese/'
     pin.fname = 'orb'
     pin.scale = 1
-    pin.cam_dct['location'] = ( 0, -1.5, 0 )
+    pin.cam_dct['location'] = ( 0, -1.2, 0 )
     pin.cam_dct['lookat'] = ( 0, 0, 0 )
     pin.cam_dct['rotate'] = ( 35, 0, 45 )
-    pin.light_radius = 2
+    pin.shadow = True
+    pin.light_lst = [( 0, 0, -5 ), ( 0, -5, 0 ), ( -5, 0, 0 ),
+                     ( 0, 0, 5 ), ( 0, 5, 0 ), ( 5, 0, 0 ) ]
     pin.axes_dct['show'] = False
     pin.axes_dct['len'] = 0.5
     pin.height = 400

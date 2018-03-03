@@ -154,7 +154,9 @@ def CH1_cyclide():
     pin.cam_dct['lookat'] = ( 0, 0, 0 )
     pin.cam_dct['rotate'] = ( 20, 0, 0 )
     pin.shadow = True
-    pin.light_lst = [( 0, 0, 0 ), ( 10, 0, 0 ), ( 0, 10, 0 ), ( 0, 0, 10 ),
+    pin.light_lst = [( 1, 0, 0 ), ( 0, 1, 0 ), ( 0, 0, 1 ),
+                     ( -1, 0, 0 ), ( 0, -1, 0 ), ( 0, 0, -1 ),
+                     ( 10, 0, 0 ), ( 0, 10, 0 ), ( 0, 0, 10 ),
                      ( -10, 0, 0 ), ( 0, -10, 0 ), ( 0, 0, -10 )]
     pin.axes_dct['show'] = False
     pin.axes_dct['len'] = 1.2

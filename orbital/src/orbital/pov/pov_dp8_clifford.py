@@ -53,7 +53,9 @@ def dp8_clifford():
     pin.cam_dct['location'] = ( 0, 0, 5 )
     pin.cam_dct['lookat'] = ( 0, 0, 0 )
     pin.cam_dct['rotate'] = ( 20, 0, 45 )
-    pin.light_radius = 5
+    pin.shadow = True
+    pin.light_lst = [( 0, 0, -10 ), ( 0, -10, 0 ), ( -10, 0, 0 ),
+                     ( 0, 0, 10 ), ( 0, 10, 0 ), ( 10, 0, 0 ) ]
     pin.axes_dct['show'] = False
     pin.axes_dct['len'] = 1.2
     pin.height = 400

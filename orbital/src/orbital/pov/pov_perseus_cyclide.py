@@ -172,7 +172,9 @@ def perseus_cyclide():
     pin.cam_dct['location'] = ( 0, 7, 0 )
     pin.cam_dct['lookat'] = ( 0, 0, 0 )
     pin.cam_dct['rotate'] = ( 45, 0, 0 )
-    pin.light_radius = 10
+    pin.shadow = True
+    pin.light_lst = [( 0, 0, -10 ), ( 0, -10, 0 ), ( -10, 0, 0 ),
+                     ( 0, 0, 10 ), ( 0, 10, 0 ), ( 10, 0, 0 ) ]
     pin.axes_dct['show'] = False
     pin.axes_dct['len'] = 1.2
     pin.height = 400
@@ -218,7 +220,7 @@ def perseus_cyclide():
     pin.curve_dct['FE'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':prec, 'width':0.01}
 
     col_A = ( 0.6, 0.0, 0.0, 0.0 )
-    col_B = ( 0.0, 0.0, 0.4, 0.0 )
+    col_B = ( 0.8, 0.6, 0.2, 0.0 )
     col_C = ( 0.0, 0.4, 0.0, 0.0 )
     col_D = ( 0.4, 0.0, 0.1, 0.0 )
     col_E = ( 0.2, 0.6, 0.0, 0.0 )

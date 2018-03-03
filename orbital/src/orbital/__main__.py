@@ -82,16 +82,16 @@ def usecase_povray():
     '''
     Create povray images. This may take a long time.
     '''
-    # blum_cyclide()
-    # ring_cyclide()
-    # dp6_smooth()
-    # quadric_smooth()
-    # perseus_cyclide()
+    blum_cyclide()
+    ring_cyclide()
+    dp6_smooth()
+    quadric_smooth()
+    perseus_cyclide()
     CH1_cyclide()
     spindle_cyclide()
     horn_cyclide()
-    # veronese()
-    # dp8_clifford()
+    veronese()
+    dp8_clifford()
 
 
 if __name__ == '__main__':
