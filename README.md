@@ -66,24 +66,21 @@ We render the families using Povray.
 
 ```python
 # import 
-from orbital.sage_interface import sage_QQ
-from orbital.sage_interface import sage_var
-from orbital.sage_interface import sage_vector
-from orbital.sage_interface import sage_pi
+from linear_series.class_linear_series import LinearSeries
+from linear_series.class_base_points import BasePointTree
+from linear_series.class_poly_ring import PolyRing
 
 from orbital.surface_in_quadric import get_surf
 from orbital.surface_in_quadric import approx_QQ
 from orbital.surface_in_quadric import get_prj_mat
 from orbital.surface_in_quadric import get_proj
-from orbital.surface_in_quadric import get_S1xS1_pmz
-
 from orbital.povray.class_pov_input import PovInput
 from orbital.povray.povray import create_pov
 from orbital.povray.povray_aux import get_time_str
-
-from linear_series.class_linear_series import LinearSeries
-from linear_series.class_base_points import BasePointTree
-from linear_series.class_poly_ring import PolyRing
+from orbital.sage_interface import sage_QQ
+from orbital.sage_interface import sage_var
+from orbital.sage_interface import sage_vector
+from orbital.sage_interface import sage_pi
 
 # Compute linear series on P^1xP^1 of bi-degree (2,2) and (1,1)
 # passing through two complex conjugate base points. 
@@ -124,12 +121,12 @@ f_xyz, pmz_AB_lst = get_proj( dct['imp_lst'], dct['pmz_lst'], P )
 
 # We compute a reparametrization pmz_CB_lst of the projected surface.
 # If we fix the 1st and 2nd parameter we obtain a family of conics    
-# called C and B respectively.
+# called C and B respectively. 
+# See also orbital.surface_in_quadric.get_S1xS1_pmz().
 #
 ring = PolyRing( 'x,y,v,w,c0,s0,c1,s1' )  # construct polynomial ring with new generators
 x, y, v, w, c0, s0, c1, s1 = ring.gens()
-X = 1 - s0; Y = c0;  # see get_S1xS1_pmz()
-V = 1 - s1; W = c1;
+X = 1 - s0; Y = c0; V = 1 - s1; W = c1;
 CB_dct = { x:X, y:Y, v:X * W + Y * V, w: X * V - Y * W }
 pmz_CB_lst = [ p.subs( CB_dct ) for p in ring.coerce( ls_AB.pol_lst )]
 pmz_CB_lst = list( P * dct['Q'] * sage_vector( pmz_CB_lst ) )
@@ -179,6 +176,6 @@ Output:
 
 ![image](https://github.com/niels-lubbes/orbital/tree/master/orbital/img/deg6-dp6.png "Hexagonal web on sextic del Pezzo surface")    
     
-
+<img src="https://github.com/niels-lubbes/orbital/tree/master/orbital/img/deg6-dp6.png" alt="Hexagonal web on sextic del Pezzo surface" width="240" height="180" border="10" />
       
 
