@@ -165,6 +165,7 @@ pin.text_dct['B'] = [True, col_B, 'phong 0.2 phong_size 5' ]
 pin.text_dct['C'] = [True, col_C, 'phong 0.2 phong_size 5' ]
 
 # raytrace all families of conics on the projected surface using Povray.
+# This takes a long time.
 #
 create_pov( pin, ['A', 'B', 'C'] )
 
@@ -174,8 +175,6 @@ Output:
     [(-2)*x0^2 + 2*x1*x2 + 2*x3*x4 - x5*x6 - x7*x8]
     [[4, 5]]
 
-![image](https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/deg6-dp6.png?token=AX_Io9IlHHRjrwsxr_I03zGKcN8FF31Eks5azdscwA%3D%3D "Hexagonal web on sextic del Pezzo surface")    
+![output image](https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/deg6-dp6.png?token=AX_Io9IlHHRjrwsxr_I03zGKcN8FF31Eks5azdscwA%3D%3D "Hexagonal web on sextic del Pezzo surface")    
     
-<img src="https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/deg6-dp6.png?token=AX_Io9IlHHRjrwsxr_I03zGKcN8FF31Eks5azdscwA%3D%3D" alt="Hexagonal web on sextic del Pezzo surface" width="240" height="180" border="10" />
-      
 
