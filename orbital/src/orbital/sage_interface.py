@@ -42,6 +42,16 @@ from sage.all import *
 
 
 #################################################
+# sage.interfaces                               #
+#################################################
+
+# from sage.interfaces import maple
+sage_maple = maple
+
+# from sage.interfaces import magma
+sage_magma = magma
+
+#################################################
 # sage.structure                                #
 #################################################
 
@@ -227,9 +237,13 @@ def sage_Combinations( *args, **kwargs ):
 def sage_Partitions( *args, **kwargs ):
     return Partitions( *args, **kwargs )
 
-# from sage.combinat.permutations import Partitions
+# from sage.combinat.permutation import Permutations
 def sage_Permutations( *args, **kwargs ):
     return Permutations( *args, **kwargs )
+
+# from sage.combinat.permutation import Permutation
+def sage_Permutation( *args, **kwargs ):
+    return Permutation( *args, **kwargs )
 
 # from sage.subset import Subsets
 def sage_Subsets( *args, **kwargs ):
