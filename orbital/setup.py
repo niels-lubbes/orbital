@@ -1,6 +1,6 @@
 '''
 Use of this source code is governed by a MIT-style license that can be found in the LICENSE file.
-Created on Jan 27, 2017
+Created on Apr 4, 2018
 @author: Niels Lubbes
 
 https://python-packaging.readthedocs.io/en/latest/minimal.html
@@ -13,7 +13,7 @@ from setuptools import setup
 
 setup( name = 'orbital',
        version = '0',
-       description = 'Algorithms for constructing and rendering curves on surfaces',
+       description = 'Algorithms for constructing and rendering curves on surfaces.',
        classifiers = [
            'Development Status :: 3 - Alpha',
            'License :: OSI Approved :: MIT License',
@@ -21,8 +21,8 @@ setup( name = 'orbital',
            'Programming Language :: Python :: 3',
            'Topic :: Scientific/Engineering :: Mathematics',
            ],
-      keywords = 'del Pezzo surfaces conics',
-      url = 'http://github.com/niels-lubbes/ns_lattice',
+      keywords = 'curves surfaces parametrization Povray',
+      url = 'http://github.com/niels-lubbes/orbital',
       author = 'Niels Lubbes',
       license = 'MIT',
       package_dir = {'': 'src'},
