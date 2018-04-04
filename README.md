@@ -62,10 +62,11 @@ For running the examples below, either copy paste the code into the Sage interfa
 Creates povray image of a linear projection to 3-space 
 of a smooth sextic del Pezzo surface in the projective 5-sphere. 
 This surface contains 3 families of conics that form a hexagonal web. 
-We render the families using Povray.
+We render the families of conics by using Povray.
 
 ```python
-# import 
+# We explicitly import the required libraries.
+#
 from linear_series.class_linear_series import LinearSeries
 from linear_series.class_base_points import BasePointTree
 from linear_series.class_poly_ring import PolyRing
@@ -74,9 +75,11 @@ from orbital.surface_in_quadric import get_surf
 from orbital.surface_in_quadric import approx_QQ
 from orbital.surface_in_quadric import get_prj_mat
 from orbital.surface_in_quadric import get_proj
+
 from orbital.povray.class_pov_input import PovInput
 from orbital.povray.povray import create_pov
 from orbital.povray.povray_aux import get_time_str
+
 from orbital.sage_interface import sage_QQ
 from orbital.sage_interface import sage_var
 from orbital.sage_interface import sage_vector
