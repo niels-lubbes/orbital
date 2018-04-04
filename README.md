@@ -177,9 +177,7 @@ Output:
     [(-2)*x0^2 + 2*x1*x2 + 2*x3*x4 - x5*x6 - x7*x8]
     [[4, 5]]
 
-The image is 
-
-![example image](https://github.com/niels-lubbes/orbital/img/deg6-dp6.png "An exemplary image")    
+![image](https://github.com/niels-lubbes/orbital/tree/master/orbital/img/deg6-dp6.png "Sextic del Pezzo surface")    
     
 
       
