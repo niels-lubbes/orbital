@@ -174,8 +174,8 @@ Output:
     [(-2)*x0^2 + 2*x1*x2 + 2*x3*x4 - x5*x6 - x7*x8]
     [[4, 5]]
 
-![image](https://github.com/niels-lubbes/orbital/tree/master/orbital/img/deg6-dp6.png "Hexagonal web on sextic del Pezzo surface")    
+![image](https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/deg6-dp6.png?token=AX_Io9IlHHRjrwsxr_I03zGKcN8FF31Eks5azdscwA%3D%3D "Hexagonal web on sextic del Pezzo surface")    
     
-<img src="https://github.com/niels-lubbes/orbital/tree/master/orbital/img/deg6-dp6.png" alt="Hexagonal web on sextic del Pezzo surface" width="240" height="180" border="10" />
+<img src="https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/deg6-dp6.png?token=AX_Io9IlHHRjrwsxr_I03zGKcN8FF31Eks5azdscwA%3D%3D" alt="Hexagonal web on sextic del Pezzo surface" width="240" height="180" border="10" />
       
 
