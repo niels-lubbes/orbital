@@ -112,8 +112,8 @@ if __name__ == '__main__':
     #                                       #
     #########################################
 
-    # usecase__two_sphere_cyclide()
-    usecase_povray()
+    usecase__two_sphere_cyclide()
+    # usecase_povray() # takes a long time
 
     #########################################
     #                                       #
