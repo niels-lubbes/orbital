@@ -22,6 +22,7 @@ from orbital.sage_interface import sage_PolynomialRing
 from orbital.sage_interface import sage_QQ
 from orbital.sage_interface import sage_NumberField
 from orbital.sage_interface import sage_FractionField
+from orbital.sage_interface import sage_matrix
 
 from orbital.pov.pov_blum_cyclide import blum_cyclide
 from orbital.pov.pov_ring_cyclide import ring_cyclide
@@ -33,6 +34,13 @@ from orbital.pov.pov_spindle_cyclide import spindle_cyclide
 from orbital.pov.pov_horn_cyclide import horn_cyclide
 from orbital.pov.pov_veronese import veronese
 from orbital.pov.pov_dp8_clifford import dp8_clifford
+
+from linear_series.class_linear_series import LinearSeries
+from linear_series.class_base_points import BasePointTree
+from linear_series.class_poly_ring import PolyRing
+from linear_series.get_linear_series import get_mon_lst
+
+from orbital.surface_in_quadric import get_surf
 
 
 def usecase__two_sphere_cyclide():
@@ -94,13 +102,71 @@ def usecase_povray():
     dp8_clifford()
 
 
+def usecase_celestial_types():
+    '''
+    Let surface X in P^m be the blowups of P^1xP^1 in either 0 or 2 complex conjugate  
+    points so that m=8 and m=6 respectively. 
+    Here P^1xP^1 denotes the fiber product of the projective line with itself. 
+    We verify for n in [3,4,5,6,7] whether X can be linearly projected into the 
+    projective n-sphere S^n.  
+    '''
+
+    #
+    # P^1xP^1
+    #
+    # We construct a parametrization of the double Segre surface dP8 in
+    # projective 8-space. This surface contains 2 conics through each point
+#     ring = PolyRing( 'x,y,v,w', True )
+#     ls_dP8 = LinearSeries( get_mon_lst( [2, 2], ring.gens() ), ring )
+#     OrbTools.p( 'ls_dP8 =', ls_dP8 )
+#     get_surf( ls_dP8, ( 7 + 1, 1 ), [-8, -8, -10, -6, -7, 6, 5, 6, 0, -8, -2, -7, -7, 7, -1, 0, -9, 7, 1, -9]  )
+#     get_surf( ls_dP8, ( 6 + 1, 1 ) )
+#     get_surf( ls_dP8, ( 5 + 1, 1 ) )
+#     get_surf( ls_dP8, ( 4 + 1, 1 ) )
+#     get_surf( ls_dP8, ( 3 + 1, 1 ) )
+
+    #
+    # P^1xP^1 blown up in two general complex conjugate points
+    #
+    # We construct a parametrization of a sextic del Pezzo surface dP6
+    # in projective 6-space, that contains 3 conics through each point.
+    # We show that dP6 can be projected into S^5 and S^4.
+    #
+    a0 = PolyRing( 'x,y,v,w', True ).ext_num_field( 't^2 + 1' ).root_gens()[0]
+    bp_tree = BasePointTree( ['xv', 'xw', 'yv', 'yw'] )
+    bp_tree.add( 'xv', ( -a0, a0 ), 1 )
+    bp_tree.add( 'xv', ( a0, -a0 ), 1 )
+    ls_dP6 = LinearSeries.get( [2, 2], bp_tree )
+    get_surf( ls_dP6, ( 5 + 1, 1 ), [-9, -6, 1, 4, -1, -8, -5, -5, -4, 8, 1] )
+    prv_Q = sage_matrix( [( 0, 0, 0, 1, 0, 1, 1 ), ( 1, 1, 0, 1, 0, 0, 0 ), ( 0, 1, 1, 0, 1, 0, 1 ), ( 1, 1, 0, 0, 1, 0, 0 ), ( 1, 1, 1, 1, 1, 1, 0 ), ( 1, 0, 0, 1, 0, 1, 1 )] )
+    get_surf( ls_dP6, ( 4 + 1, 1 ), [-1, -9, -10, -7, -10, -8, 0], prv_Q )
+
+    #
+    # P^1xP^1 blown up in two complex conjugate points that lie in the same fiber
+    #
+    # We construct a parametrization of a sextic weak del Pezzo surface wdP6
+    # in projective 6-space, that contains 2 conics through each point.
+    # We show that wdP6 can be projected into S^5 and S^4.
+    #
+    a0 = PolyRing( 'x,y,v,w', True ).ext_num_field( 't^2 + 1' ).root_gens()[0]
+    bp_tree = BasePointTree( ['xv', 'xw', 'yv', 'yw'] )
+    bp_tree.add( 'xv', ( a0, 0 ), 1 )  # the complex conjugate base points lie in the same fiber
+    bp_tree.add( 'xv', ( -a0, 0 ), 1 )
+    ls_wdP6 = LinearSeries.get( [2, 2], bp_tree )
+    get_surf( ls_wdP6, ( 5 + 1, 1 ), [-6, 8, -7, -8, 0, -8, 2, -5, -8] )
+    prv_Q = sage_matrix( [( 1, 0, 0, 1, 1, 1, 0 ), ( 1, 0, 0, 1, 0, 1, 1 ), ( 0, 1, 1, 1, 0, 1, 0 ), ( 0, 0, 0, 0, 1, 0, 0 ), ( 0, 1, 0, 1, 1, 1, 0 ), ( 0, 0, 0, 1, 1, 1, 0 )] )
+    get_surf( ls_wdP6, ( 4 + 1, 1 ), [-2, -7, -6, -10, -2, -4, 4] , prv_Q )
+
+
 if __name__ == '__main__':
 
     #  Debug output settings
     #
     sage_set_verbose( -1 )
-    OrbTools.filter( '__main__.py' )  # only print if verbose output by module <file_name>
-    OrbTools.filter( None )  # print all verbose output
+    mod_lst = []
+    mod_lst += ['__main__.py']
+    OrbTools.filter( mod_lst )  # output only from specified modules
+    OrbTools.filter( None )  # print all verbose output, comment to disable.
     OrbTools.start_timer()
 
     if 'OUTPUT_PATH' not in os.environ:
@@ -112,8 +178,9 @@ if __name__ == '__main__':
     #                                       #
     #########################################
 
-    usecase__two_sphere_cyclide()
+    # usecase__two_sphere_cyclide()
     # usecase_povray() # takes a long time
+    usecase_celestial_types()
 
     #########################################
     #                                       #
