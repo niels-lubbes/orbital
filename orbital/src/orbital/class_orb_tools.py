@@ -33,25 +33,28 @@ class OrbTools():
     __start_time = None
     __end_time = None
 
-    # private static variables used by ".verbose()"
+    # private static variables used by ".p()"
+    # If "__filter_fname_lst" equals [] then output is surpressed.
+    # If "__filter_fname_lst" equals None the no output is surpressed
     #
-    __filter_fname = None
-    __prev_filter_fname = None
+    __filter_fname_lst = []
+    __prev_filter_fname_lst = None
 
 
     @staticmethod
-    def filter( filter_fname ):
+    def filter( filter_fname_lst ):
         '''
         It is adviced to access this method as statically as OrbTools.filter().  
         See OrbTools.p() for more details.
         
         Parameters
         ----------
-        filter_fname : str 
-            File name. If None, then no output is surpressed by method ".p()". 
+        filter_fname_lst : list<str> 
+            List of file names for Python modules.
+            If None, then no output is surpressed by method ".p()". 
         '''
-        OrbTools.__filter_fname = filter_fname
-        OrbTools.__prev_filter_fname = filter_fname
+        OrbTools.__filter_fname_lst = filter_fname_lst
+        OrbTools.__prev_filter_fname_lst = filter_fname_lst
 
 
     @staticmethod
@@ -59,7 +62,7 @@ class OrbTools():
         '''
         Output via ".p()" will not be surpressed.
         '''
-        OrbTools.__filter_fname = None
+        OrbTools.__filter_fname_lst = None
 
 
     @staticmethod
@@ -67,7 +70,7 @@ class OrbTools():
         '''
         Resets filter state to before previous ".filter_unset()" call.
         '''
-        OrbTools.__filter_fname = OrbTools.__prev_filter_fname
+        OrbTools.__filter_fname_lst = OrbTools.__prev_filter_fname_lst
 
 
     @staticmethod
@@ -99,9 +102,10 @@ class OrbTools():
         line = str( sk_lst_lst[1][2] )
         method_name = str( sk_lst_lst[1][3] )
 
-        # only output when op is called from "op.input_file_name"
-        if OrbTools.__filter_fname != None:
-            if not file_name.endswith( OrbTools.__filter_fname ):
+        # only output when .p() is called from module whose
+        # file name is in OrbTools.__filter_fname_lst
+        if OrbTools.__filter_fname_lst != None:
+            if not file_name in OrbTools.__filter_fname_lst:
                 return
 
         # construct output string

@@ -15,7 +15,7 @@ class TestClassOrbTools:
         orb.filter( None )
         assert orb.p( 'Hello world!' ) != None
 
-        orb.filter( 'another_class.py' )
+        orb.filter( ['another_class.py'] )
         assert orb.p( 'No output since called from another class.' ) == None
 
         orb.filter_unset()
@@ -24,7 +24,7 @@ class TestClassOrbTools:
         orb.filter_reset()
         assert orb.p( 'Filter is enabled again so do not output.' ) == None
 
-        orb.filter( 'test_class_orb_tools.py' )
+        orb.filter( ['test_class_orb_tools.py'] )
         assert orb.p( 'Only output if called from this class' ) != None
 
 
