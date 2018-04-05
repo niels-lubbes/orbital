@@ -62,9 +62,8 @@ class OrbInput:
         {
             'pmz' : If True, compute parametrization of S.
             'bpt' : If True, compute base points of parametrization of S.
-            'imp' : If True, compute implicit equation of S.
-            'dim' : If True, compute dimension of S.
-            'deg' : If True, compute degree of S.
+            'imp' : If True, compute implicit equation of S.            
+            'dde' : If True, compute degree, dimension and embedding dimension n of S in S^n.
             'prj' : If True, compute projection of S.
             'fct' : If True, compute components of projection of S (uses Maple).
             'gen' : If True, compute geometric genus of S (uses Maple).
@@ -84,8 +83,7 @@ class OrbInput:
         self.do['pmz'] = True  # compute parametrization of S
         self.do['bpt'] = True  # compute base points of parametrization of S
         self.do['imp'] = True  # compute implicit equation of S
-        self.do['dim'] = True  # compute dimension of S
-        self.do['deg'] = True  # compute degree of S
+        self.do['dde'] = True  # compute degree, dimension and embedding dimension n of S in S^n.
         self.do['prj'] = True  # compute projection of S
         self.do['fct'] = True  # compute components of projection of S
         self.do['gen'] = True  # compute geometric genus of S
@@ -154,6 +152,9 @@ class OrbInput:
 
     def random( self, coef_bnd = 3, random_pmat = True ):
         '''
+        Sets (restricted) random values for "self.omat", 
+        "self.vmat" and "self.pmat". 
+                
         Parameters
         ----------
         coef_bnd : int    
@@ -164,20 +165,18 @@ class OrbInput:
         Returns
         -------
         self
-            Sets (restricted) random values for "self.omat", "self.vmat" and "self.pmat".
-            The rational coefficients of the matrices are in the interval:
-                [-coef_bnd, +coef_bnd].              
-            If "random_pmat== True" then "self.pmat" is set random (P1),
-            and to a standard projection otherwise (P0).  
+                
+        Notes
+        -----
+        The translation coefficients of "self.vmat" 
+        are in the interval: [-coef_bnd, +coef_bnd].              
+        If "random_pmat== True", then "self.pmat" 
+        is set to a random value (P1), and 
+        otherwise "self.pmat" is set to a standard 
+        projection (P0).          
         '''
 
         ch_lst = ['r', 's', 'p', 'm', 'a']
-
-        #
-        # All the coefficients are bound by coef_size-n
-        # for some integer n.
-        #
-        coef_size = OrbRing.random_elt( range( 1, coef_bnd + 1 ) )
 
         #
         # random self.pmat
@@ -216,6 +215,9 @@ class OrbInput:
         #
         # random self.vmat
         #
+
+        #     All the coefficients are bound by coef_size-n for some integer n.
+        coef_size = OrbRing.random_elt( range( 1, coef_bnd + 1 ) )
 
         #     A -- self.vmat
         t_lst = [OrbRing.random_int( coef_size ) for i in range( 7 )]

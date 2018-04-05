@@ -6,6 +6,8 @@ Created on Aug 7, 2016
 
 from orbital.sage_interface import sage_factor
 
+from orbital.class_orb_ring import OrbRing
+
 
 class OrbOutput:
     '''
@@ -48,6 +50,10 @@ class OrbOutput:
     imp_lst : list<OrbRing.R>      
         A list of polynomials in QQ[x0,...,x8] representing 
         the ideal of S. 
+
+    emb : int
+        Integer representing the embedding dimension n of S in S^n
+        so that S is not contained in a hyperplane section of S^n.
     
     dim : int
         Integer representing the dimension of S.
@@ -102,6 +108,7 @@ class OrbOutput:
         self.prj_pmz_lst = None
         self.bp_tree = None
         self.imp_lst = None
+        self.emb = None
         self.dim = None
         self.deg = None
         self.prj_pol = None
@@ -130,7 +137,7 @@ class OrbOutput:
         # short string
         s = ''
         s += 's="['
-        s += '\'@(' + str( self.dim ) + ',' + str( self.deg ) + ')=(dim,deg)\''
+        s += '\'@(' + str( self.deg ) + ',' + str( self.emb ) + ')=(deg,emb)\''
         s += ', '
         s += str( self.input.info_dct )
         s += ']"'
@@ -152,6 +159,7 @@ class OrbOutput:
         s += 'pmz_lst       = ' + str( self.pmz_lst ) + '\n'
         s += 'prj_pmz_lst   = ' + str( self.prj_pmz_lst ) + '\n'
         s += 'imp_lst       = ' + str( self.imp_lst ) + '\n'
+        s += 'emb           = ' + str( self.emb ) + '\n'
         s += 'dim           = ' + str( self.dim ) + '\n'
         s += 'deg           = ' + str( self.deg ) + '\n'
         s += 'gen           = ' + str( self.gen ) + '\n'
