@@ -99,7 +99,7 @@ class TestSurfaceInQuadric( object ):
 
     def test__rand_surf_prj( self ):
 
-        a0 = PolyRing( 'x,y,v,w' ).ext_num_field( 't^2 + 1' ).root_gens()[0]  # i
+        a0 = PolyRing( 'x,y,v,w', True ).ext_num_field( 't^2 + 1' ).root_gens()[0]  # i
         bp_tree = BasePointTree( ['xv', 'xw', 'yv', 'yw'] )
         bp = bp_tree.add( 'xv', ( -a0, a0 ), 1 )  # e1
         bp = bp_tree.add( 'xv', ( a0, -a0 ), 1 )  # e2
@@ -121,7 +121,7 @@ class TestSurfaceInQuadric( object ):
 
     def test__get_surf( self ):
 
-        a0 = PolyRing( 'x,y,v,w' ).ext_num_field( 't^2 + 1' ).root_gens()[0]  # i
+        a0 = PolyRing( 'x,y,v,w', True ).ext_num_field( 't^2 + 1' ).root_gens()[0]  # i
         bp_tree = BasePointTree( ['xv', 'xw', 'yv', 'yw'] )
         bp = bp_tree.add( 'xv', ( -a0, a0 ), 1 )  # e1
         bp = bp_tree.add( 'xv', ( a0, -a0 ), 1 )  # e2
@@ -150,7 +150,7 @@ class TestSurfaceInQuadric( object ):
 
     def test__verify_get_surf( self ):
 
-        a0 = PolyRing( 'x,y,v,w' ).ext_num_field( 't^2 + 1' ).root_gens()[0]  # i
+        a0 = PolyRing( 'x,y,v,w', True ).ext_num_field( 't^2 + 1' ).root_gens()[0]  # i
         bp_tree = BasePointTree( ['xv', 'xw', 'yv', 'yw'] )
         bp = bp_tree.add( 'xv', ( -a0, a0 ), 1 )  # e1
         bp = bp_tree.add( 'xv', ( a0, -a0 ), 1 )  # e2
@@ -170,7 +170,7 @@ class TestSurfaceInQuadric( object ):
     def test__get_proj( self ):
 
         # construct dct
-        a0 = PolyRing( 'x,y,v,w' ).ext_num_field( 't^2 + 1' ).root_gens()[0]  # i
+        a0 = PolyRing( 'x,y,v,w', True ).ext_num_field( 't^2 + 1' ).root_gens()[0]  # i
         bp_tree = BasePointTree( ['xv', 'xw', 'yv', 'yw'] )
         bp = bp_tree.add( 'xv', ( -a0, a0 ), 1 )  # e1
         bp = bp_tree.add( 'xv', ( a0, -a0 ), 1 )  # e2
