@@ -13,6 +13,7 @@ from orbital.sage_interface import sage_MatrixSpace
 from orbital.sage_interface import sage_QQ
 from orbital.sage_interface import sage_GF
 from orbital.sage_interface import sage_Permutation
+from orbital.sage_interface import sage_Permutations
 
 from orbital.cossin.cos_sin import get_cs
 from orbital.class_orb_tools import OrbTools
@@ -128,7 +129,7 @@ def get_tmat( t_str = None ):
 
     # construct a translation matrix with undetermined
     # translations in t1,...,t7
-    a = ( QQ( 1 ) / 2 ) * sum( [ ti ** 2 for ti in t] )
+    a = ( sage_QQ( 1 ) / 2 ) * sum( [ ti ** 2 for ti in t] )
     mat = []
     mat += [[ 1 + a ] + list( t ) + [-a]]
     for i in range( 0, 7 ):
@@ -319,8 +320,8 @@ def get_emat( perm_str ):
     Returns
     -------
     sage_matrix
-        A 9*9 permutation matrix over QQ such that the first row an column are: 
-            (1,0,0,0,0,0,0,0,0).
+        A 9*9 permutation matrix over QQ such that 
+        the first row and column are: (1,0,0,0,0,0,0,0,0).
         If "perm_str=='E'", then a random permutation
         matrix is computed (the first coordinate is not permuted).
         Otherwise the returned matrix corresponds to the permutation:
