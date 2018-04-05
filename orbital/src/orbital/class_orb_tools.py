@@ -98,7 +98,7 @@ class OrbTools():
         '''
         # collect relevant info from stack trace
         sk_lst_lst = inspect.stack()
-        file_name = str( sk_lst_lst[1][1] )
+        file_name = os.path.basename( str( sk_lst_lst[1][1] ) )  # exclude path from file name
         line = str( sk_lst_lst[1][2] )
         method_name = str( sk_lst_lst[1][3] )
 

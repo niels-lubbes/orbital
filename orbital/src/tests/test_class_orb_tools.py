@@ -10,22 +10,20 @@ class TestClassOrbTools:
 
     def test__p( self ):
 
-        orb = OrbTools()
+        OrbTools.filter( None )
+        assert OrbTools.p( 'Hello world!' ) != None
 
-        orb.filter( None )
-        assert orb.p( 'Hello world!' ) != None
+        OrbTools.filter( ['another_class.py'] )
+        assert OrbTools.p( 'No output since called from another class.' ) == None
 
-        orb.filter( ['another_class.py'] )
-        assert orb.p( 'No output since called from another class.' ) == None
+        OrbTools.filter_unset()
+        assert OrbTools.p( 'Filter is disabled so output this string.' ) != None
 
-        orb.filter_unset()
-        assert orb.p( 'Filter is disabled so output this string.' ) != None
+        OrbTools.filter_reset()
+        assert OrbTools.p( 'Filter is enabled again so do not output.' ) == None
 
-        orb.filter_reset()
-        assert orb.p( 'Filter is enabled again so do not output.' ) == None
-
-        orb.filter( ['test_class_orb_tools.py'] )
-        assert orb.p( 'Only output if called from this class' ) != None
+        OrbTools.filter( ['test_class_orb_tools.py'] )
+        assert OrbTools.p( 'Only output if called from this class' ) != None
 
 
     def test__tool_dct( self ):
