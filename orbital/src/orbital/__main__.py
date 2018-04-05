@@ -27,6 +27,7 @@ from orbital.sage_interface import sage_matrix
 from orbital.pov.pov_blum_cyclide import blum_cyclide
 from orbital.pov.pov_ring_cyclide import ring_cyclide
 from orbital.pov.pov_dp6_smooth import dp6_smooth
+from orbital.pov.pov_dp6_sing import dp6_sing
 from orbital.pov.pov_quadric_smooth import quadric_smooth
 from orbital.pov.pov_perseus_cyclide import perseus_cyclide
 from orbital.pov.pov_CH1_cyclide import CH1_cyclide
@@ -93,6 +94,7 @@ def usecase_povray():
     blum_cyclide()
     ring_cyclide()
     dp6_smooth()
+    dp6_sing()
     quadric_smooth()
     perseus_cyclide()
     CH1_cyclide()
@@ -160,7 +162,7 @@ def usecase_celestial_types():
 
 if __name__ == '__main__':
 
-    #  Debug output settings
+    # Debug output settings
     #
     sage_set_verbose( -1 )
     mod_lst = []
@@ -169,8 +171,12 @@ if __name__ == '__main__':
     OrbTools.filter( None )  # print all verbose output, comment to disable.
     OrbTools.start_timer()
 
+    # set environment variables for output, Maple and Magma
+    # Maple and Magma are optionally used in orbital.prod.orb_product.
     if 'OUTPUT_PATH' not in os.environ:
         os.environ['OUTPUT_PATH'] = '/home/niels/Desktop/n/src/output/orb/povray/'
+    os.environ['PATH'] += os.pathsep + '/home/niels/Desktop/n/app/maple/link/bin'
+    os.environ['PATH'] += os.pathsep + '/home/niels/Desktop/n/app/magma/link'
 
     #########################################
     #                                       #
@@ -179,8 +185,11 @@ if __name__ == '__main__':
     #########################################
 
     # usecase__two_sphere_cyclide()
-    # usecase_povray() # takes a long time
-    usecase_celestial_types()
+    # usecase_povray()  # takes a long time
+    # usecase_celestial_types()
+
+    dp6_sing()
+    veronese()
 
     #########################################
     #                                       #
