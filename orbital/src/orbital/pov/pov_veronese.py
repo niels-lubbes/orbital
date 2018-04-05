@@ -161,11 +161,13 @@ def veronese():
     ############################
 
     # four circles on projection Veronese surface
+    pin.cam_dct['location'] = ( 0, -1.5, 0 )
     pin.cam_dct['rotate'] = ( 60, 10, 45 )
     create_pov( pin, ['FA2', 'FB2', 'FC2'] )
     create_pov( pin, ['C1', 'C2', 'C3', 'C4'] + ['FA2', 'FB2', 'FC2'] )
 
     # hexagonal web on Veronese surface
+    pin.cam_dct['location'] = ( 0, -1.2, 0 )
     pin.cam_dct['rotate'] = ( 35, 0, 45 )
     create_pov( pin, ['A', 'B', 'C'] )
     create_pov( pin, ['A', 'B', 'C', 'FA', 'FB', 'FC'] )
