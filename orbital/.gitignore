@@ -13,3 +13,4 @@
 # directories created during testing
 *_REMOVE_ME
 
+/src/test_tools.sobj
