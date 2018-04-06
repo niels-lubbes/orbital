@@ -136,7 +136,7 @@ class OrbOutput:
         '''
         # short string
         s = ''
-        s += 's="['
+        s += '"['
         s += '\'@(' + str( self.deg ) + ',' + str( self.emb ) + ')=(deg,emb)\''
         s += ', '
         s += str( self.input.info_dct )
