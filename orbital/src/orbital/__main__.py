@@ -20,9 +20,11 @@ from orbital.poly_maps import hilbert_poly
 from orbital.sage_interface import sage_set_verbose
 from orbital.sage_interface import sage_PolynomialRing
 from orbital.sage_interface import sage_QQ
+from orbital.sage_interface import sage_ZZ
 from orbital.sage_interface import sage_NumberField
 from orbital.sage_interface import sage_FractionField
 from orbital.sage_interface import sage_matrix
+from orbital.sage_interface import sage_MatrixSpace
 
 from orbital.pov.pov_blum_cyclide import blum_cyclide
 from orbital.pov.pov_ring_cyclide import ring_cyclide
@@ -36,12 +38,18 @@ from orbital.pov.pov_horn_cyclide import horn_cyclide
 from orbital.pov.pov_veronese import veronese
 from orbital.pov.pov_dp8_clifford import dp8_clifford
 
+from orbital.surface_in_quadric import get_surf
+
+from orbital.class_orb_ring import OrbRing
+
+from orbital.prod.class_orb_input import OrbInput
+from orbital.prod.orb_product import orb_product
+
 from linear_series.class_linear_series import LinearSeries
 from linear_series.class_base_points import BasePointTree
 from linear_series.class_poly_ring import PolyRing
 from linear_series.get_linear_series import get_mon_lst
 
-from orbital.surface_in_quadric import get_surf
 
 
 def usecase__two_sphere_cyclide():
@@ -111,21 +119,39 @@ def usecase_celestial_types():
     Here P^1xP^1 denotes the fiber product of the projective line with itself. 
     We verify for n in [3,4,5,6,7] whether X can be linearly projected into the 
     projective n-sphere S^n.  
+    
+    If m=8, then the celestial type is (2,8,n), where the first entry denotes 
+    the number of conics contained in X through (almost) every point.
+    
+    If m=6, then the celestial type is (3,6,n) or (2,6,n). If X in S^5 has celestial type
+    (2,6,5), then X has a real isolated singularity (see dp6_sing() for a visualization)).  
     '''
+
+    # We provide certificates "c_lst" and "prv_Q" for "get_surf()",
+    # which were obtained by a previous (long) computation.
 
     #
     # P^1xP^1
     #
     # We construct a parametrization of the double Segre surface dP8 in
     # projective 8-space. This surface contains 2 conics through each point
-#     ring = PolyRing( 'x,y,v,w', True )
-#     ls_dP8 = LinearSeries( get_mon_lst( [2, 2], ring.gens() ), ring )
-#     OrbTools.p( 'ls_dP8 =', ls_dP8 )
-#     get_surf( ls_dP8, ( 7 + 1, 1 ), [-8, -8, -10, -6, -7, 6, 5, 6, 0, -8, -2, -7, -7, 7, -1, 0, -9, 7, 1, -9]  )
-#     get_surf( ls_dP8, ( 6 + 1, 1 ) )
-#     get_surf( ls_dP8, ( 5 + 1, 1 ) )
-#     get_surf( ls_dP8, ( 4 + 1, 1 ) )
-#     get_surf( ls_dP8, ( 3 + 1, 1 ) )
+    ring = PolyRing( 'x,y,v,w', True )
+    ls_dP8 = LinearSeries( get_mon_lst( [2, 2], ring.gens() ), ring )
+    OrbTools.p( 'ls_dP8 =', ls_dP8 )
+
+    get_surf( ls_dP8, ( 7 + 1, 1 ), [-8, -8, -10, -6, -7, 6, 5, 6, 0, -8, -2, -7, -7, 7, -1, 0, -9, 7, 1, -9] )
+
+    prv_Q = sage_matrix( [( 0, 0, 0, 1, 1, 1, 0, 0, 0 ), ( 0, 1, 0, 0, 0, 0, 0, 0, 0 ), ( 1, 0, 1, 1, 0, 0, 0, 1, 0 ), ( 1, 0, 0, 1, 0, 0, 1, 0, 0 ), ( 0, 0, 0, 0, 0, 0, 1, 0, 1 ), ( 0, 1, 0, 0, 1, 0, 1, 0, 1 ), ( 0, 0, 0, 1, 1, 0, 1, 0, 1 ), ( 1, 0, 0, 1, 0, 0, 1, 1, 0 )] )
+    get_surf( ls_dP8, ( 6 + 1, 1 ), [3, -3, 3, -7, 7, 1, -4, 3, -10, 6, -4, -6, -6, 4, -9, 3, -6, -4, 1], prv_Q )
+
+    prv_Q = sage_matrix( [( 0, 1, 0, 0, 1, 0, 1, 0, 1 ), ( 1, 1, 1, 1, 0, 1, 0, 0, 1 ), ( 1, 1, 0, 1, 1, 1, 1, 0, 1 ), ( 1, 1, 1, 1, 1, 1, 1, 1, 1 ), ( 1, 0, 1, 0, 1, 0, 1, 0, 0 ), ( 0, 0, 1, 0, 1, 0, 0, 1, 0 ), ( 0, 0, 0, 0, 0, 0, 1, 1, 1 )] )
+    get_surf( ls_dP8, ( 5 + 1, 1 ), [-7, -2, -1, -5, -4, 6, -2, -2, -2, 2, 9, -4, -9, -4, 2, -10, 9, -6, -1], prv_Q )
+
+    prv_Q = sage_matrix( [( 0, 1, 0, 1, 1, 1, 0, 1, 1 ), ( 1, 0, 0, 0, 1, 1, 0, 1, 1 ), ( 1, 0, 0, 0, 1, 0, 0, 0, 1 ), ( 0, 1, 1, 0, 0, 0, 1, 1, 0 ), ( 1, 1, 1, 0, 0, 0, 1, 1, 0 ), ( 0, 1, 1, 1, 0, 1, 1, 1, 0 )] )
+    get_surf( ls_dP8, ( 4 + 1, 1 ), [-2, -3, 6, 7, -10, -2, -4, -8, -3, -4, 4, -6], prv_Q )
+
+    # prv_Q = sage_matrix()
+    # get_surf( ls_dP8, ( 3 + 1, 1 ), prv_Q  )
 
     #
     # P^1xP^1 blown up in two general complex conjugate points
@@ -134,6 +160,7 @@ def usecase_celestial_types():
     # in projective 6-space, that contains 3 conics through each point.
     # We show that dP6 can be projected into S^5 and S^4.
     #
+
     a0 = PolyRing( 'x,y,v,w', True ).ext_num_field( 't^2 + 1' ).root_gens()[0]
     bp_tree = BasePointTree( ['xv', 'xw', 'yv', 'yw'] )
     bp_tree.add( 'xv', ( -a0, a0 ), 1 )
@@ -160,6 +187,119 @@ def usecase_celestial_types():
     get_surf( ls_wdP6, ( 4 + 1, 1 ), [-2, -7, -6, -10, -2, -4, 4] , prv_Q )
 
 
+def usecase_orb_product( num = 10 ):
+    '''
+    Outputs "num" random surfaces in the projective n-sphere S^n, 
+    that are obtained by rotating or translating a parametrized 
+    circle.
+    
+    Notice that we can recover the OrbInput object 
+    from the short string output 
+    (see "usecase_orb_product_investigate_example()")
+    
+    Parameters
+    ----------
+    num : int
+        Number of times a random surface should be computed.
+    '''
+
+    for idx in range( num ):
+        try:
+
+            input = OrbInput().random( 3, False )  # random input
+
+            # only compute dimension and degree
+            for key in input.do.keys(): input.do[key] = False
+            input.do['imp'] = True
+            input.do['dde'] = True
+
+            o = orb_product( input )
+
+            OrbTools.p( '(deg, emb, dim ) =', ( o.deg, o.emb, o.dim ), ' short string =', o.get_short_str() )  # output  orbital product
+
+        except BaseException as e:
+
+            # continue with loop regardless of exceptions
+            OrbTools.p( 'Exception occurred: ', e )
+            OrbTools.p( input )
+            OrbTools.p( o )
+
+
+
+def usecase_orb_product_implicit_circle( num = 10 ):
+    '''
+    Outputs "num" random surfaces in the projective n-sphere S^n, 
+    that are obtained by rotating or translating an implicit circle.
+    The circle is obtained as a random hyperplane section.
+    
+    The hyperplane section is obtained by applying 
+    a random matrix in PGL(8+1) to the hyperplane 
+    section { x | x3=..=x8=0=-x0^2+x1^2+...+x8^2=0 }.  
+    Since the random matrix is not orthogonal
+    we cannot use the matrix to compute parametric 
+    presentations for these examples.  
+    
+    Notice that we can recover the OrbInput object 
+    from the short string output 
+    (see "usecase_orb_product_investigate_example()")
+    
+    Parameters
+    ----------
+    num : int
+        Number of times a random surface should be computed.   
+    '''
+
+    for idx in range( num ):
+        try:
+
+            # compute random input
+            ch_str = ''.join( [OrbRing.random_elt( ['r', 's', 'p', 'm', 'a'] ) for i in range( 4 ) ] )
+            pmat = list( sage_MatrixSpace( sage_ZZ, 9, 9 ).random_element() )
+            p_tup = ( 'P1', 'I', 'I' )
+            o_tup = ( 'I', 'O' + ch_str, 'I' )
+            v_tup = ( 'M' + str( pmat ), 'I', 'I' )
+            input = OrbInput().set( p_tup, o_tup, v_tup )
+
+            # compute only few attributes
+            for key in input.do.keys(): input.do[key] = False
+            input.do['imp'] = True
+            input.do['dde'] = True
+
+            o = orb_product( input )
+
+            OrbTools.p( '(deg, emb, dim ) =', ( o.deg, o.emb, o.dim ), ' short string =', o.get_short_str() )  # output  orbital product
+
+        except BaseException as e:
+
+            # continue with loop regardless of exceptions
+            OrbTools.p( 'Exception occurred: ', e )
+            OrbTools.p( input )
+            OrbTools.p( o )
+
+
+def usecase_orb_product_investigate_example():
+    '''
+    Here we investigate an example obtained 
+    by "usecase_orb_product"
+    '''
+
+    s = "['@(4,3)=(deg,emb)', {'pmat': ('P0', 'I', 'I'), 'omat': ('T[1, 0, 0, 0, 0, 0, 0]', 'Orppp', 'T[-1, 0, 0, 0, 0, 0, 0]'), 'vmat': ('T[0, 1, 1, 0, 0, 0, 0]', 'Rrrrs[37, 0, 0, 0]', 'T[0, -1, -1, 0, 0, 0, 0]')}]"
+
+    input = OrbInput().set_short_str( s )
+    input.do['pmz'] = True
+    input.do['bpt'] = False
+    input.do['imp'] = True
+    input.do['dde'] = True
+    input.do['prj'] = True
+    input.do['fct'] = True  # Maple
+    input.do['gen'] = True  # Maple
+    input.do['sng'] = True  # Magma
+    input.do['tst'] = True
+
+    o = orb_product( input )
+    OrbTools.p( o )
+
+
 if __name__ == '__main__':
 
     # Debug output settings
@@ -168,7 +308,7 @@ if __name__ == '__main__':
     mod_lst = []
     mod_lst += ['__main__.py']
     OrbTools.filter( mod_lst )  # output only from specified modules
-    OrbTools.filter( None )  # print all verbose output, comment to disable.
+    # OrbTools.filter( None )  # print all verbose output, comment to disable.
     OrbTools.start_timer()
 
     # set environment variables for output, Maple and Magma
@@ -187,9 +327,9 @@ if __name__ == '__main__':
     # usecase__two_sphere_cyclide()
     # usecase_povray()  # takes a long time
     # usecase_celestial_types()
-
-    dp6_sing()
-    veronese()
+    usecase_orb_product( 10 )
+    # usecase_orb_product_implicit_circle( 10 )
+    usecase_orb_product_investigate_example()
 
     #########################################
     #                                       #
