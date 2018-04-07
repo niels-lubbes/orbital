@@ -129,15 +129,20 @@ Output:
 
 ### Example 2: Construct a surface by the random rotation or translation of a circle
 
-We saw in the previous example that with `get_surf()` we can 
-a construct surface X in S^n that contain two circles through each point, for given 
-embdedding dimension n and degree of X. 
-However, since it requires diagonal orthonormalization of matrices the coefficients 
-of ideal and parametrizing map are large in general. In this example we 
+In the previous example we constructed with `get_surf()`  
+a surface X in S^n that contain two circles through each point, 
+for given embedding dimension n and degree of X. 
+The above method requires diagonal orthonormalization of matrices. 
+Therefore the coefficients of polynomials that define X are large in general. 
+In this example we 
 use  [`orb_product()`](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/prod/orb_product.py)
-instead, which constructs surface by rotating or translated a circle in S^n. 
-The 1-parameter subgroup of the automorphisms of the n-sphere are 
-represented by a parametrized matrix. We may assume that 2<=n<=7.
+instead, which constructs surfaces by rotating or translating a circle in S^n. 
+The 1-parameter subgroup of automorphisms of the n-sphere are 
+represented by a parametrized matrix.
+The disadvantage of this method that is gives us less control on the degree and 
+embedding dimension. 
+However, the advantage is that the coefficients of the defining polynomials 
+of the constructed surfaces are small.
 
 ```python
 from orbital.prod.class_orb_input import OrbInput
