@@ -66,7 +66,7 @@ A *celestial surface* is a surface that contains at least two circles through al
 Such a surface can be embedded in the projective n-sphere S^n for some n>=2. 
 The n-sphere S^n is a hyperquadric of signature (n+1,1).
 A surface in S^n of degree d that contains l circles through
-almost each point has "celestial type": (l,d,n).
+almost each point has *celestial type*: (l,d,n).
 We have [shown](https://arxiv.org/abs/1302.6710) that n<=7 and l is either
 infinity, or at most 6.
 
