@@ -62,7 +62,7 @@ might be informative for how to call each function.
 
 ### Example 1: Constructing celestial surfaces
 
-A "celestial surface" is a surface that contains at least two circles through almost each point. 
+A *celestial surface* is a surface that contains at least two circles through almost each point. 
 Such a surface can be embedded in the projective n-sphere S^n for some n>=2. 
 The n-sphere S^n is a hyperquadric of signature (n+1,1).
 A surface in S^n of degree d that contains l circles through
@@ -71,9 +71,9 @@ We have [shown](https://arxiv.org/abs/1302.6710) that n<=7 and l is either
 infinity, or at most 6.
 
 We denote the fiber product of the projective line with itself by P^1xP^1. 
-Celestial surfaces that contain finitely many circles through each point
-are the blowup of P^1xP^1 in either 0,2 or 4 complex conjugate points. 
-We can parametize such blowups by constructing [linear series](https://github.com/niels-lubbes/linear_series) 
+Celestial surfaces, that contain finitely many circles through each point,
+are the blowup of P^1xP^1 in either 0, 2 or 4 complex conjugate points. 
+We can parametrize such blowups by constructing a [linear series](https://github.com/niels-lubbes/linear_series) 
 of forms of bidegree (2,2) that pass through the base points. 
 
 We use [`get_surf()`](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/surface_in_quadric.py)
