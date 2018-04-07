@@ -13,7 +13,7 @@ from setuptools import setup
 
 setup( name = 'orbital',
        version = '0',
-       description = 'Algorithms for constructing and rendering curves on surfaces.',
+       description = 'Python library for constructing and visualizing curves on surfaces',
        classifiers = [
            'Development Status :: 3 - Alpha',
            'License :: OSI Approved :: MIT License',

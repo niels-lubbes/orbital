@@ -1,8 +1,5 @@
 # Orbital
-Algorithms for constructing and rendering curves on surfaces.
 
-See
+Orbital is a Python library for constructing and visualizing curves on surfaces.
 
-https://github.com/niels-lubbes/orbital/ 
-
-for more information.
+See <https://github.com/niels-lubbes/orbital/> for more information.
