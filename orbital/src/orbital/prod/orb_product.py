@@ -2,6 +2,9 @@
 Use of this source code is governed by a MIT-style license that can be found in the LICENSE file.
 Created on Jul 8, 2016
 @author: Niels Lubbes
+
+
+The main functionality of this module is accessed via the method orb_product()
 '''
 
 import warnings
