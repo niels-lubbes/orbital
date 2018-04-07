@@ -126,7 +126,7 @@ Output:
     get_surf(377): J diag.  = [-1.000000000000000?, -1.000000000000000?, -1.000000000000000?, -1.000000000000000?, -1.00000000000000?, 1.000000000000000?] 
 
 
-### Example 4: Construct a surface in S^n by random rotation or translation of a circle
+### Example 2: Construct a surface in S^n by random rotation or translation of a circle
 
 We saw in the previous example that with `get_surf()` we can 
 a construct surface X in S^n that contain two circles through each point, for given 
@@ -201,7 +201,7 @@ input.do['tst'] = True
 o = orb_product( input )
 print( o )
 ```
-Ouput:
+Output:
 
     ------------------------------
     ...............
@@ -228,14 +228,14 @@ Ouput:
     ------------------------------
 
 We see from the output that the computed surface X is obtained by rotating a circle in the 
-3-sphere S^3. The surface X has degree 4 and so has its stereographic projection Y to P^3.
+3-sphere S^3. The surface X has degree 4 and so has its stereographic projection Y to projective 3-space P^3.
 The equation of Y is given by `xyz_pol` and its singular locus 
 consists of an irreducible conic at infinity, without real points. The conic is known as 
 the Euclidean absolute. The surface X is a so called Perseus cyclide and its two 
 isolated singularities are send to the Euclidean absolute.
     
     
-### Example 3: Constructing the Clifford translation of a circle along a circle
+### Example 3: Constructing the pointwise product of circles in the unit quaternions
 
 A [Clifford torus](https://en.wikipedia.org/wiki/Clifford_torus) is a quartic surface 
 obtained as the point-wise [Hamiltonian product](https://en.wikipedia.org/wiki/Quaternion) 
@@ -277,16 +277,18 @@ Output:
 In the output `c0,s0,c1,s1` stands for cos(a), sin(a), cos(b) and sin(b)
 respectively, where a and b are angles between 0 and 2*pi.
 We constructed with [`dp8_clifford()`](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/pov/pov_dp8_clifford.py)
-a Povray image of this surface,
+a Povray image of a stereographic projection of such a Clifford translational surface.
 
 ![output image](https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/deg8-clifford.png?token=AX_Io87BPAT0KHA353fOlHnmAZ3QMmk6ks5a0dCMwA%3D%3D "Clifford translational surface")    
 
 
 ### Example 4: Computing and rendering a hexagonal web of conics on a surface. 
 
-Creates povray image of a linear projection to 3-space 
-of a smooth sextic del Pezzo surface in the projective 5-sphere. 
-This surface contains 3 families of conics that form a hexagonal web. 
+In example 1 we constructed a celestial surface in the S^4.
+In this example we create an image of a linear projection to 3-space 
+of such constructed surfaces.
+In this example we consider a smooth del Pezzo surface in S^5
+that contains 3 families of conics. The conics form a hexagonal web. 
 We render the families of conics by using Povray.
 
 ```python
