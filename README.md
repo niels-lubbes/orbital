@@ -129,9 +129,8 @@ Output:
 
 ### Example 2: Construct a surface by the random rotation or translation of a circle
 
-In the previous example we constructed with `get_surf()`  
-a surface X in S^n that contain two circles through each point, 
-for given embedding dimension n and degree of X. 
+In the previous example we constructed with `get_surf()` a surface X in S^n 
+that contain two circles through each point, for given embedding dimension n and degree of X. 
 The above method requires diagonal orthonormalization of matrices. 
 Therefore the coefficients of polynomials that define X are large in general. 
 In this example we 
