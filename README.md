@@ -202,6 +202,7 @@ o = orb_product( input )
 print( o )
 ```
 Ouput:
+
     ------------------------------
     ...............
     pmat          = P0 ~~~ I ~~~ I
@@ -266,6 +267,7 @@ pmz_AB_lst = [1] + get_prj_S3( get_hp_S3( v, M * w ) )
 for pmz in pmz_AB_lst: print( sage_factor( pmz ) )
 ```
 Output:
+
     1
     (-c0*c1 + c0*s1 - c0 + c1 - s1 + 2)^-1 * (s0*c1 + c0*s1 - c0 + s0)
     (-c0*c1 + c0*s1 - c0 + c1 - s1 + 2)^-1 * (-c0*c1 + s0*s1 - c0 - s0)
@@ -277,8 +279,7 @@ respectively, where a and b are angles between 0 and 2*pi.
 We constructed with [`dp8_clifford()`](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/pov/pov_dp8_clifford.py)
 a Povray image of this surface,
 
-![output image](https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/dp8_clifford "Clifford translational surface")    
-
+![output image](https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/deg8-clifford.png?token=AX_Io87BPAT0KHA353fOlHnmAZ3QMmk6ks5a0dCMwA%3D%3D "Clifford translational surface")    
 
 
 ### Example 4: Computing and rendering a hexagonal web of conics on a surface. 
