@@ -3,10 +3,10 @@
 
 ## Introduction
 
-Orbital is a Python library for constructing and rendering curves on surfaces.   
+Orbital is a Python library for constructing and visualizing curves on surfaces.   
 
 For the underlying theory of this package we refer to the article
-"Surfaces that are covered by two families of circles" [pdf](https://arxiv.org/abs/1302.6710).
+[*"Surfaces that are covered by two families of circles"*](https://arxiv.org/abs/1302.6710).
 
 This library depends on [SageMath](https://SageMath.org) and [Povray](http://povray.org) libraries.
 
