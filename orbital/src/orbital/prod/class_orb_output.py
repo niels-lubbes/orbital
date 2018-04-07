@@ -183,7 +183,7 @@ class OrbOutput:
         if self.bp_tree != None:
             s += 'bp_tree       = ' + str( self.bp_tree ) + '\n'
 
-        s += 'short_str     =\n\t'
+        s += 'short_str     = '
         s += self.get_short_str() + '\n'
 
         s += 30 * '-' + '\n'
