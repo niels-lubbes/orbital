@@ -75,8 +75,7 @@ are the blowup of P^1xP^1 in either 0,2 or 4 complex conjugate points.
 We can parametize such blowups by constructing [linear series](https://github.com/niels-lubbes/linear_series) 
 of forms of bidegree (2,2) that pass through the base points. 
 
-We use  
-[surface_in_quadric.get_surf()](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/surface_in_quadric.py)
+We use [`get_surf()`](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/surface_in_quadric.py)
 to compute from the parametrization the ideal of the surface.
 We look in the ideal for a quadratic form of signature (n+1,1).  
 
@@ -86,14 +85,8 @@ We look in the ideal for a quadratic form of signature (n+1,1).
 from linear_series.class_linear_series import LinearSeries
 from linear_series.class_base_points import BasePointTree
 from linear_series.class_poly_ring import PolyRing
-
 from orbital.surface_in_quadric import get_surf
-
 from orbital.class_orb_tools import OrbTools
-
-# We enable verbose output (nothing is filtered out)
-#
-OrbTools.filter( None )
 
 # We construct a parametrization of a sextic del Pezzo surface dP6
 # in projective 6-space, that contains 3 conics through each point 
@@ -105,30 +98,15 @@ bp = bp_tree.add( 'xv', ( a0, -a0 ), 1 )
 ls_dP6 = LinearSeries.get( [2, 2], bp_tree )
 print( ls_dP6 )
 
-# We show that dP6 can be projected into S^5 and S^4
+# We show that dP6 can be projected into S^4
 #
-dct61 = get_surf( ls_dP6, ( 5+1, 1 ) )
+OrbTools.filter( None ) # enable verbose output
 dct51 = get_surf( ls_dP6, ( 4+1, 1 ) )
 ```
 Output:
     
     { 7, <<x^2*v^2 - y^2*w^2, x^2*v*w + y^2*v*w, x^2*w^2 + y^2*w^2, x*y*v^2 - y^2*v*w, x*y*v*w - y^2*w^2, y^2*v*w + x*y*w^2, y^2*v^2 + y^2*w^2>>, QQ( <a0|t^2 + 1> )[x, y, v, w] }
     
-    get_surf(316): Computing random quadrics in ideal... 
-    get_surf(356):           sig = (6, 1) , sig_set = set([(3, 4)]) 
-    get_surf(356):           sig = (6, 1) , sig_set = set([(3, 4), (4, 3)]) 
-    get_surf(356):           sig = (6, 1) , sig_set = set([(2, 5), (3, 4), (4, 3)]) 
-    get_surf(356):           sig = (6, 1) , sig_set = set([(1, 6), (2, 5), (3, 4), (4, 3)]) 
-    get_surf(356):           sig = (6, 1) , sig_set = set([(1, 6), (2, 5), (3, 4), (6, 1), (4, 3)]) 
-    get_surf(358): Q        = [(1, 0, 0, 0, 0, 0, 0), (0, 1, 0, 0, 0, 0, 0), (0, 0, 1, 0, 0, 0, 0), (0, 0, 0, 1, 0, 0, 0), (0, 0, 0, 0, 1, 0, 0), (0, 0, 0, 0, 0, 1, 0), (0, 0, 0, 0, 0, 0, 1)] 
-    get_surf(359): pmz_lst  = [-c0^2*c1^2 + s0^2*s1^2 - 2*s0^2*s1 - 2*s0*s1^2 + s0^2 + 4*s0*s1 + s1^2 - 2*s0 - 2*s1 + 1, -c0^2*c1*s1 - s0^2*c1*s1 + c0^2*c1 + s0^2*c1 + 2*s0*c1*s1 - 2*s0*c1 - c1*s1 + c1, c0^2*c1^2 + s0^2*c1^2 - 2*s0*c1^2 + c1^2, c0^2*c1*s1 - c0*s0*s1^2 - c0^2*c1 + 2*c0*s0*s1 + c0*s1^2 - c0*s0 - 2*c0*s1 + c0, -c0^2*c1^2 + c0*s0*c1*s1 - c0*s0*c1 - c0*c1*s1 + c0*c1, -c0*s0*c1^2 - c0^2*c1*s1 + c0^2*c1 + c0*c1^2, c0^2*c1^2 + c0^2*s1^2 - 2*c0^2*s1 + c0^2] 
-    get_surf(360): imp_lst  = [x3*x5 + x5^2 - x2*x6 - x4*x6, x4^2 + x5^2 - x2*x6, x3*x4 + x4*x5 - x1*x6 + x5*x6, x2*x4 - x1*x5 + x2*x6, x1*x4 - x0*x5 + x1*x6 - x5*x6, x3^2 - x5^2 - x0*x6 + x2*x6 + 2*x4*x6, x2*x3 - x0*x5 + x1*x6 - x5*x6, x1*x3 - x0*x4 - x4*x6, x1^2 - x0*x2 - x2*x6, x0*x5^2 + x2*x5^2 - x2^2*x6 - 2*x1*x5*x6 + x5^2*x6 + x2*x6^2, x0*x4*x5 + x1*x5^2 - x1*x2*x6 - x0*x5*x6 + x4*x5*x6 + x1*x6^2 - x5*x6^2] 
-    get_surf(361): c_lst    = [-7, -3, -2, 5, 5, -5, -2, 3, -8, -9, -4] 
-    get_surf(362): M_pol    = -8*x1^2 + 8*x0*x2 + 3*x1*x3 - 2*x2*x3 - 5*x3^2 - 3*x0*x4 + 5*x1*x4 + 5*x2*x4 - 2*x3*x4 - 3*x4^2 - 3*x0*x5 - 5*x1*x5 - 7*x3*x5 - 2*x4*x5 - 5*x5^2 + 5*x0*x6 + 5*x1*x6 + 18*x2*x6 - 6*x4*x6 - 5*x5*x6 
-    get_surf(375): M        = [(0, 0, 4, 0, -3/2, -3/2, 5/2), (0, -8, 0, 3/2, 5/2, -5/2, 5/2), (4, 0, 0, -1, 5/2, 0, 9), (0, 3/2, -1, -5, -1, -7/2, 0), (-3/2, 5/2, 5/2, -1, -3, -1, -3), (-3/2, -5/2, 0, -7/2, -1, -5, -5/2), (5/2, 5/2, 9, 0, -3, -5/2, 0)] 
-    get_surf(376): U        = [(0.4222851601889938?, -1.642986325709679?, -1.741082149831869?, 0.566552639363350?, 1.613758669096323?, 0.622664009006899?, 1.936454943842840?), (0.4183110304040526?, 1.987338683834588?, -0.363622947184111?, 0.894221829882205?, 0.0615319212670577?, 2.095276628554762?, 0.2813654745496045?), (0.2607984896339884?, 1.200467513228684?, -1.194884742729225?, -1.963345463013132?, -0.03107664706610797?, -0.652905646874609?, 0.697593039586024?), (1.127122586930573?, -0.00467979593646299?, 0.01033916593830126?, -0.0703669096326930?, 0.591100268511707?, -0.1154273187487600?, -0.6753623868208163?), (0.1260788700673402?, -0.1311875787915946?, -0.03643156712249499?, -0.0834441446065686?, -0.2265073812454545?, 0.1354604011123243?, -0.001938362197660932?), (0.0487572393598491?, 0.0320855964509422?, -0.0779939768440050?, 0.1136406792879351?, -0.0816933670163349?, -0.1016817237269874?, 0.01399274430607368?), (1.30767090764666?, 0.3290941018473?, 2.14449422159360?, 0.0129850903388?, -0.12785892545682?, -0.4961779530816?, 2.18448489039277?)] 
-    get_surf(377): J diag.  = [-1.000000000000000?, -1.000000000000000?, -1.000000000000000?, -1.000000000000000?, -1.000000000000000?, -1.00000000000000?, 1.000000000000000?] 
-
     get_surf(316): Computing random quadrics in ideal... 
     get_surf(356):           sig = (5, 1) , sig_set = set([(3, 3)]) 
     get_surf(356):           sig = (5, 1) , sig_set = set([(3, 3), (2, 2)]) 
@@ -148,9 +126,162 @@ Output:
     get_surf(377): J diag.  = [-1.000000000000000?, -1.000000000000000?, -1.000000000000000?, -1.000000000000000?, -1.00000000000000?, 1.000000000000000?] 
 
 
-### Example 2: Constructing the Clifford translation of a circle along a circle
+### Example 4: Construct a surface in S^n by random rotation or translation of a circle
 
-### Example 3: Computing and rendering a hexagonal web of conics on a surface. 
+We saw in the previous example that with `get_surf()` we can 
+a construct surface X in S^n that contain two circles through each point, for given 
+embdedding dimension n and degree of X. 
+However, since it requires diagonal orthonormalization of matrices the coefficients 
+of ideal and parametrizing map are large in general. In this example we 
+use  [`orb_product()`](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/prod/orb_product.py)
+instead, which constructs surface by rotating or translated a circle in S^n. 
+The 1-parameter subgroup of the automorphisms of the n-sphere are 
+represented by a parametrized matrix. We may assume that 2<=n<=7.
+
+```python
+from orbital.prod.class_orb_input import OrbInput
+from orbital.prod.orb_product import orb_product
+
+input = OrbInput().random( 3, False )  # random input
+
+for key in input.do.keys(): input.do[key] = False
+input.do['imp'] = True # compute ideal of random surface
+input.do['dde'] = True # compute degree and embedding dimension
+
+o = orb_product( input )
+
+print( o )
+```
+Output:
+
+    ------------------------------
+    ...............
+    pmat          = P0 ~~~ I ~~~ I
+    omat          = E[8, 2, 4, 3, 1, 6, 7, 5] ~~~ Osmpr ~~~ E[5, 2, 4, 3, 8, 6, 7, 1]
+    vmat          = T[0, -3, 2, -2, 0, -2, 1] ~~~ Rpapr[227, 286, 226, 309] ~~~ T[0, 3, -2, 2, 0, 2, -1]
+    do            = {'sng': False, 'fct': False, 'pmz': False, 'prj': False, 'imp': True, 'bpt': False, 'tst': False, 'gen': False, 'dde': True}
+    ...............
+    pmz_lst       = None
+    prj_pmz_lst   = None
+    imp_lst       = [25*x4 - 11*x6 - 10*x8, x3 - x6, 50*x0 + 7*x6 - 55*x8, 75000*x1*x5 + 108459*x6^2 - 75000*x2*x7 + 69280*x6*x8 + 6900*x8^2, 2250000*x2^2 + 2250000*x5^2 - 1792921*x6^2 - 1847820*x6*x8 - 476100*x8^2, 2250000*x1^2 + 6684421*x6^2 + 2250000*x7^2 + 3332820*x6*x8 + 363600*x8^2, 3253770*x1*x6^2 - 6684421*x5*x6^2 - 2250000*x1*x2*x7 - 2250000*x5*x7^2 + 2078400*x1*x6*x8 - 3332820*x5*x6*x8 + 207000*x1*x8^2 - 363600*x5*x8^2, 16711052500*x5^2*x6^2 + 11763354681*x6^4 - 16268850000*x2*x6^2*x7 + 4482302500*x6^2*x7^2 + 8332050000*x5^2*x6*x8 + 15028079040*x6^3*x8 - 10392000000*x2*x6*x7*x8 + 4619550000*x6*x7^2*x8 + 909000000*x5^2*x8^2 + 6296452600*x6^2*x8^2 - 1035000000*x2*x7*x8^2 + 1190250000*x7^2*x8^2 + 956064000*x6*x8^3 + 47610000*x8^4]
+    emb           = 4
+    dim           = 2
+    deg           = 8
+    gen           = -1
+    prj_pol       = None
+    xyz_pol       = None
+    pmz_test      = None
+    short_str     = "['@(8,4)=(deg,emb)', {'pmat': ('P0', 'I', 'I'), 'omat': ('E[8, 2, 4, 3, 1, 6, 7, 5]', 'Osmpr', 'E[5, 2, 4, 3, 8, 6, 7, 1]'), 'vmat': ('T[0, -3, 2, -2, 0, -2, 1]', 'Rpapr[227, 286, 226, 309]', 'T[0, 3, -2, 2, 0, 2, -1]')}]"
+    ------------------------------
+
+From the `short_str` we can recover the `OrbInput` object,
+and compute more attributes as is shown in the following example. 
+
+```python
+import os
+from orbital.prod.class_orb_input import OrbInput
+from orbital.prod.orb_product import orb_product
+
+os.environ['PATH'] += os.pathsep + '/home/niels/Desktop/n/app/maple/link/bin' # executable path for Maple
+os.environ['PATH'] += os.pathsep + '/home/niels/Desktop/n/app/magma/link' # executable path for Magma 
+
+s = "['@(4,3)=(deg,emb)', {'pmat': ('P0', 'I', 'I'), 'omat': ('T[1, 0, 0, 0, 0, 0, 0]', 'Orppp', 'T[-1, 0, 0, 0, 0, 0, 0]'), 'vmat': ('T[0, 1, 1, 0, 0, 0, 0]', 'Rrrrs[37, 0, 0, 0]', 'T[0, -1, -1, 0, 0, 0, 0]')}]"
+
+input = OrbInput().set_short_str( s )
+input.do['pmz'] = True
+input.do['bpt'] = False
+input.do['imp'] = True
+input.do['dde'] = True
+input.do['prj'] = True
+input.do['fct'] = True  # requires access to Maple, otherwise output empty list
+input.do['gen'] = True  # requires access to Maple, otherwise output value -3
+input.do['sng'] = True  # requires access to Magma, otherwise output empty list
+input.do['tst'] = True
+
+o = orb_product( input )
+print( o )
+```
+Ouput:
+    ------------------------------
+    ...............
+    pmat          = P0 ~~~ I ~~~ I
+    omat          = T[1, 0, 0, 0, 0, 0, 0] ~~~ Orppp ~~~ T[-1, 0, 0, 0, 0, 0, 0]
+    vmat          = T[0, 1, 1, 0, 0, 0, 0] ~~~ Rrrrs[37, 0, 0, 0] ~~~ T[0, -1, -1, 0, 0, 0, 0]
+    do            = {'sng': True, 'fct': True, 'pmz': True, 'prj': True, 'imp': True, 'bpt': False, 'tst': True, 'gen': True, 'dde': True}
+    ...............
+    pmz_lst       = [4/5*c0*c1 - 3/5*s0*c1 + 7/5*c0*s1 + 6/5*s0*s1 - 12/5*c0 - 11/5*s0 - 1/5*c1 - 18/5*s1 + 28/5, 4/5*c0*c1 - 3/5*s0*c1 + 7/5*c0*s1 + 6/5*s0*s1 - 12/5*c0 - 11/5*s0 - 2*s1 + 3, 3/5*c0*c1 + 4/5*s0*c1 - 6/5*c0*s1 + 7/5*s0*s1 + 11/5*c0 - 12/5*s0, -2*s1 + 2, 0, 0, 0, 0, 4/5*c0*c1 - 3/5*s0*c1 + 7/5*c0*s1 + 6/5*s0*s1 - 12/5*c0 - 11/5*s0 - 1/5*c1 - 8/5*s1 + 13/5]
+    prj_pmz_lst   = [-2*s1 + 3, 4/5*c0*c1 - 3/5*s0*c1 + 7/5*c0*s1 + 6/5*s0*s1 - 12/5*c0 - 11/5*s0 - 2*s1 + 3, 3/5*c0*c1 + 4/5*s0*c1 - 6/5*c0*s1 + 7/5*s0*s1 + 11/5*c0 - 12/5*s0, -2*s1 + 2]
+    imp_lst       = [x7, x6, x5, x4, 100*x1^2 - 4*x0*x3 - 40*x1*x3 + 9*x3^2 - 200*x1*x8 + 44*x3*x8 + 100*x8^2, 100*x0^2 - 100*x2^2 - 4*x0*x3 - 40*x1*x3 - 91*x3^2 - 200*x1*x8 + 44*x3*x8]
+    emb           = 3
+    dim           = 2
+    deg           = 4
+    gen           = 1
+    prj_pol       = 25*x0^4 + 100*x0^3*x1 + 50*x0^2*x1^2 - 100*x0*x1^3 + 25*x1^4 - 50*x0^2*x2^2 - 100*x0*x1*x2^2 + 50*x1^2*x2^2 + 25*x2^4 - 24*x0^3*x3 - 40*x0^2*x1*x3 + 20*x0*x1^2*x3 + 20*x0*x2^2*x3 - 41*x0^2*x3^2 - 100*x0*x1*x3^2 + 50*x1^2*x3^2 + 50*x2^2*x3^2 + 20*x0*x3^3 + 25*x3^4
+    prj_pol{x0:0} = (25) * (x1^2 + x2^2 + x3^2)^2
+    xyz_pol       = 25*x^4 + 50*x^2*y^2 + 25*y^4 + 50*x^2*z^2 + 50*y^2*z^2 + 25*z^4 - 100*x^3 - 100*x*y^2 + 20*x^2*z + 20*y^2*z - 100*x*z^2 + 20*z^3 + 50*x^2 - 50*y^2 - 40*x*z - 41*z^2 + 100*x - 24*z + 25
+    pmz_test      = True
+    fct_lst       = 1 factors
+    sng_lst       = 1 components
+                ~ ('[x0,x1^2 + x2^2 + x3^2]', 2*t + 1)
+    short_str     = "['@(4,3)=(deg,emb)', {'pmat': ('P0', 'I', 'I'), 'omat': ('T[1, 0, 0, 0, 0, 0, 0]', 'Orppp', 'T[-1, 0, 0, 0, 0, 0, 0]'), 'vmat': ('T[0, 1, 1, 0, 0, 0, 0]', 'Rrrrs[37, 0, 0, 0]', 'T[0, -1, -1, 0, 0, 0, 0]')}]"
+    ------------------------------
+
+We see from the output that the computed surface X is obtained by rotating a circle in the 
+3-sphere S^3. The surface X has degree 4 and so has its stereographic projection Y to P^3.
+The equation of Y is given by `xyz_pol` and its singular locus 
+consists of an irreducible conic at infinity, without real points. The conic is known as 
+the Euclidean absolute. The surface X is a so called Perseus cyclide and its two 
+isolated singularities are send to the Euclidean absolute.
+    
+    
+### Example 3: Constructing the Clifford translation of a circle along a circle
+
+A [Clifford torus](https://en.wikipedia.org/wiki/Clifford_torus) is a quartic surface 
+obtained as the point-wise [Hamiltonian product](https://en.wikipedia.org/wiki/Quaternion) 
+of two great circles in the 3-sphere S^3, 
+where we identify S^3 with the unit quaternions.
+If instead of great circles we also consider little circles, 
+then this construction leads to surfaces of degree 8 in S^3 
+that contain two circles through each point.
+
+```python
+from orbital.transform_sphere import get_xfer_S3
+from orbital.transform_sphere import get_hp_S3
+from orbital.transform_sphere import get_prj_S3
+from orbital.class_orb_ring import OrbRing
+from orbital.sage_interface import sage_factor
+from orbital.sage_interface import sage_vector
+
+
+# Construct surface as pointwise hamiltonian product of
+# two circles in S^3
+#
+c0, s0, c1, s1 = OrbRing.coerce( 'c0,s0,c1,s1' )
+x0, y0, z0, s = 1, 1, 0, 1
+a01, a02, a03, a12, a13, a23 = [90] + 5 * [0]
+M = get_xfer_S3( a01, a02, a03, a12, a13, a23, x0, y0, z0, s )
+v = sage_vector( [c0, s0, 0, 0, 1] )
+w = sage_vector( [c1, s1, 0, 0, 1] )
+pmz_AB_lst = [1] + get_prj_S3( get_hp_S3( v, M * w ) )
+for pmz in pmz_AB_lst: print( sage_factor( pmz ) )
+```
+Output:
+    1
+    (-c0*c1 + c0*s1 - c0 + c1 - s1 + 2)^-1 * (s0*c1 + c0*s1 - c0 + s0)
+    (-c0*c1 + c0*s1 - c0 + c1 - s1 + 2)^-1 * (-c0*c1 + s0*s1 - c0 - s0)
+    (-1) * (-c1 + s1 - 1) * s0 * (-c0*c1 + c0*s1 - c0 + c1 - s1 + 2)^-1
+
+
+In the output `c0,s0,c1,s1` stands for cos(a), sin(a), cos(b) and sin(b)
+respectively, where a and b are angles between 0 and 2*pi.
+We constructed with [`dp8_clifford()`](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/pov/pov_dp8_clifford.py)
+a Povray image of this surface,
+
+![output image](https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/dp8_clifford "Clifford translational surface")    
+
+
+
+### Example 4: Computing and rendering a hexagonal web of conics on a surface. 
 
 Creates povray image of a linear projection to 3-space 
 of a smooth sextic del Pezzo surface in the projective 5-sphere. 
@@ -184,7 +315,7 @@ from orbital.class_orb_tools import OrbTools
 # Disable verbose output
 #
 sage_set_verbose( -1 )
-OrbTools.filter( 'no output' )
+OrbTools.filter( [] )
 
 # Compute linear series on P^1xP^1 of bi-degree (2,2) and (1,1)
 # passing through two complex conjugate base points. 
@@ -204,12 +335,13 @@ ls_CB = LinearSeries.get( [1, 1], bp_tree )
 # signature (6,1) and that is the projection of the surface
 # parametrized by ls_AB. The quadratic form of signature (6,1)
 # has associated matrix M with orthogonal diagonalization
-# M=U.T*J*U, where J is a diagonal matrix.
+# M=U.T*J*U, where J is a diagonal matrix. We modify J so that
+# J has (-1,1,1,1,1,1,1) on its diagonal and not (1,1,1,1,1,1,-1).
 #
 c_lst = [-1, -1, 0, 0, 0, -1, 1, 0, -1, -1, -1] # precomputed; set to None for computing new example
 dct = get_surf( ls_AB, ( 6, 1 ), c_lst )
 U, J = dct['UJ']
-U.swap_rows( 0, 6 );J.swap_columns( 0, 6 );J.swap_rows( 0, 6 )
+U.swap_rows( 0, 6 );J.swap_columns( 0, 6 );J.swap_rows( 0, 6 ) 
 assert dct['M'] == approx_QQ( U.T * J * U )
 
 # In order to visualize the surface we project it to 3-space
