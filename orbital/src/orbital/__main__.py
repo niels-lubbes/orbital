@@ -51,67 +51,6 @@ from linear_series.class_poly_ring import PolyRing
 from linear_series.get_linear_series import get_mon_lst
 
 
-
-def usecase__two_sphere_cyclide():
-    '''
-    Construct parametrization of families of circles
-    on the sphere cyclide. The sphere cyclide is 
-    a quartic del Pezzo surface embedded into
-    projective 3-sphere. This surface has two families
-    of circles, but is not rational. 
-    '''
-
-    R = sage_PolynomialRing( sage_QQ, 'a' )
-    a = R.gens()[0]
-    B = sage_NumberField( [a ** 2 - 1 / sage_QQ( 2 )], 'a0' )
-    B = sage_FractionField( sage_PolynomialRing( B, 'k' ) )
-    OrbTools.p( ring_dict( B ) )
-
-    S = '[-y0^2+y1^2+y2^2+y3^2+y4^2]'
-    X = '[(x1^2+x2^2+x3^2)^2-x0^2*(8*x1^2-2*x2^2-2*x3^2-2*x0^2)]'
-    OrbTools.p( euclidean_type_form( X[1:-1] ) )
-
-    p = '[y0-y4,y1,y2,y3]'
-    m = '[y4,y1+a0*y0]'
-    P = '[x0-k*x1]'
-
-    f = invert_birational_map( p, S )
-    OrbTools.p( 'f =', f )
-
-    Y = image_map( f, X )
-    OrbTools.p( 'Y =', len( Y ), Y )
-    OrbTools.p( 'Y =', hilbert_poly( Y ) )
-
-    F = preimage_map( m, Y, P, B )
-    OrbTools.p( 'F =', len( F ), F )
-
-    C = image_map( p, F, B )
-    OrbTools.p( 'C =', len( C ), C )
-
-    for i in range( len( C ) ):
-        s = str( C[i] )
-        for ( a, b ) in [( 'a0', 'sqrt(1/2)' ), ( 'k', 'p1' ), ( 'x0', '1' ), ( 'x1', 'x' ), ( 'x2', 'y' ), ( 'x3', 'z' )]:
-            s = s.replace( a, b )
-        print( s )
-
-
-def usecase_povray():
-    '''
-    Create povray images. This may take a long time.
-    '''
-    blum_cyclide()
-    ring_cyclide()
-    dp6_smooth()
-    dp6_sing()
-    quadric_smooth()
-    perseus_cyclide()
-    CH1_cyclide()
-    spindle_cyclide()
-    horn_cyclide()
-    veronese()
-    dp8_clifford()
-
-
 def usecase_celestial_types():
     '''
     Let surface X in P^m be the blowups of P^1xP^1 in either 0 or 2 complex conjugate  
@@ -185,6 +124,23 @@ def usecase_celestial_types():
     get_surf( ls_wdP6, ( 5 + 1, 1 ), [-6, 8, -7, -8, 0, -8, 2, -5, -8] )
     prv_Q = sage_matrix( [( 1, 0, 0, 1, 1, 1, 0 ), ( 1, 0, 0, 1, 0, 1, 1 ), ( 0, 1, 1, 1, 0, 1, 0 ), ( 0, 0, 0, 0, 1, 0, 0 ), ( 0, 1, 0, 1, 1, 1, 0 ), ( 0, 0, 0, 1, 1, 1, 0 )] )
     get_surf( ls_wdP6, ( 4 + 1, 1 ), [-2, -7, -6, -10, -2, -4, 4] , prv_Q )
+
+
+def usecase_povray():
+    '''
+    Create povray images. This may take a long time.
+    '''
+    blum_cyclide()
+    ring_cyclide()
+    dp6_smooth()
+    dp6_sing()
+    quadric_smooth()
+    perseus_cyclide()
+    CH1_cyclide()
+    spindle_cyclide()
+    horn_cyclide()
+    veronese()
+    dp8_clifford()
 
 
 def usecase_orb_product( num = 10 ):
@@ -291,13 +247,56 @@ def usecase_orb_product_investigate_example():
     input.do['imp'] = True
     input.do['dde'] = True
     input.do['prj'] = True
-    input.do['fct'] = True  # Maple
-    input.do['gen'] = True  # Maple
-    input.do['sng'] = True  # Magma
+    input.do['fct'] = True  # requires Maple
+    input.do['gen'] = True  # requires Maple
+    input.do['sng'] = True  # requires Magma
     input.do['tst'] = True
 
     o = orb_product( input )
     OrbTools.p( o )
+
+
+def usecase__two_sphere_cyclide():
+    '''
+    Construct parametrization of families of circles
+    on the sphere cyclide. The sphere cyclide is 
+    a quartic del Pezzo surface embedded into
+    projective 3-sphere. This surface has two families
+    of circles, but is not rational. 
+    '''
+
+    R = sage_PolynomialRing( sage_QQ, 'a' )
+    a = R.gens()[0]
+    B = sage_NumberField( [a ** 2 - 1 / sage_QQ( 2 )], 'a0' )
+    B = sage_FractionField( sage_PolynomialRing( B, 'k' ) )
+    OrbTools.p( ring_dict( B ) )
+
+    S = '[-y0^2+y1^2+y2^2+y3^2+y4^2]'
+    X = '[(x1^2+x2^2+x3^2)^2-x0^2*(8*x1^2-2*x2^2-2*x3^2-2*x0^2)]'
+    OrbTools.p( euclidean_type_form( X[1:-1] ) )
+
+    p = '[y0-y4,y1,y2,y3]'
+    m = '[y4,y1+a0*y0]'
+    P = '[x0-k*x1]'
+
+    f = invert_birational_map( p, S )
+    OrbTools.p( 'f =', f )
+
+    Y = image_map( f, X )
+    OrbTools.p( 'Y =', len( Y ), Y )
+    OrbTools.p( 'Y =', hilbert_poly( Y ) )
+
+    F = preimage_map( m, Y, P, B )
+    OrbTools.p( 'F =', len( F ), F )
+
+    C = image_map( p, F, B )
+    OrbTools.p( 'C =', len( C ), C )
+
+    for i in range( len( C ) ):
+        s = str( C[i] )
+        for ( a, b ) in [( 'a0', 'sqrt(1/2)' ), ( 'k', 'p1' ), ( 'x0', '1' ), ( 'x1', 'x' ), ( 'x2', 'y' ), ( 'x3', 'z' )]:
+            s = s.replace( a, b )
+        print( s )
 
 
 if __name__ == '__main__':
@@ -324,12 +323,12 @@ if __name__ == '__main__':
     #                                       #
     #########################################
 
-    # usecase__two_sphere_cyclide()
+    usecase_celestial_types()
     # usecase_povray()  # takes a long time
-    # usecase_celestial_types()
     usecase_orb_product( 10 )
-    # usecase_orb_product_implicit_circle( 10 )
+    usecase_orb_product_implicit_circle( 10 )
     usecase_orb_product_investigate_example()
+    usecase__two_sphere_cyclide()
 
     #########################################
     #                                       #
