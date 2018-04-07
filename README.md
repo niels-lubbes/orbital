@@ -48,16 +48,17 @@ sage -pip uninstall orbital
 
 ## Examples
 
-See also [this file](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/__main__.py) 
-for example usecases. 
+For running the examples below, either copy paste the code into the Sage interface or run them as a Python module:
+
+    sage -python -m my_module_name.py
+
+See [this file](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/__main__.py) 
+for more example usecases. 
 See the [source code](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital)
 the io-specification of each function.
 The [test functions](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/tests)
 might be informative for how to call each function.
 
-For running the examples below, either copy paste the code into the Sage interface or run them as a Python module:
-
-    sage -python -m my_module_name.py
 
 ### Example 1: Constructing celestial surfaces
 
