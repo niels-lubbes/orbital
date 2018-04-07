@@ -126,7 +126,7 @@ Output:
     get_surf(377): J diag.  = [-1.000000000000000?, -1.000000000000000?, -1.000000000000000?, -1.000000000000000?, -1.00000000000000?, 1.000000000000000?] 
 
 
-### Example 2: Construct a surface in S^n by random rotation or translation of a circle
+### Example 2: Construct a surface by the random rotation or translation of a circle
 
 We saw in the previous example that with `get_surf()` we can 
 a construct surface X in S^n that contain two circles through each point, for given 
@@ -254,8 +254,7 @@ from orbital.sage_interface import sage_factor
 from orbital.sage_interface import sage_vector
 
 
-# Construct surface as pointwise hamiltonian product of
-# two circles in S^3
+# Construct surface as pointwise hamiltonian product of two circles in S^3
 #
 c0, s0, c1, s1 = OrbRing.coerce( 'c0,s0,c1,s1' )
 x0, y0, z0, s = 1, 1, 0, 1
