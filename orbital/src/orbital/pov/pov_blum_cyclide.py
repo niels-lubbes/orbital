@@ -22,6 +22,7 @@ from orbital.surface_in_quadric import get_proj
 from orbital.povray.class_pov_input import PovInput
 from orbital.povray.povray import create_pov
 from orbital.povray.povray_aux import get_time_str
+from orbital.povray.povray_aux import rgbt2pov
 
 from linear_series.class_poly_ring import PolyRing
 from linear_series.class_base_points import BasePointTree
@@ -148,7 +149,8 @@ def blum_cyclide():
     pin.cam_dct['rotate'] = ( 20, 180, 20 )
     pin.shadow = True
     pin.light_lst = [( 0, 0, -5 ), ( 0, -5, 0 ), ( -5, 0, 0 ),
-                     ( 0, 0, 5 ), ( 0, 5, 0 ), ( 5, 0, 0 ) ]
+                     ( 0, 0, 5 ), ( 0, 5, 0 ), ( 5, 0, 0 ),
+                     ( -5, -5, -5 ), ( 5, -5, 5 ), ( -5, -5, 5 ), ( 5, -5, -5 ) ]
     pin.axes_dct['show'] = False
     pin.axes_dct['len'] = 1.2
     pin.height = 400
@@ -217,35 +219,35 @@ def blum_cyclide():
     pin.curve_dct['FE'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.01}
     pin.curve_dct['FF'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.01}
 
-    col_A = ( 0.5, 0.0, 0.0, 0.0 )
-    col_B = ( 0.2, 0.3, 0.2, 0.0 )
-    col_C = ( 0.8, 0.6, 0.2, 0.0 )
-    col_E = ( 0.5, 0.0, 0.0, 0.0 )
-    col_F = ( 0.2, 0.3, 0.2, 0.0 )
-    col_D = ( 0.8, 0.6, 0.2, 0.0 )
-    colFF = ( 0.1, 0.1, 0.1, 0.0 )
+    col_A = rgbt2pov( ( 28, 125, 154, 0 ) )  # blue
+    col_B = rgbt2pov( ( 123, 21, 3, 0 ) )  # brown
+    col_C = rgbt2pov( ( 75, 102, 0, 0 ) )  # green
+    col_E = col_A
+    col_F = col_B
+    col_D = col_C
+    colFF = rgbt2pov( ( 254, 242, 190, 0 ) )  # beige
 
-    pin.text_dct['A'] = [True, col_A, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['B'] = [True, col_B, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['C'] = [True, col_C, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['E'] = [True, col_E, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['F'] = [True, col_F, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['D'] = [True, col_D, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['WE'] = [True, col_E, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['WF'] = [True, col_F, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['WD'] = [True, col_D, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['SA'] = [True, col_A, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['SB'] = [True, col_B, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['SC'] = [True, col_C, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['SE'] = [True, col_E, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['SF'] = [True, col_F, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['SD'] = [True, col_D, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FA'] = [True, colFF, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FB'] = [True, colFF, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FC'] = [True, colFF, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FE'] = [True, colFF, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FF'] = [True, colFF, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FD'] = [True, colFF, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['A'] = [True, col_A, 'phong 0.2' ]
+    pin.text_dct['B'] = [True, col_B, 'phong 0.2' ]
+    pin.text_dct['C'] = [True, col_C, 'phong 0.2' ]
+    pin.text_dct['E'] = [True, col_E, 'phong 0.2' ]
+    pin.text_dct['F'] = [True, col_F, 'phong 0.2' ]
+    pin.text_dct['D'] = [True, col_D, 'phong 0.2' ]
+    pin.text_dct['WE'] = [True, col_E, 'phong 0.2' ]
+    pin.text_dct['WF'] = [True, col_F, 'phong 0.2' ]
+    pin.text_dct['WD'] = [True, col_D, 'phong 0.2' ]
+    pin.text_dct['SA'] = [True, col_A, 'phong 0.2' ]
+    pin.text_dct['SB'] = [True, col_B, 'phong 0.2' ]
+    pin.text_dct['SC'] = [True, col_C, 'phong 0.2' ]
+    pin.text_dct['SE'] = [True, col_E, 'phong 0.2' ]
+    pin.text_dct['SF'] = [True, col_F, 'phong 0.2' ]
+    pin.text_dct['SD'] = [True, col_D, 'phong 0.2' ]
+    pin.text_dct['FA'] = [True, colFF, 'phong 0.2' ]
+    pin.text_dct['FB'] = [True, colFF, 'phong 0.2' ]
+    pin.text_dct['FC'] = [True, colFF, 'phong 0.2' ]
+    pin.text_dct['FE'] = [True, colFF, 'phong 0.2' ]
+    pin.text_dct['FF'] = [True, colFF, 'phong 0.2' ]
+    pin.text_dct['FD'] = [True, colFF, 'phong 0.2' ]
 
     # raytrace image/animation
     F_lst = ['FA', 'FB', 'FC']
