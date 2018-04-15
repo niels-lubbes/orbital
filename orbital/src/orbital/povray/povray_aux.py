@@ -140,6 +140,36 @@ def pov_nopow( poly ):
     return reduce( lambda x, y: x.replace( y, dct[y] ), dct, str( poly ) )
 
 
+def rgbt2pov( rgbt, gamma = 2.2 ):
+    '''
+    Converts RGB colors to Povray colors. 
+    
+    For more info see:
+    <http://news.povray.org/povray.general/thread/%3Cweb.4a5865409e9a3ab0e4e47a1b0@news.povray.org%3E/>
+    
+    Parameters
+    ----------
+    rgbt : tuple
+        A tuple consisting of 4 values: 
+        Integer r in [0,255] defining the red component. 
+        Integer g in [0,255] defining the green component.
+        Integer b in [0,255] defining the blue component.    
+        Integer t in [0,255] defining the transparency.    
+
+    Returns
+    -------
+    tuple
+        A tuple consisting of 4 entries for rgbt value in Povray:
+        (r/255^2.2, g/255^2.2, b/255^2.2, t/255 ) 
+        
+    Note
+    ----
+    The output is used for setting "pin.text_dct", which is used in 
+    "povray.create_pov_preamble_declares()".
+    '''
+    return ( ( rgbt[0] / 255.0 ) ** 2.2, ( rgbt[1] / 255.0 ) ** 2.2, ( rgbt[2] / 255.0 ) ** 2.2, rgbt[3] / 255.0 )
+
+
 def get_pmz_value( pmz_lst, v0, v1, prec = 50 ):
     '''
     Parameters

@@ -15,8 +15,22 @@ from orbital.povray.povray import create_pov
 
 from orbital.povray.povray_aux import get_time_str
 
+from orbital.povray.povray_aux import rgbt2pov
+
 
 class TestPovray( object ):
+
+    def test__rgbt2_pov( self ):
+        # blue
+        col = rgbt2pov( ( 28, 125, 154, 0 ) )
+        print( col )
+        assert str( col ) == '(0.00775102739766061, 0.20835965596076741, 0.3297290329675149, 0.0)'
+
+        # beige
+        col = rgbt2pov( ( 254, 242, 190, 0 ) )
+        print( col )
+        assert str( col ) == '(0.9913928435929399, 0.8912620368134188, 0.5234431552143247, 0.0)'
+
 
     def test__povray( self ):
 
@@ -70,5 +84,6 @@ class TestPovray( object ):
 
 if __name__ == '__main__':
 
-    TestPovray().test__povray()
+    TestPovray().test__rgbt2_pov()
+    # TestPovray().test__povray()
     pass
