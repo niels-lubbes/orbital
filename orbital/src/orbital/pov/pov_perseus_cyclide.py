@@ -18,6 +18,7 @@ from orbital.class_orb_ring import OrbRing
 from orbital.povray.class_pov_input import PovInput
 from orbital.povray.povray import create_pov
 from orbital.povray.povray_aux import get_time_str
+from orbital.povray.povray_aux import rgbt2pov
 
 from linear_series.class_poly_ring import PolyRing
 from linear_series.class_base_points import BasePointTree
@@ -219,11 +220,11 @@ def perseus_cyclide():
     pin.curve_dct['FD'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':prec, 'width':0.01}
     pin.curve_dct['FE'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':prec, 'width':0.01}
 
-    col_A = ( 0.6, 0.0, 0.0, 0.0 )
-    col_B = ( 0.8, 0.6, 0.2, 0.0 )
-    col_C = ( 0.0, 0.4, 0.0, 0.0 )
-    col_D = ( 0.4, 0.0, 0.1, 0.0 )
-    col_E = ( 0.2, 0.6, 0.0, 0.0 )
+    col_A = ( 0.6, 0.0, 0.0, 0.0 )  # red
+    col_B = ( 0.8, 0.6, 0.2, 0.0 )  # beige
+    col_C = ( 0.0, 0.4, 0.0, 0.0 )  # green
+    col_D = rgbt2pov( ( 28, 125, 154, 0 ) )  # blue
+    col_E = rgbt2pov( ( 74, 33, 0, 0 ) )  # brown
     colFF = ( 0.1, 0.1, 0.1, 0.0 )
 
     pin.text_dct['A'] = [True, col_A, 'phong 0.2 phong_size 5' ]

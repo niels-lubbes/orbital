@@ -220,12 +220,12 @@ def blum_cyclide():
     pin.curve_dct['FF'] = {'step0':v0_lst, 'step1':v1_lst_F, 'prec':10, 'width':0.01}
 
     col_A = rgbt2pov( ( 28, 125, 154, 0 ) )  # blue
-    col_B = rgbt2pov( ( 123, 21, 3, 0 ) )  # brown
+    col_B = rgbt2pov( ( 74, 33, 0, 0 ) )  # brown
     col_C = rgbt2pov( ( 75, 102, 0, 0 ) )  # green
     col_E = col_A
     col_F = col_B
     col_D = col_C
-    colFF = rgbt2pov( ( 254, 242, 190, 0 ) )  # beige
+    colFF = rgbt2pov( ( 179, 200, 217, 0 ) )  # light blue
 
     pin.text_dct['A'] = [True, col_A, 'phong 0.2' ]
     pin.text_dct['B'] = [True, col_B, 'phong 0.2' ]

@@ -18,6 +18,7 @@ from orbital.surface_in_quadric import get_S1xS1_pmz
 from orbital.povray.class_pov_input import PovInput
 from orbital.povray.povray import create_pov
 from orbital.povray.povray_aux import get_time_str
+from orbital.povray.povray_aux import rgbt2pov
 
 from linear_series.class_linear_series import LinearSeries
 from linear_series.class_base_points import BasePointTree
@@ -101,10 +102,14 @@ def dp6_smooth():
     pin.curve_dct['FB'] = {'step0':v0_lst, 'step1':v1_F_lst, 'prec':10, 'width':0.01}
     pin.curve_dct['FC'] = {'step0':v0_lst, 'step1':v1_F_lst, 'prec':10, 'width':0.01}
 
-    col_A = ( 0.4, 0.0, 0.0, 0.0 )
-    col_B = ( 0.2, 0.3, 0.2, 0.0 )
-    col_C = ( 0.8, 0.6, 0.2, 0.0 )
-    colFF = ( 0.1, 0.1, 0.1, 0.0 )
+    # col_A = ( 0.4, 0.0, 0.0, 0.0 )
+    # col_B = ( 0.2, 0.3, 0.2, 0.0 )
+    # col_C = ( 0.8, 0.6, 0.2, 0.0 )
+    # colFF = ( 0.1, 0.1, 0.1, 0.0 )
+    col_A = rgbt2pov( ( 28, 125, 154, 0 ) )  # blue
+    col_B = rgbt2pov( ( 74, 33, 0, 0 ) )  # brown
+    col_C = rgbt2pov( ( 75, 102, 0, 0 ) )  # green
+    colFF = rgbt2pov( ( 179, 200, 217, 0 ) )  # light blue
 
     pin.text_dct['A'] = [True, col_A, 'phong 0.2 phong_size 5' ]
     pin.text_dct['B'] = [True, col_B, 'phong 0.2 phong_size 5' ]

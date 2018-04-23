@@ -18,6 +18,7 @@ from orbital.class_orb_tools import OrbTools
 from orbital.povray.class_pov_input import PovInput
 from orbital.povray.povray import create_pov
 from orbital.povray.povray_aux import get_time_str
+from orbital.povray.povray_aux import rgbt2pov
 
 from linear_series.class_poly_ring import PolyRing
 from linear_series.class_base_points import BasePointTree
@@ -124,7 +125,8 @@ def ring_cyclide():
     pin.cam_dct['rotate'] = ( 45, 0, 0 )
     pin.shadow = True
     pin.light_lst = [( 0, 0, -5 ), ( 0, -5, 0 ), ( -5, 0, 0 ),
-                     ( 0, 0, 5 ), ( 0, 5, 0 ), ( 5, 0, 0 ) ]
+                     ( 0, 0, 5 ), ( 0, 5, 0 ), ( 5, 0, 0 ),
+                     ( -5, -5, -5 ), ( 5, -5, 5 ), ( -5, -5, 5 ), ( 5, -5, -5 ) ]
     pin.axes_dct['show'] = False
     pin.axes_dct['len'] = 1.2
     pin.width = 800
@@ -176,11 +178,10 @@ def ring_cyclide():
     # B = - horizontal circle
     # C = / villarceau circle
     # D = \ villarceau circle
-    col_A = ( 0.4, 0.0, 0.0, 0.0 )  # red
-    col_B = ( 0.0, 0.0, 0.4, 0.0 )  # blue
-    col_C = ( 0.1, 0.3, 0.0, 0.0 )  # green
-    col_D = ( 0.8, 0.6, 0.2, 0.0 )  # beige
-
+    col_A = rgbt2pov( ( 28, 125, 154, 0 ) )  # blue
+    col_B = rgbt2pov( ( 74, 33, 0, 0 ) )  # brown
+    col_C = rgbt2pov( ( 75, 102, 0, 0 ) )  # green
+    col_D = rgbt2pov( ( 187, 46, 0, 0 ) )  # red/orange
     colFF = ( 0.1, 0.1, 0.1, 0.0 )
 
     pin.text_dct['A'] = [True, col_A, 'phong 0.2 phong_size 5' ]
@@ -195,7 +196,6 @@ def ring_cyclide():
     pin.text_dct['WB'] = [True, col_B, 'phong 0.2 phong_size 5' ]
     pin.text_dct['WC'] = [True, col_C, 'phong 0.2 phong_size 5' ]
     pin.text_dct['WD'] = [True, col_D, 'phong 0.2 phong_size 5' ]
-
 
 
     # raytrace image/animation
