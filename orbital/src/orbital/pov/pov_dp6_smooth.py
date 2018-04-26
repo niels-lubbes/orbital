@@ -75,7 +75,8 @@ def dp6_smooth():
     pin.cam_dct['rotate'] = ( 310, 0, 0 )
     pin.shadow = True
     pin.light_lst = [( 0, 0, -5 ), ( 0, -5, 0 ), ( -5, 0, 0 ),
-                     ( 0, 0, 5 ), ( 0, 5, 0 ), ( 5, 0, 0 ) ]
+                     ( 0, 0, 5 ), ( 0, 5, 0 ), ( 5, 0, 0 ),
+                     ( -5, -5, -5 ), ( 5, -5, 5 ), ( -5, -5, 5 ), ( 5, -5, -5 ) ]
     pin.axes_dct['show'] = False
     pin.axes_dct['len'] = 1.2
     pin.height = 400
@@ -86,7 +87,7 @@ def dp6_smooth():
 
     v0_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 10 )]
     v1_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 15 )]
-    v1_F_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 2 )]
+    v1_F_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 1 )]
 
     pin.pmz_dct['A'] = ( pmz_AB_lst, 0 )
     pin.pmz_dct['B'] = ( pmz_AB_lst, 1 )
@@ -121,9 +122,9 @@ def dp6_smooth():
     # raytrace image/animation
     create_pov( pin, ['A', 'B', 'C'] )
     create_pov( pin, ['A', 'B', 'C', 'FA', 'FB', 'FC'] )
-    create_pov( pin, ['A', 'FA', 'FB', 'FC'] )
-    create_pov( pin, ['B', 'FA', 'FB', 'FC'] )
-    create_pov( pin, ['C', 'FA', 'FB', 'FC'] )
+    # create_pov( pin, ['A', 'FA', 'FB', 'FC'] )
+    # create_pov( pin, ['B', 'FA', 'FB', 'FC'] )
+    # create_pov( pin, ['C', 'FA', 'FB', 'FC'] )
 
 
 

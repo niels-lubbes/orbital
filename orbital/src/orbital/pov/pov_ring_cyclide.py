@@ -122,7 +122,7 @@ def ring_cyclide():
     pin.scale = 1
     pin.cam_dct['location'] = ( 0, -7, 0 )
     pin.cam_dct['lookat'] = ( 0, 0, 0 )
-    pin.cam_dct['rotate'] = ( 45, 0, 0 )
+    pin.cam_dct['rotate'] = ( 55, 0, 0 )  # 45
     pin.shadow = True
     pin.light_lst = [( 0, 0, -5 ), ( 0, -5, 0 ), ( -5, 0, 0 ),
                      ( 0, 0, 5 ), ( 0, 5, 0 ), ( 5, 0, 0 ),
@@ -182,7 +182,7 @@ def ring_cyclide():
     col_B = rgbt2pov( ( 74, 33, 0, 0 ) )  # brown
     col_C = rgbt2pov( ( 75, 102, 0, 0 ) )  # green
     col_D = rgbt2pov( ( 187, 46, 0, 0 ) )  # red/orange
-    colFF = ( 0.1, 0.1, 0.1, 0.0 )
+    colFF = rgbt2pov( ( 179, 200, 217, 0 ) )  # light blue
 
     pin.text_dct['A'] = [True, col_A, 'phong 0.2 phong_size 5' ]
     pin.text_dct['B'] = [True, col_B, 'phong 0.2 phong_size 5' ]

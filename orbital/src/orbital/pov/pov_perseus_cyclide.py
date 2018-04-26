@@ -222,9 +222,9 @@ def perseus_cyclide():
 
     col_A = ( 0.6, 0.0, 0.0, 0.0 )  # red
     col_B = ( 0.8, 0.6, 0.2, 0.0 )  # beige
-    col_C = ( 0.0, 0.4, 0.0, 0.0 )  # green
+    col_C = rgbt2pov( ( 74, 33, 0, 0 ) )  # brown
     col_D = rgbt2pov( ( 28, 125, 154, 0 ) )  # blue
-    col_E = rgbt2pov( ( 74, 33, 0, 0 ) )  # brown
+    col_E = ( 0.2, 0.6, 0.0, 0.0 )  # green
     colFF = ( 0.1, 0.1, 0.1, 0.0 )
 
     pin.text_dct['A'] = [True, col_A, 'phong 0.2 phong_size 5' ]
