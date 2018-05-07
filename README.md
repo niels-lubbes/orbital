@@ -146,6 +146,8 @@ of the constructed surfaces are small.
 ```python
 from orbital.prod.class_orb_input import OrbInput
 from orbital.prod.orb_product import orb_product
+from orbital.class_orb_tools import OrbTools                                           
+OrbTools.filter([]) # disable verbose output 
 
 input = OrbInput().random( 3, False )  # random input
 
