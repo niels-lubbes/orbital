@@ -12,7 +12,7 @@ from setuptools import setup
 
 
 setup( 
-    name = 'orbital',
+    name = 'orbital-surface',
     version = '0',
     description = 'Python library for constructing and visualizing curves on surfaces',
     classifiers = [
