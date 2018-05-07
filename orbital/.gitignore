@@ -6,6 +6,7 @@
 
 # Python egg metadata, regenerated from source files by setuptools.
 /src/*.egg-info
+*.egg-info
 
 # md viewer files
 .*.md.html
