@@ -74,9 +74,8 @@ def dp6_smooth():
     pin.cam_dct['lookat'] = ( 0, 0, 0 )
     pin.cam_dct['rotate'] = ( 310, 0, 0 )
     pin.shadow = True
-    pin.light_lst = [( 0, 0, -5 ), ( 0, -5, 0 ), ( -5, 0, 0 ),
-                     ( 0, 0, 5 ), ( 0, 5, 0 ), ( 5, 0, 0 ),
-                     ( -5, -5, -5 ), ( 5, -5, 5 ), ( -5, -5, 5 ), ( 5, -5, -5 ) ]
+    pin.light_lst = [( 0, 0, -4 ), ( 0, -4, 0 ), ( -4, 0, 0 ), ( 0, 4, 0 ), ( 4, 0, 0 ),
+                     ( -5, -5, -5 ), ( 5, 5, -5 ), ( -5, 5, -5 ), ( 5, -5, -5 ) ]
     pin.axes_dct['show'] = False
     pin.axes_dct['len'] = 1.2
     pin.height = 400
@@ -96,35 +95,32 @@ def dp6_smooth():
     pin.pmz_dct['FB'] = ( pmz_AB_lst, 1 )
     pin.pmz_dct['FC'] = ( pmz_CB_lst, 0 )
 
-    pin.curve_dct['A'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.02}
-    pin.curve_dct['B'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.02}
-    pin.curve_dct['C'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.02}
-    pin.curve_dct['FA'] = {'step0':v0_lst, 'step1':v1_F_lst, 'prec':10, 'width':0.01}
-    pin.curve_dct['FB'] = {'step0':v0_lst, 'step1':v1_F_lst, 'prec':10, 'width':0.01}
-    pin.curve_dct['FC'] = {'step0':v0_lst, 'step1':v1_F_lst, 'prec':10, 'width':0.01}
+    pin.curve_dct['A'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.018}
+    pin.curve_dct['B'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.018}
+    pin.curve_dct['C'] = {'step0':v0_lst, 'step1':v1_lst, 'prec':10, 'width':0.018}
+    pin.curve_dct['FA'] = {'step0':v0_lst, 'step1':v1_F_lst, 'prec':10, 'width':0.003}
+    pin.curve_dct['FB'] = {'step0':v0_lst, 'step1':v1_F_lst, 'prec':10, 'width':0.003}
+    pin.curve_dct['FC'] = {'step0':v0_lst, 'step1':v1_F_lst, 'prec':10, 'width':0.003}
 
-    # col_A = ( 0.4, 0.0, 0.0, 0.0 )
-    # col_B = ( 0.2, 0.3, 0.2, 0.0 )
-    # col_C = ( 0.8, 0.6, 0.2, 0.0 )
-    # colFF = ( 0.1, 0.1, 0.1, 0.0 )
-    col_A = rgbt2pov( ( 28, 125, 154, 0 ) )  # blue
-    col_B = rgbt2pov( ( 74, 33, 0, 0 ) )  # brown
-    col_C = rgbt2pov( ( 75, 102, 0, 0 ) )  # green
+    # ( 0.4, 0.0, 0.0, 0.0 ), ( 0.2, 0.3, 0.2, 0.0 ), ( 0.8, 0.6, 0.2, 0.0 )
+    col_A = rgbt2pov( ( 75, 102, 0, 0 ) )  # green /
+    col_B = rgbt2pov( ( 74, 33, 0, 0 ) )  # brown -
+    col_C = rgbt2pov( ( 28, 125, 154, 0 ) )  # blue \
     colFF = rgbt2pov( ( 179, 200, 217, 0 ) )  # light blue
 
-    pin.text_dct['A'] = [True, col_A, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['B'] = [True, col_B, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['C'] = [True, col_C, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FA'] = [True, colFF, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FB'] = [True, colFF, 'phong 0.2 phong_size 5' ]
-    pin.text_dct['FC'] = [True, colFF, 'phong 0.2 phong_size 5' ]
+    pin.text_dct['A'] = [True, col_A, 'phong 0.2' ]
+    pin.text_dct['B'] = [True, col_B, 'phong 0.2' ]
+    pin.text_dct['C'] = [True, col_C, 'phong 0.2' ]
+    pin.text_dct['FA'] = [True, colFF, 'phong 0.8' ]
+    pin.text_dct['FB'] = [True, colFF, 'phong 0.8' ]
+    pin.text_dct['FC'] = [True, colFF, 'phong 0.8' ]
 
     # raytrace image/animation
     create_pov( pin, ['A', 'B', 'C'] )
     create_pov( pin, ['A', 'B', 'C', 'FA', 'FB', 'FC'] )
-    # create_pov( pin, ['A', 'FA', 'FB', 'FC'] )
-    # create_pov( pin, ['B', 'FA', 'FB', 'FC'] )
-    # create_pov( pin, ['C', 'FA', 'FB', 'FC'] )
+    create_pov( pin, ['A', 'FA', 'FB', 'FC'] )
+    create_pov( pin, ['B', 'FA', 'FB', 'FC'] )
+    create_pov( pin, ['C', 'FA', 'FB', 'FC'] )
 
 
 

@@ -198,11 +198,11 @@ def perseus_cyclide():
     pin.pmz_dct['FE'] = ( pmz_EB_lst, 0 )
 
     v0_lst = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 10 )]
-    v1_lst_A = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 5 )]
+    v1_lst_A = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 10 )]  # 5
     v1_lst_B = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 15 )]
     v1_lst_C = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 36 )]
     v1_lst_D = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 36 )]
-    v1_lst_E = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 5 )]
+    v1_lst_E = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 10 )]  # 5
 
     v1_lst_F = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 360, 1 )]
 
@@ -222,8 +222,8 @@ def perseus_cyclide():
 
     col_A = ( 0.6, 0.0, 0.0, 0.0 )  # red
     col_B = ( 0.8, 0.6, 0.2, 0.0 )  # beige
-    col_C = rgbt2pov( ( 74, 33, 0, 0 ) )  # brown
-    col_D = rgbt2pov( ( 28, 125, 154, 0 ) )  # blue
+    col_C = ( 0.6, 0.0, 0.0, 0.0 )  # red   *** rgbt2pov( ( 74, 33, 0, 0 ) )     # brown
+    col_D = ( 0.2, 0.6, 0.0, 0.0 )  # green *** rgbt2pov( ( 28, 125, 154, 0 ) )  # blue
     col_E = ( 0.2, 0.6, 0.0, 0.0 )  # green
     colFF = ( 0.1, 0.1, 0.1, 0.0 )
 
