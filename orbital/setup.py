@@ -13,7 +13,7 @@ from setuptools import setup
 
 setup( 
     name = 'orbital-surface',
-    version = '0',
+    version = '1',
     description = 'Python library for constructing and visualizing curves on surfaces',
     classifiers = [
         'Development Status :: 3 - Alpha',
@@ -28,14 +28,14 @@ setup(
     license = 'MIT',
     package_dir = {
         'orbital': 'src/orbital',
-        'cossin': 'src/orbital/cossin',
-        'pov': 'src/orbital/pov',
-        'povray': 'src/orbital/povray',
-        'prod': 'src/orbital/prod',
+        'orbital.cossin': 'src/orbital/cossin',
+        'orbital.pov': 'src/orbital/pov',
+        'orbital.povray': 'src/orbital/povray',
+        'orbital.prod': 'src/orbital/prod',
     },
-    packages = ['orbital', 'cossin', 'pov', 'povray', 'prod'],
+    packages = ['orbital', 'orbital.cossin', 'orbital.pov', 'orbital.povray', 'orbital.prod'],
     # include_package_data = True,
-    package_data = {'orbital': ['orb_tools.sobj'], 'cossin':['cos_sin.txt']},
+    package_data = {'orbital': ['orb_tools.sobj'], 'orbital.cossin':['cos_sin.txt']},
     install_requires = ['linear_series'],
     test_suite = 'nose.collector',
     tests_require = ['nose'],
