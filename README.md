@@ -20,29 +20,29 @@ We assume that `povray` is accessible from your commandline interface.
 
 * Install the `orbital` package: 
 ```    
-sage -pip install orbital
+sage -pip install orbital-surface
 ```    
 If you do not have root access use the following command instead:
 ```    
-sage -pip install --user orbital
+sage -pip install --user orbital-surface
 ```    
 
 * We advice to upgrade the `orbital` package regularly:
 ```
-sage -pip install --upgrade orbital
+sage -pip install --upgrade orbital-surface
 ```
  
 * To execute some [usecases](https://github.com/niels-lubbes/moebius_aut/blob/master/orbital/src/orbital/__main__.py) type:
 ```    
-sage -python -m orbital
+sage -python -m orbital-surface
 ```
 
 * For showing which files were installed 
 or for uninstalling the `orbital` package, 
 use one of the following commands:
 ```
-sage -pip show --files orbital
-sage -pip uninstall orbital
+sage -pip show --files orbital-surface
+sage -pip uninstall orbital-surface
 ```
 
 
