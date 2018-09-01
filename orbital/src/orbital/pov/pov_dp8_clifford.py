@@ -18,9 +18,10 @@ from orbital.class_pov_input import PovInput
 from orbital.povray.povray import create_pov
 from orbital.povray.povray_aux import get_time_str
 
-from orbital.transform_sphere import get_xfer_S3
-from orbital.transform_sphere import get_hp_S3
-from orbital.transform_sphere import get_prj_S3
+from orbital.sphere.sphere_transform import get_rot_S3
+from orbital.sphere.sphere_transform import get_trn_S3
+from orbital.sphere.sphere_transform import get_scale_S3
+from orbital.sphere.sphere_transform import get_hp_P4
 
 
 def dp8_clifford():
@@ -33,15 +34,26 @@ def dp8_clifford():
     # construct surface as pointwise hamiltonian product of
     # two circles in S^3
     #
+    T = get_trn_S3( [0, 0, 0] )
+    R = get_rot_S3( 6 * [0] )
+    S = get_scale_S3( 1 )
+    A = S * R * T
+
+    q32 = sage_QQ( 3 ) / 2
+    T = get_trn_S3( [q32, 0, 0] )
+    R = get_rot_S3( 6 * [0] )
+    S = get_scale_S3( 1 )
+    B = S * R * T
+
     c0, s0, c1, s1 = OrbRing.coerce( 'c0,s0,c1,s1' )
-    x0, y0, z0, s = 1, 1, 0, 1
-    a01, a02, a03, a12, a13, a23 = [90] + 5 * [0]
-    M = get_xfer_S3( a01, a02, a03, a12, a13, a23, x0, y0, z0, s )
-    v = sage_vector( [c0, s0, 0, 0, 1] )
-    w = sage_vector( [c1, s1, 0, 0, 1] )
-    pmz_AB_lst = [1] + get_prj_S3( get_hp_S3( v, M * w ) )
+    u = list( A * sage_vector( [1, c0 , s0 , 0, 0] ) )
+    v = list( B * sage_vector( [1, c1 , s1 , 0, 0] ) )
+    p = get_hp_P4( u, v )
+    pmz_AB_lst = [ p[0] - p[4], p[1], p[2], p[3] ]
+
     for pmz in pmz_AB_lst:
         OrbTools.p( '\t\t', sage_factor( pmz ) )
+
 
     # PovInput dp8 clifford
     #
@@ -50,9 +62,9 @@ def dp8_clifford():
     pin.path = './' + get_time_str() + '_dp8_clifford/'
     pin.fname = 'orb'
     pin.scale = 1
-    pin.cam_dct['location'] = ( 0, 0, 5 )
+    pin.cam_dct['location'] = ( 0, 0, 4 )
     pin.cam_dct['lookat'] = ( 0, 0, 0 )
-    pin.cam_dct['rotate'] = ( 20, 0, 45 )
+    pin.cam_dct['rotate'] = ( 0, 0, 0 )
     pin.shadow = True
     pin.light_lst = [( 0, 0, -10 ), ( 0, -10, 0 ), ( -10, 0, 0 ),
                      ( 0, 0, 10 ), ( 0, 10, 0 ), ( 10, 0, 0 ) ]
