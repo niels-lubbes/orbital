@@ -98,7 +98,7 @@ class SphereInput:
     opa : sage_QQ
         Rational number between 0 and 1, denoting the opacity of the surface plot.
         
-    rng : int
+    rng : float
         Range for implicit plot.
              
     stp : int
