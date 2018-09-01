@@ -240,50 +240,55 @@ the Euclidean absolute. The surface X is a so called Perseus cyclide and its two
 isolated singularities are send to the Euclidean absolute.
     
     
-### Example 3: Constructing the pointwise product of circles in the unit quaternions
+### Example 3: Computing product of circles
 
 A [Clifford torus](https://en.wikipedia.org/wiki/Clifford_torus) is a quartic surface 
 obtained as the point-wise [Hamiltonian product](https://en.wikipedia.org/wiki/Quaternion) 
 of two great circles in the 3-sphere S^3, 
 where we identify S^3 with the unit quaternions.
 If instead of great circles we also consider little circles, 
-then this construction leads to surfaces of degree 8 in S^3 
+then this construction leads to surfaces of degree 4 or 8 in S^3 
 that contain two circles through each point.
 
 ```python
-from orbital.transform_sphere import get_xfer_S3
-from orbital.transform_sphere import get_hp_S3
-from orbital.transform_sphere import get_prj_S3
-from orbital.class_orb_ring import OrbRing
-from orbital.sage_interface import sage_factor
-from orbital.sage_interface import sage_vector
+from orbital.sphere.class_sphere_input import SphereInput
+from orbital.sphere.sphere_experiment import clifford
+from orbital.class_orb_tools import OrbTools
+OrbTools.filter( [] ) 
 
+# create SphereInput object
+inp = '[[(0, 0, 0), (0, 0, 0), (0, 0, 0), 1], [(55, 30, 0), (0,65, 0), (3/2, 0, 0), 1]]'
+sinp = SphereInput().set(inp)    
+sinp.bas  = False
+sinp.mrk  = False
+sinp.pmz  = True
+sinp.fam  = True
+sinp.famt = 3
+sinp.stp  = 12
+sinp.opa  = 3/4
+sinp.ppt  = 100
 
-# Construct surface as pointwise hamiltonian product of two circles in S^3
-#
-c0, s0, c1, s1 = OrbRing.coerce( 'c0,s0,c1,s1' )
-x0, y0, z0, s = 1, 1, 0, 1
-a01, a02, a03, a12, a13, a23 = [90] + 5 * [0]
-M = get_xfer_S3( a01, a02, a03, a12, a13, a23, x0, y0, z0, s )
-v = sage_vector( [c0, s0, 0, 0, 1] )
-w = sage_vector( [c1, s1, 0, 0, 1] )
-pmz_AB_lst = [1] + get_prj_S3( get_hp_S3( v, M * w ) )
-for pmz in pmz_AB_lst: print( sage_factor( pmz ) )
+# compute product of circles
+plt, out  = clifford( sinp )
+show( plt, frame = False )
+print( out )
 ```
 Output:
 
-    1
-    (-c0*c1 + c0*s1 - c0 + c1 - s1 + 2)^-1 * (s0*c1 + c0*s1 - c0 + s0)
-    (-c0*c1 + c0*s1 - c0 + c1 - s1 + 2)^-1 * (-c0*c1 + s0*s1 - c0 - s0)
-    (-1) * (-c1 + s1 - 1) * s0 * (-c0*c1 + c0*s1 - c0 + c1 - s1 + 2)^-1
+    --- SphereInput ---
+     [(0, 0, 0), (0, 0, 0), (0, 0, 0), 1]
+     [(55, 30, 0), (0, 65, 0), (3/2, 0, 0), 1]
+     short_input = [[(0, 0, 0), (0, 0, 0), (0, 0, 0), 1], [(55, 30, 0), (0, 65, 0), (3/2, 0, 0), 1]]
+    -------------------
+    
+    eqn_str = (2014026851767689) * (x1^2 + x2^2 + x3^2)^4+(-1) * x0 * (-2014026851767689*x0^7 + 3438408945839472*x0^6*x1 + 5124755703563172*x0^5*x1^2 + 3098583413356464*x0^4*x1^3 - 16760366455053366*x0^3*x1^4 - 3098583413356464*x0^2*x1^5 + 5124755703563172*x0*x1^6 - 3438408945839472*x1^7 - 3092194666059840*x0^6*x2 + 18858408601592160*x0^5*x1*x2 - 3505095937654080*x0^4*x1^2*x2 - 37716817203184320*x0^3*x1^3*x2 + 3505095937654080*x0^2*x1^4*x2 + 18858408601592160*x0*x1^5*x2 + 3092194666059840*x1^6*x2 + 8821193625627136*x0^5*x2^2 + 3098583413356464*x0^4*x1*x2^2 - 40913608754234660*x0^3*x1^2*x2^2 - 6197166826712928*x0^2*x1^3*x2^2 + 19070705032753480*x0*x1^4*x2^2 - 10315226837518416*x1^5*x2^2 - 3505095937654080*x0^4*x2^3 - 37716817203184320*x0^3*x1*x2^3 + 7010191875308160*x0^2*x1^2*x2^3 + 37716817203184320*x0*x1^3*x2^3 + 9276583998179520*x1^4*x2^3 - 24153242299181294*x0^3*x2^4 - 3098583413356464*x0^2*x1*x2^4 + 22767142954817444*x0*x1^2*x2^4 - 10315226837518416*x1^3*x2^4 + 3505095937654080*x0^2*x2^5 + 18858408601592160*x0*x1*x2^5 + 9276583998179520*x1^2*x2^5 + 8821193625627136*x0*x2^6 - 3438408945839472*x1*x2^6 + 3092194666059840*x2^7 + 6184389332119680*x0^5*x1*x3 - 37716817203184320*x0^4*x1^2*x3 + 13194581207427840*x0^3*x1^3*x3 + 37716817203184320*x0^2*x1^4*x3 + 6184389332119680*x0*x1^5*x3 + 6876817891678944*x0^5*x2*x3 - 14785751688255856*x0^4*x1*x2*x3 + 13073984718391872*x0^3*x1^2*x2*x3 + 14785751688255856*x0^2*x1^3*x2*x3 + 6876817891678944*x0*x1^4*x2*x3 + 37716817203184320*x0^4*x2^2*x3 + 13194581207427840*x0^3*x1*x2^2*x3 + 12368778664239360*x0*x1^3*x2^2*x3 + 13073984718391872*x0^3*x2^3*x3 + 14785751688255856*x0^2*x1*x2^3*x3 + 13753635783357888*x0*x1^2*x2^3*x3 - 37716817203184320*x0^2*x2^4*x3 + 6184389332119680*x0*x1*x2^4*x3 + 6876817891678944*x0*x2^5*x3 - 8056107407070756*x0^5*x3^2 + 3438408945839472*x0^4*x1*x3^2 + 16979155688311444*x0^3*x1^2*x3^2 - 6536992359195936*x0^2*x1^3*x3^2 + 2193404000055588*x0*x1^4*x3^2 - 10315226837518416*x1^5*x3^2 - 3092194666059840*x0^4*x2*x3^2 - 113150451609552960*x0^3*x1*x2*x3^2 + 6597290603713920*x0^2*x1^2*x2*x3^2 + 37716817203184320*x0*x1^3*x2*x3^2 + 9276583998179520*x1^4*x2*x3^2 - 5199471844072340*x0^3*x2^2*x3^2 - 6536992359195936*x0^2*x1*x2^2*x3^2 + 11779683844239104*x0*x1^2*x2^2*x3^2 - 20630453675036832*x1^3*x2^2*x3^2 + 6597290603713920*x0^2*x2^3*x3^2 + 37716817203184320*x0*x1*x2^3*x3^2 + 18553167996359040*x1^2*x2^3*x3^2 + 9586279844183516*x0*x2^4*x3^2 - 10315226837518416*x1*x2^4*x3^2 + 9276583998179520*x2^5*x3^2 + 12368778664239360*x0^3*x1*x3^3 + 37716817203184320*x0^2*x1^2*x3^3 + 12368778664239360*x0*x1^3*x3^3 + 13753635783357888*x0^3*x2*x3^3 + 14785751688255856*x0^2*x1*x2*x3^3 + 13753635783357888*x0*x1^2*x2*x3^3 - 37716817203184320*x0^2*x2^2*x3^3 + 12368778664239360*x0*x1*x2^2*x3^3 + 13753635783357888*x0*x2^3*x3^3 - 12084161110606134*x0^3*x3^4 - 3438408945839472*x0^2*x1*x3^4 - 10987459110578340*x0*x1^2*x3^4 - 10315226837518416*x1^3*x3^4 + 3092194666059840*x0^2*x2*x3^4 + 18858408601592160*x0*x1*x2*x3^4 + 9276583998179520*x1^2*x2*x3^4 - 7291021188514376*x0*x2^2*x3^4 - 10315226837518416*x1*x2^2*x3^4 + 9276583998179520*x2^3*x3^4 + 6184389332119680*x0*x1*x3^5 + 6876817891678944*x0*x2*x3^5 - 8056107407070756*x0*x3^6 - 3438408945839472*x1*x3^6 + 3092194666059840*x2*x3^6)
+    Agreat  = True
+    Bgreat  = False
+    A       = [(2, 0, 0, 0, 0), (0, 2, 0, 0, 0), (0, 0, 2, 0, 0), (0, 0, 0, 2, 0), (0, 0, 0, 0, 2)]
+    B       = [(17/4, 3, 0, 0, -9/4), (72688803/23025140, 18544801/5756285, -16632/23885, -38400/67721, -38395467/23025140), (1126125/1151257, -139986/1151257, 2304/4777, -55440/67721, -2313773/1151257), (360/241, 240/241, 0, 418/241, -360/241), (81/85, 108/85, 154/85, 0, -9/85)]
+    pmzAB   = [-1/281*(44*(1685891*cos(a) + 63630*sin(a))*cos(b) - 69408*(231*cos(a) + 160*sin(a))*sin(b) + 72688803*cos(a) - 22522500*sin(a))/(12*(8676*cos(a) + 6800*sin(a) - 20485)*cos(b) + 148456*cos(a)*sin(b) + 78084*cos(a) + 122400*sin(a) - 348245), 1/281*(44*(63630*cos(a) - 1685891*sin(a))*cos(b) - 69408*(160*cos(a) - 231*sin(a))*sin(b) - 22522500*cos(a) - 72688803*sin(a))/(12*(8676*cos(a) + 6800*sin(a) - 20485)*cos(b) + 148456*cos(a)*sin(b) + 78084*cos(a) + 122400*sin(a) - 348245), -4*(12*(1700*cos(a) - 2169*sin(a))*cos(b) - 37114*sin(a)*sin(b) + 30600*cos(a) - 19521*sin(a))/(12*(8676*cos(a) + 6800*sin(a) - 20485)*cos(b) + 148456*cos(a)*sin(b) + 78084*cos(a) + 122400*sin(a) - 348245)]
 
-
-In the output `c0,s0,c1,s1` stands for cos(a), sin(a), cos(b) and sin(b)
-respectively, where a and b are angles between 0 and 2*pi.
-We constructed with [`dp8_clifford()`](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/pov/pov_dp8_clifford.py)
-a Povray image of a stereographic projection of such a Clifford translational surface.
-
-![output image](https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/deg8-clifford.png?token=AX_Io87BPAT0KHA353fOlHnmAZ3QMmk6ks5a0dCMwA%3D%3D "Clifford translational surface")    
+![output image](https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/deg8-greatb.png "Clifford translational surface")    
 
 
 ### Example 4: Computing and rendering a hexagonal web of conics on a surface. 
