@@ -82,6 +82,11 @@ def sage_set_verbose( *args, **kwargs ):
 def sage_n( *args, **kwargs ):
     return n( *args, **kwargs )
 
+# from sage.misc.flatten import flatten
+def sage_flatten( *args, **kwargs ):
+    return flatten( *args, **kwargs )
+
+
 
 #################################################
 # sage.functions                                #
@@ -263,7 +268,29 @@ def sage_Graph( *args, **kwargs ):
     return Graph( *args, **kwargs )
 
 
+#################################################
+# sage.plot                                     #
+#################################################
 
+# from sage.plot.graphics import Graphics
+def sage_Graphics( *args, **kwargs ):
+    return Graphics( *args, **kwargs )
+
+# from sage.plot.plot3d.parametric_plot3d import parametric_plot3d
+def sage_parametric_plot3d( *args, **kwargs ):
+    return parametric_plot3d( *args, **kwargs )
+
+# from sage.plot.plot3d.implicit_plot3d import implicit_plot3d
+def sage_implicit_plot3d( *args, **kwargs ):
+    return implicit_plot3d( *args, **kwargs )
+
+# from sage.plot.plot3d.shapes2 import point3d
+def sage_point3d( *args, **kwargs ):
+    return point3d( *args, **kwargs )
+
+# from sage.plot.plot3d.color import Color
+def sage_Color( *args, **kwargs ):
+    return Color( *args, **kwargs )
 
 
 
