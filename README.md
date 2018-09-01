@@ -288,7 +288,7 @@ Output:
     B       = [(17/4, 3, 0, 0, -9/4), (72688803/23025140, 18544801/5756285, -16632/23885, -38400/67721, -38395467/23025140), (1126125/1151257, -139986/1151257, 2304/4777, -55440/67721, -2313773/1151257), (360/241, 240/241, 0, 418/241, -360/241), (81/85, 108/85, 154/85, 0, -9/85)]
     pmzAB   = [-1/281*(44*(1685891*cos(a) + 63630*sin(a))*cos(b) - 69408*(231*cos(a) + 160*sin(a))*sin(b) + 72688803*cos(a) - 22522500*sin(a))/(12*(8676*cos(a) + 6800*sin(a) - 20485)*cos(b) + 148456*cos(a)*sin(b) + 78084*cos(a) + 122400*sin(a) - 348245), 1/281*(44*(63630*cos(a) - 1685891*sin(a))*cos(b) - 69408*(160*cos(a) - 231*sin(a))*sin(b) - 22522500*cos(a) - 72688803*sin(a))/(12*(8676*cos(a) + 6800*sin(a) - 20485)*cos(b) + 148456*cos(a)*sin(b) + 78084*cos(a) + 122400*sin(a) - 348245), -4*(12*(1700*cos(a) - 2169*sin(a))*cos(b) - 37114*sin(a)*sin(b) + 30600*cos(a) - 19521*sin(a))/(12*(8676*cos(a) + 6800*sin(a) - 20485)*cos(b) + 148456*cos(a)*sin(b) + 78084*cos(a) + 122400*sin(a) - 348245)]
 
-![output image](https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/deg8-greatb.png "Clifford translational surface")    
+[output image](https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/deg8-greatb.png "Clifford translational surface")    
 
 To experiment copy-paste 
 the code at the start of [this file](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/sphere/sphere_experiment.py) to a Sage notebook().
