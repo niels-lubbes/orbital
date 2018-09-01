@@ -292,6 +292,8 @@ Output:
 
 To experiment copy-paste 
 the code at the start of [this file](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/sphere/sphere_experiment.py) to a Sage notebook().
+For creating a Povray image of the output 
+surface see [here](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/pov/dp8_clifford.py).
 
 
 ### Example 4: Computing and rendering a hexagonal web of conics on a surface. 
