@@ -292,7 +292,11 @@ Output:
 
 To experiment copy-paste 
 the code at the 
-start of [this file](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/sphere/sphere_experiment.py) to a Sage notebook(). For creating a Povray image of the output 
+start of [this file](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/sphere/sphere_experiment.py) to 
+a Sage notebook. 
+The examples in [[1]](https://arxiv.org/abs/1306.1917) are constructed with
+this [Sage notebook](https://github.com/niels-lubbes/orbital/blob/master/orbital/bin/sum-product-circles.sws).
+For creating a Povray image of the output 
 surface see [here](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/pov/pov_dp8_clifford.py).
 
 
