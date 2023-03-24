@@ -3,7 +3,7 @@
 
 ## Introduction
 
-Orbital is a Python library for constructing and visualizing curves on surfaces.   
+Orbital is a Python library for constructing and visualizing curves on surfaces.
 
 This library depends on [SageMath](https://SageMath.org) and [Povray](http://povray.org) libraries.
 
@@ -62,10 +62,10 @@ might be informative for how to call each function.
 A *celestial surface* is a surface that contains at least two circles through almost each point. 
 Such a surface can be embedded in the projective n-sphere S^n for some n>=2. 
 The n-sphere S^n is a hyperquadric of signature (n+1,1).
-A surface in S^n of degree d that contains l circles through
-almost each point has *celestial type*: (l,d,n).
-We have [shown](https://arxiv.org/abs/1302.6710) that n<=7 and l is either
-infinity, or at most 6.
+A surface in S^n of degree d that contains c circles through
+almost each point has *celestial type* (c,d,n).
+We have [shown](https://arxiv.org/abs/1302.6710) that n<=7
+and c is either infinity, or at most 6.
 
 We denote the fiber product of the projective line with itself by P^1xP^1. 
 Celestial surfaces, that contain finitely many circles through each point,
@@ -137,7 +137,7 @@ The 1-parameter subgroup of automorphisms of the n-sphere are
 represented by a parametrized matrix.
 The disadvantage of this method that is gives us less control on the degree and 
 embedding dimension. 
-However, the advantage is that the coefficients of the defining polynomials 
+The advantage is that the coefficients of the defining polynomials
 of the constructed surfaces are small.
 
 ```python
@@ -243,11 +243,11 @@ isolated singularities are send to the Euclidean absolute.
 ### Example 3: Computing product of circles
 
 A [Clifford torus](https://en.wikipedia.org/wiki/Clifford_torus) is a quartic surface 
-obtained as the point-wise [Hamiltonian product](https://en.wikipedia.org/wiki/Quaternion) 
+obtained as the pointwise [Hamiltonian product](https://en.wikipedia.org/wiki/Quaternion)
 of two great circles in the 3-sphere S^3, 
 where we identify S^3 with the unit quaternions.
 If instead of great circles we also consider little circles, 
-then this construction leads to surfaces of degree 4 or 8 in S^3 
+then this construction leads to surfaces of degree either 4 or 8 in S^3
 that contain two circles through each point.
 
 ```python
@@ -294,18 +294,138 @@ To experiment copy-paste
 the code at the 
 start of [this file](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/sphere/sphere_experiment.py) to 
 a Sage notebook. 
-The examples in [[1]](https://arxiv.org/abs/1306.1917) are constructed 
+The examples in
+[this](https://arxiv.org/abs/1306.1917)
+and
+[this](https://arxiv.org/abs/2205.14438)
+article are constructed
 with [this](https://github.com/niels-lubbes/orbital/blob/master/orbital/bin/sum-product-circles.sws) Sage notebook.
 For creating a Povray image of the output 
 surface see [here](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/pov/pov_dp8_clifford.py).
 
+### Example 4: Surfaces of great type I, II and III
 
-### Example 4: Computing and rendering a hexagonal web of conics on a surface. 
+The examples of the surfaces of great types I, II and III in
+the article with title
+["The shapes of surfaces that contain a great and a small circle through each point"](https://arxiv.org/abs/2205.14438)
+are constructed using the following code,
+where we compute aside a parametrization also
+an implicit equation of its stereographic projection.
+
+First we import the necessary modules:
+```python
+from orbital.sphere.class_sphere_input import SphereInput
+from orbital.sphere.sphere_experiment import clifford
+from orbital.class_orb_tools import OrbTools
+OrbTools.filter( [] )
+```
+
+We create `SphereInput` object for a surface of great type I
+and pass it to the `clifford` method.
+The output of this method provides us with a parametric and implicit
+representation of the projected surface.
+
+```python
+# great type I
+inp = '[[(0, 0, 0), (0, 0, 0), (0, 0, 0), 1], [(0, 0, 0), (0, 0, 0), (3/2, 0, 0), 1]]'
+sinp = SphereInput().set(inp)
+sinp.bas = False
+sinp.mrk = False
+sinp.imp = True
+sinp.fam = True
+
+# compute the product of circles
+plt, out = clifford( sinp )
+print( out )
+show( plt, frame = False )
+```
+Output:
+
+    --- SphereInput ---
+    [(0, 0, 0), (0, 0, 0), (0, 0, 0), 1]
+    [(0, 0, 0), (0, 0, 0), (3/2, 0, 0), 1]
+    short_input = [[(0, 0, 0), (0, 0, 0), (0, 0, 0), 1], [(0, 0, 0), (0, 0, 0), (3/2, 0, 0), 1]]
+    -------------------
+
+    eqn_str = (20) * (x1^2 + x2^2 + x3^2)^4+(-1) * x0 * (-20*x0^7 - 12*x0^6*x1 + 143*x0^5*x1^2 + 36*x0^4*x1^3 - 246*x0^3*x1^4 - 36*x0^2*x1^5 + 143*x0*x1^6 + 12*x1^7 - x0^5*x2^2 + 36*x0^4*x1*x2^2 - 204*x0^3*x1^2*x2^2 - 72*x0^2*x1^3*x2^2 + 285*x0*x1^4*x2^2 + 36*x1^5*x2^2 + 42*x0^3*x2^4 - 36*x0^2*x1*x2^4 + 141*x0*x1^2*x2^4 + 36*x1^3*x2^4 - x0*x2^6 + 12*x1*x2^6 - 24*x0^5*x2*x3 + 576*x0^4*x1*x2*x3 + 48*x0^3*x1^2*x2*x3 - 576*x0^2*x1^3*x2*x3 - 24*x0*x1^4*x2*x3 + 48*x0^3*x2^3*x3 - 576*x0^2*x1*x2^3*x3 - 48*x0*x1^2*x2^3*x3 - 24*x0*x2^5*x3 - 80*x0^5*x3^2 - 12*x0^4*x1*x3^2 - 370*x0^3*x1^2*x3^2 - 24*x0^2*x1^3*x3^2 + 206*x0*x1^4*x3^2 + 36*x1^5*x3^2 + 494*x0^3*x2^2*x3^2 - 24*x0^2*x1*x2^2*x3^2 + 124*x0*x1^2*x2^2*x3^2 + 72*x1^3*x2^2*x3^2 - 82*x0*x2^4*x3^2 + 36*x1*x2^4*x3^2 - 48*x0^3*x2*x3^3 - 576*x0^2*x1*x2*x3^3 - 48*x0*x1^2*x2*x3^3 - 48*x0*x2^3*x3^3 - 120*x0^3*x3^4 + 12*x0^2*x1*x3^4 - 17*x0*x1^2*x3^4 + 36*x1^3*x3^4 - 161*x0*x2^2*x3^4 + 36*x1*x2^2*x3^4 - 24*x0*x2*x3^5 - 80*x0*x3^6 + 12*x1*x3^6)
+    Agreat = True
+    Bgreat = False
+    A = [(2, 0, 0, 0, 0), (0, 2, 0, 0, 0), (0, 0, 2, 0, 0), (0, 0, 0, 2, 0), (0, 0, 0, 0, 2)]
+    B = [(17/4, 3, 0, 0, -9/4), (3, 2, 0, 0, -3), (0, 0, 2, 0, 0), (0, 0, 0, 2, 0), (9/4, 3, 0, 0, -1/4)]
+    pmzAB = [-4*(2*cos(a)*cos(b) - 2*sin(a)*sin(b) + 3*cos(a))/(12*(cos(a) - 1)*cos(b) + 9*cos(a) - 17), -4*(2*cos(b)*sin(a) + 2*cos(a)*sin(b) + 3*sin(a))/(12*(cos(a) - 1)*cos(b) + 9*cos(a) - 17), 3*(4*cos(b)*sin(a) + 3*sin(a))/(12*(cos(a) - 1)*cos(b) + 9*cos(a) - 17)]
+
+![output image](https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/great-type-I.png "Celestial surface of great type I")
+
+```python
+# great type II
+inp = '[[(0, 0, 0), (0, 0, 0), (0, 0, 0), 1], [(0, 0, 0), (0, 0, 0), (2, 0, 0), 1]]'
+sinp = SphereInput().set(inp)
+sinp.bas = False
+sinp.mrk = False
+sinp.imp = True
+sinp.fam = True
+
+# compute the product of circles
+plt, out = clifford( sinp )
+print(out)
+show( plt, frame = False )
+```
+Output
+
+    --- SphereInput ---
+    [(0, 0, 0), (0, 0, 0), (0, 0, 0), 1]
+    [(0, 0, 0), (0, 0, 0), (2, 0, 0), 1]
+    short_input = [[(0, 0, 0), (0, 0, 0), (0, 0, 0), 1], [(0, 0, 0), (0, 0, 0), (2, 0, 0), 1]]
+    -------------------
+
+    eqn_str = (3) * (x1^2 + x2^2 + x3^2)^4+(-1) * x0 * (-3*x0^7 - 8*x0^6*x1 + 12*x0^5*x1^2 + 24*x0^4*x1^3 - 18*x0^3*x1^4 - 24*x0^2*x1^5 + 12*x0*x1^6 + 8*x1^7 - 4*x0^5*x2^2 + 24*x0^4*x1*x2^2 - 4*x0^3*x1^2*x2^2 - 48*x0^2*x1^3*x2^2 + 20*x0*x1^4*x2^2 + 24*x1^5*x2^2 + 14*x0^3*x2^4 - 24*x0^2*x1*x2^4 + 4*x0*x1^2*x2^4 + 24*x1^3*x2^4 - 4*x0*x2^6 + 8*x1*x2^6 - 16*x0^5*x2*x3 + 64*x0^4*x1*x2*x3 + 32*x0^3*x1^2*x2*x3 - 64*x0^2*x1^3*x2*x3 - 16*x0*x1^4*x2*x3 + 32*x0^3*x2^3*x3 - 64*x0^2*x1*x2^3*x3 - 32*x0*x1^2*x2^3*x3 - 16*x0*x2^5*x3 - 12*x0^5*x3^2 - 8*x0^4*x1*x3^2 - 52*x0^3*x1^2*x3^2 - 16*x0^2*x1^3*x3^2 + 12*x0*x1^4*x3^2 + 24*x1^5*x3^2 + 44*x0^3*x2^2*x3^2 - 16*x0^2*x1*x2^2*x3^2 - 8*x0*x1^2*x2^2*x3^2 + 48*x1^3*x2^2*x3^2 - 20*x0*x2^4*x3^2 + 24*x1*x2^4*x3^2 - 32*x0^3*x2*x3^3 - 64*x0^2*x1*x2*x3^3 - 32*x0*x1^2*x2*x3^3 - 32*x0*x2^3*x3^3 - 18*x0^3*x3^4 + 8*x0^2*x1*x3^4 - 12*x0*x1^2*x3^4 + 24*x1^3*x3^4 - 28*x0*x2^2*x3^4 + 24*x1*x2^2*x3^4 - 16*x0*x2*x3^5 - 12*x0*x3^6 + 8*x1*x3^6)
+    Agreat  = True
+    Bgreat  = False
+    A       = [(2, 0, 0, 0, 0), (0, 2, 0, 0, 0), (0, 0, 2, 0, 0), (0, 0, 0, 2, 0), (0, 0, 0, 0, 2)]
+    B       = [(6, 4, 0, 0, -4), (4, 2, 0, 0, -4), (0, 0, 2, 0, 0), (0, 0, 0, 2, 0), (4, 4, 0, 0, -2)]
+    pmzAB   = [-(cos(a)*cos(b) - sin(a)*sin(b) + 2*cos(a))/(2*(cos(a) -1)*cos(b) + 2*cos(a) - 3), -(cos(b)*sin(a) + cos(a)*sin(b) + 2*sin(a))/(2*(cos(a) - 1)*cos(b) + 2*cos(a) - 3), 2*(cos(b)*sin(a) + sin(a))/(2*(cos(a) - 1)*cos(b) + 2*cos(a) - 3)]
+
+![output image](https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/great-type-II.png "Celestial surface of great type II")
+
+```python
+# great type III
+inp = '[[(0, 0, 0), (0, 0, 0), (0, 0, 0), 1], [(0, 0, 0), (0, 0, 0), (3, 0, 0), 1]]'
+sinp = SphereInput().set(inp)
+sinp.bas = True
+sinp.mrk = False
+sinp.imp = True
+sinp.fam = True
+
+# compute the product of circles
+plt, out = clifford( sinp )
+print( out )
+show( plt, frame = False )
+```
+Output:
+
+    ---SphereInput---
+    [(0,0,0),(0,0,0),(0,0,0),1]
+    [(0,0,0),(0,0,0),(3,0,0),1]
+    short_input = [[(0,0,0),(0,0,0),(0,0,0),1],[(0,0,0),(0,0,0),(3,0,0),1]]
+    -------------------
+
+    eqn_str = (8)*(x1^2+x2^2+x3^2)^4+(-1)*x0*(-8*x0^7-42*x0^6*x1-13*x0^5*x1^2+126*x0^4*x1^3+42*x0^3*x1^4-126*x0^2*x1^5-13*x0*x1^6+42*x1^7-49*x0^5*x2^2+126*x0^4*x1*x2^2+156*x0^3*x1^2*x2^2-252*x0^2*x1^3*x2^2-75*x0*x1^4*x2^2+126*x1^5*x2^2+114*x0^3*x2^4-126*x0^2*x1*x2^4-111*x0*x1^2*x2^4+126*x1^3*x2^4-49*x0*x2^6+42*x1*x2^6-84*x0^5*x2*x3+144*x0^4*x1*x2*x3+168*x0^3*x1^2*x2*x3-144*x0^2*x1^3*x2*x3-84*x0*x1^4*x2*x3+168*x0^3*x2^3*x3-144*x0^2*x1*x2^3*x3-168*x0*x1^2*x2^3*x3-84*x0*x2^5*x3-32*x0^5*x3^2-42*x0^4*x1*x3^2-202*x0^3*x1^2*x3^2-84*x0^2*x1^3*x3^2-58*x0*x1^4*x3^2+126*x1^5*x3^2+14*x0^3*x2^2*x3^2-84*x0^2*x1*x2^2*x3^2-188*x0*x1^2*x2^2*x3^2+252*x1^3*x2^2*x3^2-130*x0*x2^4*x3^2+126*x1*x2^4*x3^2-168*x0^3*x2*x3^3-144*x0^2*x1*x2*x3^3-168*x0*x1^2*x2*x3^3-168*x0*x2^3*x3^3-48*x0^3*x3^4+42*x0^2*x1*x3^4-77*x0*x1^2*x3^4+126*x1^3*x3^4-113*x0*x2^2*x3^4+126*x1*x2^2*x3^4-84*x0*x2*x3^5-32*x0*x3^6+42*x1*x3^6)
+    Agreat  = True
+    Bgreat  = False
+    A       = [(2,0,0,0,0),(0,2,0,0,0),(0,0,2,0,0),(0,0,0,2,0),(0,0,0,0,2)]
+    B       = [(11,6,0,0,-9),(6,2,0,0,-6),(0,0,2,0,0),(0,0,0,2,0),(9,6,0,0,-7)]
+    pmzAB   = [-2*(cos(a)*cos(b)-sin(a)*sin(b)+3*cos(a))/(6*(cos(a)-1)*cos(b)+9*cos(a)-11),-2*(cos(b)*sin(a)+cos(a)*sin(b)+3*sin(a))/(6*(cos(a)-1)*cos(b)+9*cos(a)-11),3*(2*cos(b)*sin(a)+3*sin(a))/(6*(cos(a)-1)*cos(b)+9*cos(a)-11)]
+
+![output image](https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/great-type-III.png "Celestial surface of great type III")
+
+Alternatively, download [this Sage notebook](https://github.com/niels-lubbes/orbital/blob/master/orbital/bin/sum-product-circles.sws).
+
+### Example 5: Computing and rendering a hexagonal web of conics on a surface.
 
 In example 1 we constructed a celestial surface in the S^4.
 In this example we create an image of a linear projection to 3-space 
 of such constructed surfaces.
-In this example we consider a smooth del Pezzo surface in S^5
+Namely, we consider a smooth del Pezzo surface in S^5
 that contains 3 families of conics. The conics form a hexagonal web. 
 We render the families of conics by using Povray.
 
