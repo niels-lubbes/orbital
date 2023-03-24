@@ -303,16 +303,17 @@ with [this](https://github.com/niels-lubbes/orbital/blob/master/orbital/bin/sum-
 For creating a Povray image of the output 
 surface see [here](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/pov/pov_dp8_clifford.py).
 
-### Example 4: Surfaces of great type I, II and III
+### Example 4: Celestial surfaces of great type I, II and III
 
-The examples of the surfaces of great types I, II and III in
-the article with title
+The examples of the celestial surfaces of great types I, II and III in
+the article
 ["The shapes of surfaces that contain a great and a small circle through each point"](https://arxiv.org/abs/2205.14438)
-are constructed using the following code,
-where we compute aside a parametrization also
-an implicit equation of its stereographic projection.
+are constructed using the following code snippets.
+Download [this Sage notebook](https://github.com/niels-lubbes/orbital/blob/master/orbital/bin/sum-product-circles.sws)
+for experimentation and more details.
 
-First we import the necessary modules:
+First, we import the necessary modules:
+
 ```python
 from orbital.sphere.class_sphere_input import SphereInput
 from orbital.sphere.sphere_experiment import clifford
@@ -320,10 +321,10 @@ from orbital.class_orb_tools import OrbTools
 OrbTools.filter( [] )
 ```
 
-We create `SphereInput` object for a surface of great type I
-and pass it to the `clifford` method.
-The output of this method provides us with a parametric and implicit
-representation of the projected surface.
+Next, We create `SphereInput` objects for surfaces of great types I, II and III.
+We pass the objects it to the `clifford` method
+whose output includes a parametric and implicit
+representation of a stereographic projection of the surface in 3-space.
 
 ```python
 # great type I
@@ -417,8 +418,6 @@ Output:
     pmzAB   = [-2*(cos(a)*cos(b)-sin(a)*sin(b)+3*cos(a))/(6*(cos(a)-1)*cos(b)+9*cos(a)-11),-2*(cos(b)*sin(a)+cos(a)*sin(b)+3*sin(a))/(6*(cos(a)-1)*cos(b)+9*cos(a)-11),3*(2*cos(b)*sin(a)+3*sin(a))/(6*(cos(a)-1)*cos(b)+9*cos(a)-11)]
 
 <img src="https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/great-type-III.png" width="250">
-
-Alternatively, download [this Sage notebook](https://github.com/niels-lubbes/orbital/blob/master/orbital/bin/sum-product-circles.sws).
 
 ### Example 5: Computing and rendering a hexagonal web of conics on a surface.
 
