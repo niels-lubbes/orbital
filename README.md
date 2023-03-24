@@ -303,7 +303,7 @@ with [this](https://github.com/niels-lubbes/orbital/blob/master/orbital/bin/sum-
 For creating a Povray image of the output 
 surface see [here](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/pov/pov_dp8_clifford.py).
 
-### Example 4: Celestial surfaces of great type I, II and III
+### Example 4: Celestial surfaces of great types I, II and III
 
 The examples of the celestial surfaces of great types I, II and III in
 the article
