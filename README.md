@@ -271,7 +271,8 @@ Alternatively, download the Sage notebook
 [sum-product-circles.sws](https://github.com/niels-lubbes/orbital/blob/master/orbital/bin/sum-product-circles.sws).
 The attributes of `SphereInput` are documented at
 [class_sphere_input.py](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/sphere/class_sphere_input.py#L15).
-We pass the objects to the `clifford` method
+
+We pass the `SphereInput` object to the `clifford` method
 whose output includes a parametric and implicit
 representation of a stereographic projection of the surface in 3-space.
 The output `A` defines a 5x5 matrix A.
@@ -380,7 +381,7 @@ Output:
 <img src="https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/great-type-III.png" width="250">
 
 For creating a Povray images of celestial surfaces
-see [here](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/pov/pov_dp8_clifford.py).
+see [pov_dp8_clifford.py](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/pov/pov_dp8_clifford.py).
 
 
 ### Example 4: Computing and rendering a hexagonal web of conics on a surface.
