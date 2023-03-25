@@ -49,7 +49,7 @@ For running the examples below, either copy paste the code into the Sage interfa
 
     sage -python -m my_module_name.py
 
-See [this file](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/__main__.py) 
+See [__main__.py](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/__main__.py)
 for more example usecases. 
 See the [source code](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital)
 the io-specification of each function.
