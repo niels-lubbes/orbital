@@ -379,7 +379,7 @@ Output:
 
 <img src="https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/great-type-III.png" width="250">
 
-For creating a Povray images of the surfaces
+For creating a Povray images of celestial surfaces
 see [here](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/pov/pov_dp8_clifford.py).
 
 
