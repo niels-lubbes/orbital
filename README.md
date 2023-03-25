@@ -239,80 +239,22 @@ consists of an irreducible conic at infinity, without real points. The conic is 
 the Euclidean absolute. The surface X is a so called Perseus cyclide and its two 
 isolated singularities are send to the Euclidean absolute.
     
-    
-### Example 3: Computing product of circles
+### Example 3: Computing products of circles
 
-A [Clifford torus](https://en.wikipedia.org/wiki/Clifford_torus) is a quartic surface 
+A [Clifford torus](https://en.wikipedia.org/wiki/Clifford_torus) is a quartic surface
 obtained as the pointwise [Hamiltonian product](https://en.wikipedia.org/wiki/Quaternion)
-of two great circles in the 3-sphere S^3, 
+of two great circles in the 3-sphere S^3,
 where we identify S^3 with the unit quaternions.
-If instead of great circles we also consider little circles, 
+If instead of great circles we also consider little circles,
 then this construction leads to surfaces of degree either 4 or 8 in S^3
 that contain two circles through each point.
 
-```python
-from orbital.sphere.class_sphere_input import SphereInput
-from orbital.sphere.sphere_experiment import clifford
-from orbital.class_orb_tools import OrbTools
-OrbTools.filter( [] ) 
-
-# create SphereInput object
-inp = '[[(0, 0, 0), (0, 0, 0), (0, 0, 0), 1], [(55, 30, 0), (0,65, 0), (3/2, 0, 0), 1]]'
-sinp = SphereInput().set(inp)    
-sinp.bas  = False
-sinp.mrk  = False
-sinp.pmz  = True
-sinp.fam  = True
-sinp.famt = 3
-sinp.stp  = 12
-sinp.opa  = 3/4
-sinp.ppt  = 100
-
-# compute product of circles
-plt, out  = clifford( sinp )
-show( plt, frame = False )
-print( out )
-```
-Output:
-
-    --- SphereInput ---
-     [(0, 0, 0), (0, 0, 0), (0, 0, 0), 1]
-     [(55, 30, 0), (0, 65, 0), (3/2, 0, 0), 1]
-     short_input = [[(0, 0, 0), (0, 0, 0), (0, 0, 0), 1], [(55, 30, 0), (0, 65, 0), (3/2, 0, 0), 1]]
-    -------------------
-    
-    eqn_str = (2014026851767689) * (x1^2 + x2^2 + x3^2)^4+(-1) * x0 * (-2014026851767689*x0^7 + 3438408945839472*x0^6*x1 + 5124755703563172*x0^5*x1^2 + 3098583413356464*x0^4*x1^3 - 16760366455053366*x0^3*x1^4 - 3098583413356464*x0^2*x1^5 + 5124755703563172*x0*x1^6 - 3438408945839472*x1^7 - 3092194666059840*x0^6*x2 + 18858408601592160*x0^5*x1*x2 - 3505095937654080*x0^4*x1^2*x2 - 37716817203184320*x0^3*x1^3*x2 + 3505095937654080*x0^2*x1^4*x2 + 18858408601592160*x0*x1^5*x2 + 3092194666059840*x1^6*x2 + 8821193625627136*x0^5*x2^2 + 3098583413356464*x0^4*x1*x2^2 - 40913608754234660*x0^3*x1^2*x2^2 - 6197166826712928*x0^2*x1^3*x2^2 + 19070705032753480*x0*x1^4*x2^2 - 10315226837518416*x1^5*x2^2 - 3505095937654080*x0^4*x2^3 - 37716817203184320*x0^3*x1*x2^3 + 7010191875308160*x0^2*x1^2*x2^3 + 37716817203184320*x0*x1^3*x2^3 + 9276583998179520*x1^4*x2^3 - 24153242299181294*x0^3*x2^4 - 3098583413356464*x0^2*x1*x2^4 + 22767142954817444*x0*x1^2*x2^4 - 10315226837518416*x1^3*x2^4 + 3505095937654080*x0^2*x2^5 + 18858408601592160*x0*x1*x2^5 + 9276583998179520*x1^2*x2^5 + 8821193625627136*x0*x2^6 - 3438408945839472*x1*x2^6 + 3092194666059840*x2^7 + 6184389332119680*x0^5*x1*x3 - 37716817203184320*x0^4*x1^2*x3 + 13194581207427840*x0^3*x1^3*x3 + 37716817203184320*x0^2*x1^4*x3 + 6184389332119680*x0*x1^5*x3 + 6876817891678944*x0^5*x2*x3 - 14785751688255856*x0^4*x1*x2*x3 + 13073984718391872*x0^3*x1^2*x2*x3 + 14785751688255856*x0^2*x1^3*x2*x3 + 6876817891678944*x0*x1^4*x2*x3 + 37716817203184320*x0^4*x2^2*x3 + 13194581207427840*x0^3*x1*x2^2*x3 + 12368778664239360*x0*x1^3*x2^2*x3 + 13073984718391872*x0^3*x2^3*x3 + 14785751688255856*x0^2*x1*x2^3*x3 + 13753635783357888*x0*x1^2*x2^3*x3 - 37716817203184320*x0^2*x2^4*x3 + 6184389332119680*x0*x1*x2^4*x3 + 6876817891678944*x0*x2^5*x3 - 8056107407070756*x0^5*x3^2 + 3438408945839472*x0^4*x1*x3^2 + 16979155688311444*x0^3*x1^2*x3^2 - 6536992359195936*x0^2*x1^3*x3^2 + 2193404000055588*x0*x1^4*x3^2 - 10315226837518416*x1^5*x3^2 - 3092194666059840*x0^4*x2*x3^2 - 113150451609552960*x0^3*x1*x2*x3^2 + 6597290603713920*x0^2*x1^2*x2*x3^2 + 37716817203184320*x0*x1^3*x2*x3^2 + 9276583998179520*x1^4*x2*x3^2 - 5199471844072340*x0^3*x2^2*x3^2 - 6536992359195936*x0^2*x1*x2^2*x3^2 + 11779683844239104*x0*x1^2*x2^2*x3^2 - 20630453675036832*x1^3*x2^2*x3^2 + 6597290603713920*x0^2*x2^3*x3^2 + 37716817203184320*x0*x1*x2^3*x3^2 + 18553167996359040*x1^2*x2^3*x3^2 + 9586279844183516*x0*x2^4*x3^2 - 10315226837518416*x1*x2^4*x3^2 + 9276583998179520*x2^5*x3^2 + 12368778664239360*x0^3*x1*x3^3 + 37716817203184320*x0^2*x1^2*x3^3 + 12368778664239360*x0*x1^3*x3^3 + 13753635783357888*x0^3*x2*x3^3 + 14785751688255856*x0^2*x1*x2*x3^3 + 13753635783357888*x0*x1^2*x2*x3^3 - 37716817203184320*x0^2*x2^2*x3^3 + 12368778664239360*x0*x1*x2^2*x3^3 + 13753635783357888*x0*x2^3*x3^3 - 12084161110606134*x0^3*x3^4 - 3438408945839472*x0^2*x1*x3^4 - 10987459110578340*x0*x1^2*x3^4 - 10315226837518416*x1^3*x3^4 + 3092194666059840*x0^2*x2*x3^4 + 18858408601592160*x0*x1*x2*x3^4 + 9276583998179520*x1^2*x2*x3^4 - 7291021188514376*x0*x2^2*x3^4 - 10315226837518416*x1*x2^2*x3^4 + 9276583998179520*x2^3*x3^4 + 6184389332119680*x0*x1*x3^5 + 6876817891678944*x0*x2*x3^5 - 8056107407070756*x0*x3^6 - 3438408945839472*x1*x3^6 + 3092194666059840*x2*x3^6)
-    Agreat  = True
-    Bgreat  = False
-    A       = [(2, 0, 0, 0, 0), (0, 2, 0, 0, 0), (0, 0, 2, 0, 0), (0, 0, 0, 2, 0), (0, 0, 0, 0, 2)]
-    B       = [(17/4, 3, 0, 0, -9/4), (72688803/23025140, 18544801/5756285, -16632/23885, -38400/67721, -38395467/23025140), (1126125/1151257, -139986/1151257, 2304/4777, -55440/67721, -2313773/1151257), (360/241, 240/241, 0, 418/241, -360/241), (81/85, 108/85, 154/85, 0, -9/85)]
-    pmzAB   = [-1/281*(44*(1685891*cos(a) + 63630*sin(a))*cos(b) - 69408*(231*cos(a) + 160*sin(a))*sin(b) + 72688803*cos(a) - 22522500*sin(a))/(12*(8676*cos(a) + 6800*sin(a) - 20485)*cos(b) + 148456*cos(a)*sin(b) + 78084*cos(a) + 122400*sin(a) - 348245), 1/281*(44*(63630*cos(a) - 1685891*sin(a))*cos(b) - 69408*(160*cos(a) - 231*sin(a))*sin(b) - 22522500*cos(a) - 72688803*sin(a))/(12*(8676*cos(a) + 6800*sin(a) - 20485)*cos(b) + 148456*cos(a)*sin(b) + 78084*cos(a) + 122400*sin(a) - 348245), -4*(12*(1700*cos(a) - 2169*sin(a))*cos(b) - 37114*sin(a)*sin(b) + 30600*cos(a) - 19521*sin(a))/(12*(8676*cos(a) + 6800*sin(a) - 20485)*cos(b) + 148456*cos(a)*sin(b) + 78084*cos(a) + 122400*sin(a) - 348245)]
-
-![output image](https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/deg8-greatb.png "Clifford translational surface")    
-
-To experiment copy-paste 
-the code at the 
-start of [this file](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/sphere/sphere_experiment.py) to 
-a Sage notebook. 
-The examples in
-[this](https://arxiv.org/abs/1306.1917)
-and
-[this](https://arxiv.org/abs/2205.14438)
-article are constructed
-with [this](https://github.com/niels-lubbes/orbital/blob/master/orbital/bin/sum-product-circles.sws) Sage notebook.
-For creating a Povray image of the output 
-surface see [here](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/pov/pov_dp8_clifford.py).
-
-### Example 4: Celestial surfaces of great types I, II and III
-
-The examples of the celestial surfaces of great types I, II and III in
+The examples of the degree 8 celestial surfaces of great types I, II and III in
 the article
 ["The shapes of surfaces that contain a great and a small circle through each point"](https://arxiv.org/abs/2205.14438)
 are constructed using the following code snippets.
-Download [this Sage notebook](https://github.com/niels-lubbes/orbital/blob/master/orbital/bin/sum-product-circles.sws)
-for experimentation and more details.
 
-First, we import the necessary modules:
+First, we need to import the necessary modules:
 
 ```python
 from orbital.sphere.class_sphere_input import SphereInput
@@ -321,10 +263,28 @@ from orbital.class_orb_tools import OrbTools
 OrbTools.filter( [] )
 ```
 
-Next, We create `SphereInput` objects for surfaces of great types I, II and III.
-We pass the objects it to the `clifford` method
+Next, we a create `SphereInput` object with some input `inp`.
+To experiment and construct examples for `inp` copy-paste the code at the start of
+[sphere_experiment.py](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/sphere/sphere_experiment.py)
+to a Sage notebook.
+Alternatively, download the Sage notebook
+[sum-product-circles.sws](https://github.com/niels-lubbes/orbital/blob/master/orbital/bin/sum-product-circles.sws).
+The attributes of `SphereInput` are documented at
+[class_sphere_input.py](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/sphere/class_sphere_input.py#L15).
+We pass the objects to the `clifford` method
 whose output includes a parametric and implicit
 representation of a stereographic projection of the surface in 3-space.
+The output `A` defines a 5x5 matrix A.
+We multiply A with the parametrized vector (1,cos(a),sin(a),0,0) and obtain
+a vector (x0(a),x1(a),x2(a),x3(a),x4(a)) such that
+CA(a):=(x1(a),x2(a),x3(a),x4(a))/x0(a) parametrizes a circle in S^3.
+Similarly, the output `B` represents the parametrization CB(b) of a circle in S^3.
+The pointwise Hamiltonian product CA(a)*CB(b) represents the parametrization of a surface X in S^3.
+The output `pmzAB` corresponds to the parametrization of the stereographic projection of X into R^3.
+The output `eqn_str` provides an implicit equation for the latter surface.
+See
+[sphere_experiment.py](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/sphere/sphere_experiment.py#L129)
+for more details.
 
 ```python
 # great type I
@@ -419,7 +379,11 @@ Output:
 
 <img src="https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/great-type-III.png" width="250">
 
-### Example 5: Computing and rendering a hexagonal web of conics on a surface.
+For creating a Povray images of the surfaces
+see [here](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/pov/pov_dp8_clifford.py).
+
+
+### Example 4: Computing and rendering a hexagonal web of conics on a surface.
 
 In example 1 we constructed a celestial surface in the S^4.
 In this example we create an image of a linear projection to 3-space 
