@@ -249,7 +249,7 @@ If instead of great circles we also consider little circles,
 then this construction leads to surfaces of degree either 4 or 8 in S^3
 that contain two circles through each point.
 
-The examples of the degree 8 celestial surfaces of shapes I, II and III in
+The examples of the degree 8 celestial surfaces with shapes I, II and III in
 the article
 ["The shapes of surfaces that contain a great and a small circle through each point"](https://arxiv.org/abs/2205.14438)
 are constructed using the following code snippets.
