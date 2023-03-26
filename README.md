@@ -272,7 +272,8 @@ Alternatively, download the Sage notebook
 The attributes of `SphereInput` are documented at
 [class_sphere_input.py](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/sphere/class_sphere_input.py#L15).
 
-We pass the `SphereInput` object to the `clifford` method
+We pass the `SphereInput` object to the
+[`clifford` method](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/sphere/sphere_experiment.py#L129)
 whose output includes a parametric and implicit
 representation of a stereographic projection of the surface in 3-space.
 The output `A` defines a 5x5 matrix A.
@@ -282,10 +283,13 @@ CA(a):=(x1(a),x2(a),x3(a),x4(a))/x0(a) parametrizes a circle in S^3.
 Similarly, the output `B` represents the parametrization CB(b) of a circle in S^3.
 The pointwise Hamiltonian product CA(a)*CB(b) represents the parametrization of a surface X in S^3.
 The output `pmzAB` corresponds to the parametrization of the stereographic projection of X into R^3.
-The output `eqn_str` provides an implicit equation for the latter surface.
+The output `eqn_str` provides an
+[implicit equation](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/sphere/sphere_experiment.py#L237)
+for the latter surface.
 See
-[sphere_experiment.py](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/sphere/sphere_experiment.py#L129)
+[sphere_experiment.py](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/sphere/sphere_experiment.py)
 for more details.
+
 
 ```python
 # shape I
