@@ -249,7 +249,7 @@ If instead of great circles we also consider little circles,
 then this construction leads to surfaces of degree either 4 or 8 in S^3
 that contain two circles through each point.
 
-The examples of the degree 8 celestial surfaces of great types I, II and III in
+The examples of the degree 8 celestial surfaces of shapes I, II and III in
 the article
 ["The shapes of surfaces that contain a great and a small circle through each point"](https://arxiv.org/abs/2205.14438)
 are constructed using the following code snippets.
@@ -288,7 +288,7 @@ See
 for more details.
 
 ```python
-# great type I
+# shape I
 inp = '[[(0, 0, 0), (0, 0, 0), (0, 0, 0), 1], [(0, 0, 0), (0, 0, 0), (3/2, 0, 0), 1]]'
 sinp = SphereInput().set(inp)
 sinp.bas = False
@@ -316,10 +316,10 @@ Output:
     B = [(17/4, 3, 0, 0, -9/4), (3, 2, 0, 0, -3), (0, 0, 2, 0, 0), (0, 0, 0, 2, 0), (9/4, 3, 0, 0, -1/4)]
     pmzAB = [-4*(2*cos(a)*cos(b) - 2*sin(a)*sin(b) + 3*cos(a))/(12*(cos(a) - 1)*cos(b) + 9*cos(a) - 17), -4*(2*cos(b)*sin(a) + 2*cos(a)*sin(b) + 3*sin(a))/(12*(cos(a) - 1)*cos(b) + 9*cos(a) - 17), 3*(4*cos(b)*sin(a) + 3*sin(a))/(12*(cos(a) - 1)*cos(b) + 9*cos(a) - 17)]
 
-<img src="https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/great-type-I.png" width="250">
+<img src="https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/great-shape-I.png" width="250">
 
 ```python
-# great type II
+# shape II
 inp = '[[(0, 0, 0), (0, 0, 0), (0, 0, 0), 1], [(0, 0, 0), (0, 0, 0), (2, 0, 0), 1]]'
 sinp = SphereInput().set(inp)
 sinp.bas = False
@@ -347,10 +347,10 @@ Output
     B       = [(6, 4, 0, 0, -4), (4, 2, 0, 0, -4), (0, 0, 2, 0, 0), (0, 0, 0, 2, 0), (4, 4, 0, 0, -2)]
     pmzAB   = [-(cos(a)*cos(b) - sin(a)*sin(b) + 2*cos(a))/(2*(cos(a) -1)*cos(b) + 2*cos(a) - 3), -(cos(b)*sin(a) + cos(a)*sin(b) + 2*sin(a))/(2*(cos(a) - 1)*cos(b) + 2*cos(a) - 3), 2*(cos(b)*sin(a) + sin(a))/(2*(cos(a) - 1)*cos(b) + 2*cos(a) - 3)]
 
-<img src="https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/great-type-II.png" width="250">
+<img src="https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/great-shape-II.png" width="250">
 
 ```python
-# great type III
+# shape III
 inp = '[[(0, 0, 0), (0, 0, 0), (0, 0, 0), 1], [(0, 0, 0), (0, 0, 0), (3, 0, 0), 1]]'
 sinp = SphereInput().set(inp)
 sinp.bas = True
@@ -378,7 +378,7 @@ Output:
     B       = [(11,6,0,0,-9),(6,2,0,0,-6),(0,0,2,0,0),(0,0,0,2,0),(9,6,0,0,-7)]
     pmzAB   = [-2*(cos(a)*cos(b)-sin(a)*sin(b)+3*cos(a))/(6*(cos(a)-1)*cos(b)+9*cos(a)-11),-2*(cos(b)*sin(a)+cos(a)*sin(b)+3*sin(a))/(6*(cos(a)-1)*cos(b)+9*cos(a)-11),3*(2*cos(b)*sin(a)+3*sin(a))/(6*(cos(a)-1)*cos(b)+9*cos(a)-11)]
 
-<img src="https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/great-type-III.png" width="250">
+<img src="https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/great-shape-III.png" width="250">
 
 For creating a Povray images of celestial surfaces
 see [pov_dp8_clifford.py](https://github.com/niels-lubbes/orbital/blob/master/orbital/src/orbital/pov/pov_dp8_clifford.py).
