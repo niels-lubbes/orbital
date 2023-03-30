@@ -249,7 +249,7 @@ If instead of great circles we also consider little circles,
 then this construction leads to surfaces of degree either 4 or 8 in S^3
 that contain two circles through each point.
 
-The examples of the degree 8 celestial surfaces with shapes I, II and III in
+The examples of the degree 8 celestial surfaces with Shapes I, II and III in
 the article
 ["The shapes of surfaces that contain a great and a small circle through each point"](https://arxiv.org/abs/2205.14438)
 are constructed using the following code snippets.
@@ -294,7 +294,7 @@ for more details.
 
 
 ```python
-# shape I
+# Shape I
 inp = '[[(0, 0, 0), (0, 0, 0), (0, 0, 0), 1], [(0, 0, 0), (0, 0, 0), (3/2, 0, 0), 1]]'
 sinp = SphereInput().set(inp)
 sinp.bas = False
@@ -325,7 +325,7 @@ Output:
 <img src="https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/great-shape-I.png" width="250">
 
 ```python
-# shape II
+# Shape II
 inp = '[[(0, 0, 0), (0, 0, 0), (0, 0, 0), 1], [(0, 0, 0), (0, 0, 0), (2, 0, 0), 1]]'
 sinp = SphereInput().set(inp)
 sinp.bas = False
@@ -356,7 +356,7 @@ Output
 <img src="https://raw.githubusercontent.com/niels-lubbes/orbital/master/orbital/img/great-shape-II.png" width="250">
 
 ```python
-# shape III
+# Shape III
 inp = '[[(0, 0, 0), (0, 0, 0), (0, 0, 0), 1], [(0, 0, 0), (0, 0, 0), (3, 0, 0), 1]]'
 sinp = SphereInput().set(inp)
 sinp.bas = True
