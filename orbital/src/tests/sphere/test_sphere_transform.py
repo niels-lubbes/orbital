@@ -7,7 +7,6 @@ Created on Aug 30, 2018
 from orbital.sage_interface import sage_QQ
 from orbital.sage_interface import sage_identity_matrix
 from orbital.sage_interface import sage_PolynomialRing
-from orbital.sage_interface import sage_factor
 from orbital.sage_interface import sage_matrix
 from orbital.sage_interface import sage_vector
 from orbital.sage_interface import sage_var
@@ -33,7 +32,6 @@ class TestSphereTransform( object ):
         print( chk )
         assert str( out ) == str( chk )
 
-
     def test__get_rot_S3( self ):
 
         a12, a13, a23, a14, a24, a34 = 6 * [0]
@@ -51,7 +49,6 @@ class TestSphereTransform( object ):
         print( chk )
 
         assert str( list( out ) ) == str( list( chk ) )
-
 
     def test__get_trn_S3( self ):
 
@@ -160,7 +157,6 @@ class TestSphereTransform( object ):
         assert -v[0] ** 2 + v[1] ** 2 + v[2] ** 2 + v[3] ** 2 + v[4] ** 2 == 0
         assert Q * sage_vector( [1, 0, 0, 0, 1] ) == sage_vector( [1, 0, 0, 0, 1] )
 
-
     def test__get_scale_S3( self ):
 
         R = sage_PolynomialRing( sage_QQ, 's,t,x0,x1,x2,x3,x4,y0,y1,y2,y3,y4' )
@@ -201,7 +197,6 @@ class TestSphereTransform( object ):
         # p[ 4 ]
         # (s^2, ':', x1^2 + x2^2 + x3^2)
         # (t^2, ':', (-1) * (x0 - x4)^2)
-
 
         #
         # We use -x0^2+x1^2+x2^2+x3^2+x4^2==0
@@ -246,7 +241,6 @@ class TestSphereTransform( object ):
         assert -v[0] ** 2 + v[1] ** 2 + v[2] ** 2 + v[3] ** 2 + v[4] ** 2 == 0
         assert list( w ) == [8, 0, 0, 0, 8]
 
-
     def test__get_hp_P4( self ):
 
         c0, s0, c1, s1 = sage_var( 'c0,s0,c1,s1' )
@@ -258,7 +252,6 @@ class TestSphereTransform( object ):
         out = get_hp_P4( v, M * w )
         print( out )
         assert str( out ) == '[1, -c1*s0 - c0*s1, c0*c1 - s0*s1, 0, 0]'
-
 
 
 if __name__ == '__main__':

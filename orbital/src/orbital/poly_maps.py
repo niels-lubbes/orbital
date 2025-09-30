@@ -4,18 +4,18 @@ Created on Nov 23, 2017
 
 @author: Niels Lubbes
 '''
-from sage_interface import sage_PolynomialRing
-from sage_interface import sage_FractionField
-from sage_interface import sage__eval
-from sage_interface import sage_ideal
-from sage_interface import sage_gcd
-from sage_interface import sage_lcm
-from sage_interface import sage_SR
-from sage_interface import sage_var
-from sage_interface import sage_QQ
-from sage_interface import sage_factor
+from orbital.sage_interface import sage_PolynomialRing
+from orbital.sage_interface import sage_FractionField
+from orbital.sage_interface import sage__eval
+from orbital.sage_interface import sage_ideal
+from orbital.sage_interface import sage_gcd
+from orbital.sage_interface import sage_lcm
+from orbital.sage_interface import sage_SR
+from orbital.sage_interface import sage_var
+from orbital.sage_interface import sage_QQ
+from orbital.sage_interface import sage_factor
 
-from class_orb_tools import OrbTools
+from orbital.class_orb_tools import OrbTools
 
 
 def ring_dict( R ):
@@ -43,8 +43,7 @@ def ring_dict( R ):
     return dct
 
 
-
-def invert_map( f, X, base = sage_QQ ):
+def invert_map( f, X, base=sage_QQ ):
     '''
     Computes the inverse of a map defined by polynomials.
     
@@ -98,7 +97,6 @@ def invert_map( f, X, base = sage_QQ ):
         n = n + 1
     n = max( n_lst )
 
-
     # construct ring B(y0,...ym)[x0,...,xn]
     # over fraction field B(y0,...ym)
     # where m is the number of elements in map f and B equals base
@@ -126,8 +124,7 @@ def invert_map( f, X, base = sage_QQ ):
     return gb_lst
 
 
-
-def invert_birational_map( f, X, base = sage_QQ ):
+def invert_birational_map( f, X, base=sage_QQ ):
     '''
     Computes the inverse of a birational map.
     
@@ -201,7 +198,7 @@ def invert_birational_map( f, X, base = sage_QQ ):
     return gd_lst
 
 
-def image_map( f, X, base = sage_QQ ):
+def image_map( f, X, base=sage_QQ ):
     '''
     Computes the image f(X) of a variety X
     under a map f, defined by polynomials.
@@ -257,7 +254,7 @@ def image_map( f, X, base = sage_QQ ):
     x_lst = [ vx + str( i ) for i in range( n + 1 ) ]
     y_lst = [ vy + str( i ) for i in range( len( f.split( ',' ) ) ) ]
     mord = 'degrevlex' if base == sage_QQ else 'lexdeg'  # needed for elimination
-    xyring = sage_PolynomialRing( base, x_lst + y_lst, mord )
+    xyring = sage_PolynomialRing( base, x_lst + y_lst, order=mord )
     x_lst = xyring.gens()[:len( x_lst )]
     y_lst = xyring.gens()[len( x_lst ):]
 
@@ -276,7 +273,7 @@ def image_map( f, X, base = sage_QQ ):
         OrbTools.p( img_lst )
         return img_lst
 
-    except Exception, e:
+    except Exception as e:
 
         OrbTools.p( 'Exception occurred:', repr( e ) )
         gb_lst = sage_ideal( X_lst + mf_lst ).groebner_basis()
@@ -288,7 +285,7 @@ def image_map( f, X, base = sage_QQ ):
         return e_lst
 
 
-def preimage_map( f, X, Y, base = sage_QQ ):
+def preimage_map( f, X, Y, base=sage_QQ ):
     '''
     Computes the preimage f^{-1}(Y) of a variety Y under a map 
     f: X ---> P^m, defined by polynomials, where the domain 
@@ -356,10 +353,9 @@ def preimage_map( f, X, Y, base = sage_QQ ):
     x_lst = [ vx + str( i ) for i in range( n + 1 ) ]
     y_lst = [ vy + str( i ) for i in range( len( f.split( ',' ) ) ) ]
     mord = 'degrevlex' if base == sage_QQ else 'lex'  # needed for elimination
-    xyring = sage_PolynomialRing( base, y_lst + x_lst, order = mord )
+    xyring = sage_PolynomialRing( base, y_lst + x_lst, order=mord )
     y_lst = xyring.gens()[:len( y_lst )]
     x_lst = xyring.gens()[len( y_lst ):]
-
 
     # coerce into common ring with xi and yi variables
     dct = ring_dict( xyring )
@@ -378,7 +374,7 @@ def preimage_map( f, X, Y, base = sage_QQ ):
         OrbTools.p( img_lst )
         return img_lst
 
-    except Exception, e:
+    except Exception as e:
 
         OrbTools.p( 'Exception occurred:', repr( e ) )
         gb_lst = sage_ideal( X_lst + mf_lst + Y_lst ).groebner_basis()
@@ -390,7 +386,7 @@ def preimage_map( f, X, Y, base = sage_QQ ):
         return e_lst
 
 
-def compose_maps( g, f, base = sage_QQ ):
+def compose_maps( g, f, base=sage_QQ ):
     '''
     Computes the composition of polynomial maps.
     
@@ -434,7 +430,6 @@ def compose_maps( g, f, base = sage_QQ ):
     if vg not in g:
         g = g.replace( vf, vg )
 
-
     # detect the number of vf-variables occurring
     n_lst = []
     n = 0
@@ -463,7 +458,7 @@ def compose_maps( g, f, base = sage_QQ ):
     return g_lst
 
 
-def euclidean_type_form( X, base = sage_QQ ):
+def euclidean_type_form( X, base=sage_QQ ):
     '''
     Outputs the equation of a hypersurface in P^n in a form 
     so that the intersection with the hyperplane at infinity
@@ -505,7 +500,6 @@ def euclidean_type_form( X, base = sage_QQ ):
         n = n + 1
     n = max( n_lst )
 
-
     x_lst = [ vx + str( i ) for i in range( n + 1 ) ]
     ring = sage_PolynomialRing( base, x_lst )
     x_lst = ring.gens()
@@ -532,7 +526,7 @@ def euclidean_type_form( X, base = sage_QQ ):
     return out
 
 
-def hilbert_poly( X, base = sage_QQ ):
+def hilbert_poly( X, base=sage_QQ ):
     '''
     Computes the Hilbert polynomial of an ideal.
     
@@ -566,7 +560,6 @@ def hilbert_poly( X, base = sage_QQ ):
             n_lst += [n]
         n = n + 1
     n = max( n_lst )
-
 
     x_lst = [ vx + str( i ) for i in range( n + 1 ) ]
     ring = sage_PolynomialRing( base, x_lst )

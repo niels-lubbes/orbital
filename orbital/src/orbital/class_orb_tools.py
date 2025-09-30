@@ -4,13 +4,14 @@ Created on Nov 23, 2017
 @author: Niels Lubbes
 '''
 
-from sage_interface import sage_save
-from sage_interface import sage_load
+from orbital.sage_interface import sage_save
+from orbital.sage_interface import sage_load
 
 import inspect
 import time
 import sys
 import os
+
 
 class OrbTools():
     '''
@@ -40,7 +41,6 @@ class OrbTools():
     __filter_fname_lst = []
     __prev_filter_fname_lst = None
 
-
     @staticmethod
     def filter( filter_fname_lst ):
         '''
@@ -56,7 +56,6 @@ class OrbTools():
         OrbTools.__filter_fname_lst = filter_fname_lst
         OrbTools.__prev_filter_fname_lst = filter_fname_lst
 
-
     @staticmethod
     def filter_unset():
         '''
@@ -64,14 +63,12 @@ class OrbTools():
         '''
         OrbTools.__filter_fname_lst = None
 
-
     @staticmethod
     def filter_reset():
         '''
         Resets filter state to before previous ".filter_unset()" call.
         '''
         OrbTools.__filter_fname_lst = OrbTools.__prev_filter_fname_lst
-
 
     @staticmethod
     def p( *arg_lst ):
@@ -119,14 +116,12 @@ class OrbTools():
 
         return s
 
-
     @staticmethod
     def set_enable_tool_dct( enable_tool_dct ):
         OrbTools.__enable_tool_dct = enable_tool_dct
 
-
     @staticmethod
-    def get_tool_dct( fname = 'orb_tools' ):
+    def get_tool_dct( fname='orb_tools' ):
         '''
         Parameters
         ----------
@@ -168,9 +163,8 @@ class OrbTools():
 
         return OrbTools.__tool_dct
 
-
     @staticmethod
-    def save_tool_dct( fname = 'orb_tools' ):
+    def save_tool_dct( fname='orb_tools' ):
         '''
         Saves ".__tool_dct" to  "fname" if ".enable_tool_dct==True" 
         otherwise do nothing.
@@ -192,32 +186,27 @@ class OrbTools():
 
         sage_save( OrbTools.__tool_dct, file_name )
 
-
     @staticmethod
     def start_timer():
         '''
         Prints the current time and starts timer.
         '''
         # get time
-        OrbTools.__start_time = time.clock()  # set static variable.
+        OrbTools.__start_time = time.time()  # set static variable.
 
         OrbTools.filter_unset()
         OrbTools.p( 'start time =', OrbTools.__start_time )
         OrbTools.filter_reset()
-
 
     @staticmethod
     def end_timer():
         '''
         Prints time passed since last call of ".start_timer()".
         '''
-        OrbTools.__end_time = time.clock()
+        OrbTools.__end_time = time.time()
         passed_time = OrbTools.__end_time - OrbTools.__start_time
 
         OrbTools.filter_unset()
         OrbTools.p( 'time passed =', passed_time )
         OrbTools.filter_reset()
-
-
-
 

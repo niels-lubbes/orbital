@@ -6,6 +6,9 @@ Created on Nov 23, 2017
 
 import os
 import subprocess
+import errno
+
+from functools import reduce
 
 from copy import copy
 
@@ -18,6 +21,8 @@ from orbital.sage_interface import sage__eval
 from orbital.sage_interface import sage_cos
 from orbital.sage_interface import sage_sin
 from orbital.sage_interface import sage_pi
+from orbital.sage_interface import sage_var
+from orbital.sage_interface import sage_RealField
 
 from orbital.class_orb_tools import OrbTools
 
@@ -26,7 +31,7 @@ from orbital.class_orb_ring import OrbRing
 from orbital.povray.class_pov_input import PovInput
 
 
-def pov_exp_lst( d, v, tbl = [] ):
+def pov_exp_lst( d, v, tbl=[] ):
     '''
     Called by "pov_coef_lst".
     
@@ -93,7 +98,7 @@ def pov_coef_lst( poly ):
         http://www.povray.org/documentation/3.7.0/r3_4.html#r3_4_5_3_2
     '''
 
-    R = sage_PolynomialRing( sage_QQ, 'x,y,z', order = 'degrevlex' )  # lower degree equations first
+    R = sage_PolynomialRing( sage_QQ, 'x,y,z', order='degrevlex' )  # lower degree equations first
     x, y, z = R.gens()
     poly = sage__eval( str( poly ), R.gens_dict() )
 
@@ -127,9 +132,9 @@ def pov_nopow( poly ):
         "x^3*y^2*z+x^2*y" --> "x*x*x*y*y*z+x*x*y"
     '''
 
-    R = PolynomialRing( QQ, var( 'x,y,z' ), order = 'degrevlex' )  # lower degree equations first
+    R = sage_PolynomialRing( sage_QQ, sage_var( 'x,y,z' ), order='degrevlex' )  # lower degree equations first
     x, y, z = R.gens()
-    poly = sage_eval( str( poly ), R.gens_dict() )
+    poly = sage__eval( str( poly ), R.gens_dict() )
 
     dct = {}
     for i in range( 2, poly.total_degree() + 1 ):
@@ -140,7 +145,7 @@ def pov_nopow( poly ):
     return reduce( lambda x, y: x.replace( y, dct[y] ), dct, str( poly ) )
 
 
-def rgbt2pov( rgbt, gamma = 2.2 ):
+def rgbt2pov( rgbt, gamma=2.2 ):
     '''
     Converts RGB colors to Povray colors. 
     
@@ -170,7 +175,7 @@ def rgbt2pov( rgbt, gamma = 2.2 ):
     return ( ( rgbt[0] / 255.0 ) ** 2.2, ( rgbt[1] / 255.0 ) ** 2.2, ( rgbt[2] / 255.0 ) ** 2.2, rgbt[3] / 255.0 )
 
 
-def get_pmz_value( pmz_lst, v0, v1, prec = 50 ):
+def get_pmz_value( pmz_lst, v0, v1, prec=50 ):
     '''
     Parameters
     ----------
@@ -208,7 +213,6 @@ def get_pmz_value( pmz_lst, v0, v1, prec = 50 ):
 
     dct = {c0:sage_cos( v0 ), s0:sage_sin( v0 ), c1:sage_cos( v1 ), s1:sage_sin( v1 ), t0:v0, t1:v1}
 
-
     if type( pmz_lst[0] ) == int:
         W = sage_QQ( pmz_lst[0] )
     else:
@@ -221,9 +225,10 @@ def get_pmz_value( pmz_lst, v0, v1, prec = 50 ):
     if W == 0:
         return None
 
-    XW = round( X / W, prec )
-    YW = round( Y / W, prec )
-    ZW = round( Z / W, prec )
+    RF = sage_RealField( prec )
+    XW = RF( X / W )
+    YW = RF( Y / W )
+    ZW = RF( Z / W )
 
     return [ XW, YW, ZW ]
 
@@ -300,7 +305,6 @@ def get_curve_lst( pin, fam ):
             if point != None:
                 point = [ coord * pin.scale for coord in point  ]
                 curve += [point]
-
 
         # need at least 3 points for cubic interpolation
         if len( curve ) >= 3:
@@ -393,12 +397,9 @@ def convert_pngs_gif( path, fname, num_curves, ani_delay ):
         cmd += [file_name_prefix + '-' + str( idx ) + '.png']
     cmd += [path + fname + '.gif']
 
-    p = subprocess.Popen( cmd, stdout = subprocess.PIPE, stderr = subprocess.PIPE )
+    p = subprocess.Popen( cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE )
 
     out, err = p.communicate()
     OrbTools.p( 'out =', out )
     OrbTools.p( 'err =', err )
-
-
-
 

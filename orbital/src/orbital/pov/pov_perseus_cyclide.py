@@ -8,7 +8,6 @@ from orbital.sage_interface import sage_var
 from orbital.sage_interface import sage_matrix
 from orbital.sage_interface import sage_vector
 from orbital.sage_interface import sage_factor
-from orbital.sage_interface import sage_n
 from orbital.sage_interface import sage_pi
 
 from orbital.class_orb_tools import OrbTools
@@ -18,19 +17,16 @@ from orbital.class_orb_ring import OrbRing
 from orbital.povray.class_pov_input import PovInput
 from orbital.povray.povray import create_pov
 from orbital.povray.povray_aux import get_time_str
-from orbital.povray.povray_aux import rgbt2pov
 
 from linear_series.class_poly_ring import PolyRing
 from linear_series.class_base_points import BasePointTree
 from linear_series.class_linear_series import LinearSeries
 
 
-
 def perseus_cyclide():
     '''
     Creates povray image of the Perseus cyclide.
     '''
-
 
     # We first construct a trigonometric parametrization
     # by rotating a circle.
@@ -114,7 +110,6 @@ def perseus_cyclide():
     OrbTools.p( 'linear series 12 =\n', ls_12 )
     OrbTools.p( 'linear series 11a =\n', ls_11a )
     OrbTools.p( 'linear series 11b =\n', ls_11b )
-
 
     # compute reparametrization from the linear series of families
     ring = PolyRing( 'x,y,v,w,c0,s0,c1,s1' )
@@ -238,7 +233,6 @@ def perseus_cyclide():
     pin.text_dct['FC'] = [True, colFF, 'phong 0.2 phong_size 5' ]
     pin.text_dct['FD'] = [True, colFF, 'phong 0.2 phong_size 5' ]
     pin.text_dct['FE'] = [True, colFF, 'phong 0.2 phong_size 5' ]
-
 
     # raytrace image/animation
     create_pov( pin, ['C', 'D', 'FC', 'FD'] )

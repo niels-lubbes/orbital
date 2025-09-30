@@ -5,23 +5,22 @@ Created on Aug 8, 2016
 
 The main functionality of this module is accessed via the method get_surf().
 '''
-from sage_interface import sage_PolynomialRing
-from sage_interface import sage_QQ
-from sage_interface import sage__eval
-from sage_interface import sage_identity_matrix
-from sage_interface import sage_MatrixSpace
-from sage_interface import sage_matrix
-from sage_interface import sage_GF
-from sage_interface import sage_vector
-from sage_interface import sage_ZZ
-from sage_interface import sage_invariant_theory
-from sage_interface import sage_diagonal_matrix
-from sage_interface import sage_ideal
-from sage_interface import sage_var
+from orbital.sage_interface import sage_PolynomialRing
+from orbital.sage_interface import sage_QQ
+from orbital.sage_interface import sage__eval
+from orbital.sage_interface import sage_identity_matrix
+from orbital.sage_interface import sage_MatrixSpace
+from orbital.sage_interface import sage_matrix
+from orbital.sage_interface import sage_GF
+from orbital.sage_interface import sage_vector
+from orbital.sage_interface import sage_invariant_theory
+from orbital.sage_interface import sage_diagonal_matrix
+from orbital.sage_interface import sage_ideal
+from orbital.sage_interface import sage_var
 
-from class_orb_tools import OrbTools
+from orbital.class_orb_tools import OrbTools
 
-from class_orb_ring import OrbRing
+from orbital.class_orb_ring import OrbRing
 
 from linear_series.class_linear_series import LinearSeries
 
@@ -78,7 +77,7 @@ def get_deg_surf( imp_lst, emb_dim ):
     return hpol.diff().diff()
 
 
-def get_prj_mat( nrows, ncols, num_tries = 0 ):
+def get_prj_mat( nrows, ncols, num_tries=0 ):
     '''
     Creates a matrix corresponding to a linear projection.
     
@@ -154,7 +153,7 @@ def approx_QQ( mat ):
     return sage_matrix( sage_QQ, mat.nrows(), mat.ncols(), A )
 
 
-def rand_surf_prj( ls, prj_dim, prv_Q = None ):
+def rand_surf_prj( ls, prj_dim, prv_Q=None ):
     '''
     Helper method for "get_surf".
     
@@ -243,7 +242,7 @@ def rand_surf_prj( ls, prj_dim, prv_Q = None ):
     return Q, pmz_lst, imp_lst
 
 
-def get_surf( ls, sig, coef_lst = None, prv_Q = None ):
+def get_surf( ls, sig, coef_lst=None, prv_Q=None ):
     '''
     Constructs a surface S in a quadric with given signature. 
     This surface is a projection of the surface that is parametrized
@@ -408,7 +407,6 @@ def verify_get_surf( dct ):
     imp_lst = dct['imp_lst']
     pmz_lst = dct['pmz_lst']
 
-
     pmz_dct = { x_lst[i]:pmz_lst[i] for i in range( len( pmz_lst ) )  }
     sub_lst = [ imp.subs( pmz_dct ) for imp in imp_lst ]
 
@@ -480,8 +478,4 @@ def get_proj( imp_lst, pmz_lst, mat ):
     prj_pmz_lst = list( mat * sage_vector( pmz_lst ) )
 
     return f_xyz, prj_pmz_lst
-
-
-
-
 

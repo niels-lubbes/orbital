@@ -13,7 +13,7 @@ from orbital.sage_interface import sage_pi
 
 from orbital.class_orb_tools import OrbTools
 
-from orbital.class_pov_input import PovInput
+from orbital.povray.class_pov_input import PovInput
 
 from orbital.povray.povray import create_pov
 from orbital.povray.povray_aux import get_time_str

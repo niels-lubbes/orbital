@@ -5,10 +5,8 @@ Created on Jan 16, 2018
 '''
 
 from orbital.sage_interface import sage_QQ
-from orbital.sage_interface import sage_var
 from orbital.sage_interface import sage_matrix
 from orbital.sage_interface import sage_vector
-from orbital.sage_interface import sage_factor
 from orbital.sage_interface import sage_pi
 
 from orbital.class_orb_tools import OrbTools
@@ -88,8 +86,6 @@ def quadric_smooth():
     pin.text_dct['FA'] = [True, ( 0.1, 0.1, 0.1, 0.0 ), 'phong 0.2 phong_size 5' ]
     pin.text_dct['FB'] = [True, ( 0.1, 0.1, 0.1, 0.0 ), 'phong 0.2 phong_size 5' ]
 
-
     # raytrace image/animation
     create_pov( pin, ['A', 'B', 'FA', 'FB'] )
-
 

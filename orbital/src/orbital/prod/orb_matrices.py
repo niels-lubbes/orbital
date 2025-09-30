@@ -95,11 +95,10 @@ def get_mat( A_str, B_str, C_str ):
             mat_lst = OrbRing.coerce( M_str[1:] )
             M_lst += [sage_matrix( mat_lst )]
 
-
     return M_lst[0] * M_lst[1] * M_lst[2]
 
 
-def get_tmat( t_str = None ):
+def get_tmat( t_str=None ):
     '''
     Parameters
     ----------
@@ -258,7 +257,7 @@ def get_rmat( r_str ):
     for row in list( omat ):
 
         if idx % 2 == 0:
-            cv, sv = get_cs( cs_lst[ idx / 2 ] )
+            cv, sv = get_cs( cs_lst[ idx // 2 ] )
             dct = { c0:cv, s0:sv}
             if cv ** 2 + sv ** 2 != 1:
                raise Exception( 'Expect cos(%)^2+sin(%)^2=1.' )
@@ -273,7 +272,7 @@ def get_rmat( r_str ):
     return sage_matrix( rmat )
 
 
-def get_pmat( random = False ):
+def get_pmat( random=False ):
     '''
     Parameters
     ----------
@@ -430,5 +429,4 @@ def get_xmat( r_str ):
     OrbTools.p( 'mat3 =\n' + str( get_mat( *m_tup ) ) )
 
     return mat3 * mat2 * mat1
-
 

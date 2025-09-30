@@ -5,13 +5,11 @@ Created on Nov 23, 2017
 '''
 
 import os
-import sys
 
 from orbital.class_orb_tools import OrbTools
 
 from orbital.poly_maps import image_map
 from orbital.poly_maps import invert_birational_map
-from orbital.poly_maps import compose_maps
 from orbital.poly_maps import euclidean_type_form
 from orbital.poly_maps import preimage_map
 from orbital.poly_maps import ring_dict
@@ -142,7 +140,7 @@ def usecase_povray():
     dp8_clifford()
 
 
-def usecase_orb_product( num = 10 ):
+def usecase_orb_product( num=10 ):
     '''
     Outputs "num" random surfaces in the projective n-sphere S^n, 
     that are obtained by rotating or translating a parametrized 
@@ -180,8 +178,7 @@ def usecase_orb_product( num = 10 ):
             OrbTools.p( o )
 
 
-
-def usecase_orb_product_implicit_circle( num = 10 ):
+def usecase_orb_product_implicit_circle( num=10 ):
     '''
     Outputs "num" random surfaces in the projective n-sphere S^n, 
     that are obtained by rotating or translating an implicit circle.
@@ -339,6 +336,4 @@ if __name__ == '__main__':
     OrbTools.end_timer()
 
     print( '\nThe End' )
-
-
 

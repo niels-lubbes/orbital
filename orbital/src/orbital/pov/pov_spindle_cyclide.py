@@ -13,7 +13,7 @@ from orbital.sage_interface import sage_pi
 
 from orbital.class_orb_tools import OrbTools
 
-from orbital.class_pov_input import PovInput
+from orbital.povray.class_pov_input import PovInput
 
 from orbital.povray.povray import create_pov
 from orbital.povray.povray_aux import get_time_str
@@ -75,7 +75,6 @@ def spindle_cyclide():
 
     v1_lstFA = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 270 - 15, 1 )]
     v1_lstFB = [ ( sage_QQ( i ) / 180 ) * sage_pi for i in range( 0, 180, 1 )]
-
 
     pin.curve_dct['A'] = {'step0':v0_lst, 'step1':v1_lst_A, 'prec':10, 'width':0.03}
     pin.curve_dct['B'] = {'step0':v0_lst, 'step1':v1_lst_B, 'prec':10, 'width':0.03}

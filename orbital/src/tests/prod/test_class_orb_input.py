@@ -10,7 +10,7 @@ from orbital.sage_interface import sage__eval
 
 class TestOrbInput( object ):
 
-     def test__random( self ):
+    def test__random( self ):
         coef_bnd = 3
         in1 = OrbInput().random( 3, False )
         print( in1 )

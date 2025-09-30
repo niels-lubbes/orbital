@@ -3,8 +3,6 @@ Use of this source code is governed by a MIT-style license that can be found in 
 Created on Nov 23, 2017
 @author: Niels Lubbes
 '''
-import os
-
 from orbital.sage_interface import sage_var
 from orbital.sage_interface import sage_pi
 from orbital.sage_interface import sage_QQ
@@ -30,7 +28,6 @@ class TestPovray( object ):
         col = rgbt2pov( ( 254, 242, 190, 0 ) )
         print( col )
         assert str( col ) == '(0.9913928435929399, 0.8912620368134188, 0.5234431552143247, 0.0)'
-
 
     def test__povray( self ):
 
@@ -78,12 +75,12 @@ class TestPovray( object ):
         ani = False
         ft_lst = []
 
-        lst = create_pov( pin, ['A', 'B'], show_surf, ani, ft_lst )
-        lst = create_pov( pin, ['A'], False, True, [] )
+        create_pov( pin, ['A', 'B'], show_surf, ani, ft_lst )
+        create_pov( pin, ['A'], False, True, [] )
 
 
 if __name__ == '__main__':
 
     TestPovray().test__rgbt2_pov()
-    # TestPovray().test__povray()
+    TestPovray().test__povray()
     pass

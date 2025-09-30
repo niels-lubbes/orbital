@@ -13,7 +13,7 @@ from orbital.class_orb_tools import OrbTools
 
 from orbital.class_orb_ring import OrbRing
 
-from orbital.class_pov_input import PovInput
+from orbital.povray.class_pov_input import PovInput
 
 from orbital.povray.povray import create_pov
 from orbital.povray.povray_aux import get_time_str
@@ -53,7 +53,6 @@ def dp8_clifford():
 
     for pmz in pmz_AB_lst:
         OrbTools.p( '\t\t', sage_factor( pmz ) )
-
 
     # PovInput dp8 clifford
     #
@@ -110,10 +109,4 @@ def dp8_clifford():
     create_pov( pin, ['A', 'B', 'FA', 'FB'] )
     create_pov( pin, ['A', 'FA', 'FB'] )
     create_pov( pin, ['B', 'FA', 'FB'] )
-
-
-
-
-
-
 

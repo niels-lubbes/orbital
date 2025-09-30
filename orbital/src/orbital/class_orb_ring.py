@@ -5,11 +5,11 @@ Created on Aug 7, 2016
 @author: Niels Lubbes
 '''
 
-from sage_interface import sage_QQ
-from sage_interface import sage_ZZ
-from sage_interface import sage_PolynomialRing
-from sage_interface import sage__eval
-from sage_interface import sage_var
+from orbital.sage_interface import sage_QQ
+from orbital.sage_interface import sage_ZZ
+from orbital.sage_interface import sage_PolynomialRing
+from orbital.sage_interface import sage__eval
+from orbital.sage_interface import sage_var
 
 
 class OrbRing:
@@ -22,13 +22,11 @@ class OrbRing:
     vstr += 'c0,s0,c1,s1,'
     vstr += 't0,t1,t2,t3,t4,t5,t6,t7'
 
-    R = sage_PolynomialRing( num_field, sage_var( vstr ), order = 'degrevlex' )
-
+    R = sage_PolynomialRing( num_field, sage_var( vstr ), order='degrevlex' )
 
     @staticmethod
     def coerce( expr ):
         return sage__eval( str( expr ), OrbRing.R.gens_dict() )
-
 
     @staticmethod
     def random_int( val ):
@@ -51,9 +49,8 @@ class OrbRing:
         idx = int( sage_ZZ.random_element( 0, len( lst ) ) )
         return lst[idx]
 
-
     @staticmethod
-    def approx_QQ_coef( cf, ci_idx = 0 ):
+    def approx_QQ_coef( cf, ci_idx=0 ):
         '''
         Parameters
         ----------
@@ -81,9 +78,8 @@ class OrbRing:
 
         return ncf
 
-
     @staticmethod
-    def approx_QQ_pol_lst( pol_lst, ci_idx = 0 ):
+    def approx_QQ_pol_lst( pol_lst, ci_idx=0 ):
         '''
         Parameters
         ----------

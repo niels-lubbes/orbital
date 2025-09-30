@@ -47,12 +47,13 @@ def get_cs( angle ):
     #  cos( a + 90 ) = -sin(a)
     dct = {0:( c, s ), 1:( -s, c ), 2:( -c, -s ), 3:( c, s )}
 
-    rc, rs = dct[int( angle ) / int( 90 )]
+    # rc, rs = dct[int( angle ) / int( 90 )] old code
+    rc, rs = dct[int( angle / 90 )]
 
     return rc, rs
 
 
-def get_pt_dct( fname = 'cos_sin' ):
+def get_pt_dct( fname='cos_sin' ):
     '''
     Reads in a list of Pythagorian triples, which was obtained from:
     <http://www.tsm-resources.com/alists/PythagTriples.txt>

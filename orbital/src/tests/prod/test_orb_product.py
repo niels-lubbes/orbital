@@ -35,13 +35,11 @@ from orbital.sage_interface import sage_identity_matrix
 
 class TestOrbInput( object ):
 
-
     def test__get_emb_dim( self ):
         imp_lst = OrbRing.coerce( '[-x0^2+x1^2+x2^2+x3^2+x4^2+x5^2+x6^2+x7^2+x8^2, x8, x7, x6, x5, x1*x2-x0*x4]' )
         emb = get_emb_dim( imp_lst )
         print( emb )
         assert emb == 3
-
 
     def test__get_deg_dim_1( self ):
 
@@ -50,7 +48,6 @@ class TestOrbInput( object ):
         print( deg_dim )
         assert deg_dim == ( 2, 5 )
 
-
     def test__get_deg_dim_2( self ):
 
         imp_lst = OrbRing.coerce( '[-x0^2+x1^2+x2^2+x3^2+x4^2+x5^2+x6^2+x7^2+x8^2, x8, x7, x6, x5, x4, x3]' )
@@ -58,14 +55,12 @@ class TestOrbInput( object ):
         print( deg_dim )
         assert deg_dim == ( 2, 1 )
 
-
     def test__get_deg_dim_3( self ):
 
         imp_lst = OrbRing.coerce( '[-x0^2+x1^2+x2^2+x3^2+x4^2+x5^2+x6^2+x7^2+x8^2, x8, x7, x6, x5, x1*x2-x0*x4]' )
         deg_dim = get_deg_dim( imp_lst )
         print( deg_dim )
         assert deg_dim == ( 4, 2 )
-
 
     def test__get_project( self ):
 
@@ -76,7 +71,6 @@ class TestOrbInput( object ):
         out = get_project( pol_lst, pmat )
         print( out )
         assert str( out ) == '(x0^4 - x0^2*x1^2 - x0^2*x2^2 - x1^2*x2^2 - x0^2*x3^2, -x^2*y^2 - x^2 - y^2 - z^2 + 1)'
-
 
     def test__get_factor_lst( self ):
 
@@ -98,7 +92,6 @@ class TestOrbInput( object ):
         print( fct_lst )
         assert str( fct_lst ) == "[('x2-RootOf(_Z^2+1)*x3', '1'), ('x2+RootOf(_Z^2+1)*x3', '1'), ('x0-1/3*x1', '2'), ('x0-x1', '3')]"
 
-
     def test__get_genus( self ):
 
         pol = OrbRing.coerce( '(x1^2+x2^2+x3^2+3*x0^2)^2-16*(x1^2+x2^2)' )
@@ -119,7 +112,6 @@ class TestOrbInput( object ):
         print( gen )
         assert gen == 1
 
-
     def test__get_sing_lst( self ):
         pol = OrbRing.coerce( '(x1^2+x2^2+x3^2+3*x0^2)^2-16*x0^2*(x1^2+x2^2)' )
         print( pol )
@@ -139,7 +131,6 @@ class TestOrbInput( object ):
         print( sng_lst )
         assert str( sng_lst ) == "[('[x0^2 + 1/3*x3^2,x1,x2]', 2), ('[x0,x1^2 + x2^2 + x3^2]', 2*t + 1)]"
 
-
     def test__get_pmz( self ):
         pmat = get_pmat( False )
         omat = sage_identity_matrix( 9 )
@@ -150,7 +141,6 @@ class TestOrbInput( object ):
         assert str( pmz_lst ) == '[1, c1, s1, 0, 0, 0, 0, 0, 0]'
         assert str( prj_pmz_lst ) == '[1, c1, s1, 0]'
 
-
     def test__get_orb_bp_tree( self ):
         pmz_lst = OrbRing.coerce( '[2,c0,s0,c1,s1,c0,s0,c1,s1]' )
         bp_tree = get_orb_bp_tree( pmz_lst )
@@ -158,11 +148,10 @@ class TestOrbInput( object ):
 
         out = str( bp_tree )
 
-        assert 'chart=xv, depth=0, mult=1, sol=(a0, (a0))' in out
+        assert 'chart=xv, depth=0, mult=1, sol=(a0, a0)' in out
         assert 'chart=xv, depth=0, mult=1, sol=(a0, (-a0))' in out
         assert 'chart=xv, depth=0, mult=1, sol=(-a0, (-a0))' in out
-        assert 'chart=xv, depth=0, mult=1, sol=(-a0, (a0))' in out
-
+        assert 'chart=xv, depth=0, mult=1, sol=(-a0, a0)' in out
 
     def test__get_imp( self ):
 
@@ -172,7 +161,6 @@ class TestOrbInput( object ):
         imp_lst = get_imp( omat, vmat )  # ideal of Perseus cyclide
         print( imp_lst )
         assert str( imp_lst ) == '[x7, x6, x5, x4, 100*x1^2 - 4*x0*x3 - 40*x1*x3 + 9*x3^2 - 200*x1*x8 + 44*x3*x8 + 100*x8^2, 100*x0^2 - 100*x2^2 - 4*x0*x3 - 40*x1*x3 - 91*x3^2 - 200*x1*x8 + 44*x3*x8]'
-
 
     def test__get_pmz_verify__perseus( self ):
 
@@ -193,7 +181,6 @@ class TestOrbInput( object ):
         tst = get_pmz_verify( o )
         print( tst )
         assert tst == True
-
 
     def test__orb_product__65_smooth( self ):
 
@@ -217,7 +204,6 @@ class TestOrbInput( object ):
         print( o )
 
         assert ( o.deg, o.emb, o.dim ) == ( 6, 5, 2 )
-
 
     def test__orb_product__65_sing( self ):
 
@@ -246,7 +232,6 @@ class TestOrbInput( object ):
 
         assert 'chart=xv, depth=0, mult=1, sol=(a1, 0)' in str( o.bp_tree )
         assert 'chart=xv, depth=0, mult=1, sol=(-a1, 0)' in str( o.bp_tree )
-
 
     def test__orb_product__43_perseus( self ):
 
@@ -300,24 +285,22 @@ class TestOrbInput( object ):
         # ------------------------------
 
 
-
-
 if __name__ == '__main__':
 
     OrbTools.filter( None )
 
-#     TestOrbInput().test__get_emb_dim()
-#     TestOrbInput().test__get_deg_dim_1()
-#     TestOrbInput().test__get_deg_dim_2()
-#    TestOrbInput().test__get_deg_dim_3()
-#    TestOrbInput().test__get_project()
-#     TestOrbInput().test__get_factor_lst()
-#     TestOrbInput().test__get_genus()
-#     TestOrbInput().test__get_sing_lst()
-#     TestOrbInput().test__get_pmz()
-#     TestOrbInput().test__get_orb_bp_tree()
-#     TestOrbInput().test__get_imp()
-#     TestOrbInput().test__get_pmz_verify__perseus()
+    TestOrbInput().test__get_emb_dim()
+    TestOrbInput().test__get_deg_dim_1()
+    TestOrbInput().test__get_deg_dim_2()
+    TestOrbInput().test__get_deg_dim_3()
+    TestOrbInput().test__get_project()
+    TestOrbInput().test__get_factor_lst()
+    TestOrbInput().test__get_genus()
+    TestOrbInput().test__get_sing_lst()
+    TestOrbInput().test__get_pmz()
+    TestOrbInput().test__get_orb_bp_tree()
+    TestOrbInput().test__get_imp()
+    TestOrbInput().test__get_pmz_verify__perseus()
     TestOrbInput().test__orb_product__65_smooth()
     TestOrbInput().test__orb_product__65_sing()
     TestOrbInput().test__orb_product__43_perseus()
