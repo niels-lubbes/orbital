@@ -116,8 +116,8 @@ def invert_map( f, X, base=sage_QQ ):
     dct = ring_dict( ring )
     X = sage__eval( X, dct )
     f = sage__eval( f, dct )
-    map = [ y_lst[i] - f[i] for i in range( len( f ) ) ]
-    gb_lst = list( sage_ideal( X + map ).groebner_basis() )
+    mmap = [ y_lst[i] - f[i] for i in range( len( f ) ) ]
+    gb_lst = list( sage_ideal( X + mmap ).groebner_basis() )
 
     OrbTools.p( gb_lst )
 
@@ -253,7 +253,7 @@ def image_map( f, X, base=sage_QQ ):
     # where B is given by parameter base.
     x_lst = [ vx + str( i ) for i in range( n + 1 ) ]
     y_lst = [ vy + str( i ) for i in range( len( f.split( ',' ) ) ) ]
-    mord = 'degrevlex' if base == sage_QQ else 'lexdeg'  # needed for elimination
+    mord = 'degrevlex' if base == sage_QQ else 'deglex'  # needed for elimination
     xyring = sage_PolynomialRing( base, x_lst + y_lst, order=mord )
     x_lst = xyring.gens()[:len( x_lst )]
     y_lst = xyring.gens()[len( x_lst ):]

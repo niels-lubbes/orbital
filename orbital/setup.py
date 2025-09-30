@@ -15,7 +15,7 @@ from setuptools import setup
 
 setup( 
     name='orbital-surface',
-    version='3',
+    version='4',
     description='Python library for constructing and visualizing curves on surfaces',
     classifiers=[
         'Development Status :: 3 - Alpha',
@@ -39,8 +39,8 @@ setup(
     # include_package_data = True,
     package_data={'orbital': ['orb_tools.sobj'], 'orbital.cossin':['cos_sin.txt']},
     install_requires=['linear_series'],
-    test_suite='nose.collector',
-    tests_require=['nose'],
+    setup_requires=['pytest-runner'],
+    tests_require=['pytest'],
     entry_points={
         'console_scripts': ['run-lattice=orbital.__main__:main'],
     },
